@@ -1,0 +1,17 @@
+Package: qualtrics
+Title: Work with Qualtrics from R
+Version: 0.0.0.9000
+Authors@R: person("James", "Dunham", email = "james@jdunham.io", role = c("aut", "cre"))
+Description: This package aims to make working with Qualtrics surveys in R easier. Download survey responses into an R session; import and export survey designs; set active/closed status and expiration dates; drop sensitive fields from survey responses; and upload images to the graphics library.
+Depends:
+    R (>= 3.3.0)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Suggests:
+    testthat
+Imports:
+    data.table,
+    httr,
+    jsonlite
+RoxygenNote: 5.0.1

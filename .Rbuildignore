@@ -1,0 +1,8 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.api_key$
+^\.travis\.yml$
+^README\.Rmd$
+^README-.*\.png$
+^Output\.json$
+^f\.zip$
