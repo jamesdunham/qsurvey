@@ -24,8 +24,8 @@ current working directory in the file \code{.api_key}, and then as a global
 variable \code{api_key}.
 
 qualtrics focuses on survey responses and designs. To access API endpoints
-that are not available through package functions, \code{\link{get}} and
-\code{\link{post}} request wrappers are available. (Refer to the
+that are not available through package functions, \code{\link{qget}} and
+\code{\link{qpost}} request wrappers are available. (Refer to the
 \href{https://api.qualtrics.com}{API documentation}.)
 
 I'm aware of two other Qualtrics packages.

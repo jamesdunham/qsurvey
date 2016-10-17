@@ -1,4 +1,4 @@
-#' List survey metadata
+#' List surveys
 #'
 #' @return A data.table of survey metadata
 #' @export
@@ -7,8 +7,7 @@ list_surveys = function() {
   page = "surveys"
   # could excerpt this
   while (length(page)) {
-    r = get(service = page)
-    parsed = httr::content(r, as = "parsed")
+    parsed = qget(endpoint = page, as = "parsed")
     if (length(parsed$result$nextPage)) {
       page = paste0("surveys?", sub(".*\\?", "", parsed$result$nextPage))
     } else {

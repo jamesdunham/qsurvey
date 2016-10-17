@@ -4,7 +4,7 @@
 \alias{get_responses}
 \title{Export survey responses}
 \usage{
-get_responses(id = "SV_738wNt5GB4wrTaR", labels = TRUE)
+get_responses(id, labels = TRUE)
 }
 \arguments{
 \item{id}{A Qualtrics survey identifier}

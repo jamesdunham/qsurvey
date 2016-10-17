@@ -2,7 +2,7 @@
 % Please edit documentation in R/list_surveys.r
 \name{list_surveys}
 \alias{list_surveys}
-\title{List survey metadata}
+\title{List surveys}
 \usage{
 list_surveys()
 }
@@ -10,6 +10,6 @@ list_surveys()
 A data.table of survey metadata
 }
 \description{
-List survey metadata
+List surveys
 }
 
