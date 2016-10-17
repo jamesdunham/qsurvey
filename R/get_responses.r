@@ -13,6 +13,7 @@ get_responses = function(id, labels = TRUE) {
   export_progress = 0
   while (export_progress < 100) {
     r_export = qget(endpoint = paste0("responseexports/", export_id))
+    # TODO: replace with txtProgressBar
     export_progress = r_export$result$percentComplete
     cat(export_progress, "... ")
   }

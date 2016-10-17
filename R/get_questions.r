@@ -1,9 +1,12 @@
-#' Title
+#' Get question names, labels, and text
 #'
-#' @param id
-#' @param text
+#' Given a survey ID, retrieve the names, labels, and text of the survey's
+#' questions.
 #'
-#' @return
+#' @param id surveyID
+#' @param text Whether to include question text in the result
+#'
+#' @return A data.table of question names, labels, and (optionally) text
 #' @export
 questions = function(id, text = TRUE) {
   design = get_survey_design(id)
