@@ -1,9 +1,10 @@
 #' Get the Qualtrics API key
 #'
 #' The user is expected to save their Qualtrics API key either in a file named
-#' \code{.api_key} in the working directory or as a global variable named
+#' \code{.api_key} in the working directory or define a global variable named
 #' \code{api_key}. This function looks for the key in each place and returns it
-#' if successful.
+#' if successful, or stops. Called by other package functions, but may also be
+#' used directly to verify that the correct key will be used.
 #'
 #' @return A string giving an API key
 #' @export

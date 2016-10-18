@@ -1,8 +1,7 @@
-#' Wrap GET requests
+#' Make GET requests
 #'
-#' Typically called by other functions, not directly. This function can be used
-#' to access API endpoints without package functions. See the
-#' \href{https://api.qualtrics.com}{API documentation}.
+#' This function can be used to access API endpoints for which higher-level
+#' package functions are not available.
 #'
 #' @param url The base API URL
 #' @param endpoint The endpoint name, e.g. \code{users}
@@ -21,11 +20,10 @@ qget = function(url = "https://az1.qualtrics.com/API/v3/", endpoint = NULL,
   httr::content(r, as = as)
 }
 
-#' Wrap POST requests
+#' Make POST requests
 #'
-#' Typically called by other functions, not directly. This function can be used
-#' to access API endpoints without package functions. See the
-#' \href{https://api.qualtrics.com}{API documentation}.
+#' This function can be used to access API endpoints for which higher-level
+#' package functions are not available.
 #'
 #' @inheritParams qget
 #' @param body A named list of body data to post

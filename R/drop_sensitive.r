@@ -34,4 +34,3 @@ drop_sensitive = function(tbl) {
   }
   return(tbl[])
 }
-

@@ -1,12 +1,13 @@
-#' Export survey responses
+#' Get survey responses
 #'
 #' @param id A Qualtrics survey identifier
-#' @param labels Whether to use question labels and answer codes
+#' @param labels Use question labels and answer codes (default), instead of
+#'   identifiers like "QID1"
 #'
 #' @return A data.table of survey responses
 #' @importFrom utils unzip
 #' @export
-get_responses = function(id, labels = TRUE) {
+responses = function(id, labels = TRUE) {
   r = qpost(endpoint = "responseexports", body = list(format = "json",
     surveyId = id, useLabels = labels))
   export_id = r$result$id

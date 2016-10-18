@@ -18,8 +18,7 @@
 #'
 #' qualtrics focuses on survey responses and designs. To access API endpoints
 #' that are not available through package functions, \code{\link{qget}} and
-#' \code{\link{qpost}} request wrappers are available. (Refer to the
-#' \href{https://api.qualtrics.com}{API documentation}.)
+#' \code{\link{qpost}} request wrappers are available.
 #'
 #' I'm aware of two other Qualtrics packages.
 #' \href{https://github.com/jbryer/qualtrics}{Jason Bryer} wrote one in 2012.
