@@ -5,10 +5,12 @@
 #'
 #' \itemize{
 #'   \item Download survey responses into an R session
-#'   \item Import and export survey designs
-#'   \item Set active/closed status and expiration dates
+#   \item Import and export survey designs
+#'   \item Download survey designs
+#   \item Set active/closed status and expiration dates
+#'   \item List survey metadata (e.g. active/closed status and expiration dates)
 #'   \item Drop sensitive fields from survey responses
-#'   \item Upload images to the graphics library
+#   \item Upload images to the graphics library
 #' }
 #'
 #' The package works by sending requests to the Qualtrics API. For

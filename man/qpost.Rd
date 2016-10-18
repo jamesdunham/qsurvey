@@ -2,7 +2,7 @@
 % Please edit documentation in R/http.r
 \name{qpost}
 \alias{qpost}
-\title{Wrap POST requests}
+\title{Make POST requests}
 \usage{
 qpost(url = "https://az1.qualtrics.com/API/v3/", endpoint = NULL,
   body = NULL, ...)
@@ -20,8 +20,7 @@ qpost(url = "https://az1.qualtrics.com/API/v3/", endpoint = NULL,
 The content of the request's response via \link[httr]{content}
 }
 \description{
-Typically called by other functions, not directly. This function can be used
-to access API endpoints without package functions. See the
-\href{https://api.qualtrics.com}{API documentation}.
+This function can be used to access API endpoints for which higher-level
+package functions are not available.
 }
 

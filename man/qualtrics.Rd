@@ -12,10 +12,9 @@ features:
 \details{
 \itemize{
   \item Download survey responses into an R session
-  \item Import and export survey designs
-  \item Set active/closed status and expiration dates
+  \item Download survey designs
+  \item List survey metadata (e.g. active/closed status and expiration dates)
   \item Drop sensitive fields from survey responses
-  \item Upload images to the graphics library
 }
 
 The package works by sending requests to the Qualtrics API. For
@@ -25,8 +24,7 @@ variable \code{api_key}.
 
 qualtrics focuses on survey responses and designs. To access API endpoints
 that are not available through package functions, \code{\link{qget}} and
-\code{\link{qpost}} request wrappers are available. (Refer to the
-\href{https://api.qualtrics.com}{API documentation}.)
+\code{\link{qpost}} request wrappers are available.
 
 I'm aware of two other Qualtrics packages.
 \href{https://github.com/jbryer/qualtrics}{Jason Bryer} wrote one in 2012.
