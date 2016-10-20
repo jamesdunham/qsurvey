@@ -1,3 +1,5 @@
+utils::globalVariables(c("export_label", "question"))
+
 #' Get question names, labels, and text
 #'
 #' Retrieve the names, labels, and text of a given survey's questions.
@@ -7,7 +9,7 @@
 #'
 #' @return A data.table of question names, labels, and (optionally) text
 #' @export
-questions = function(id, text = TRUE) {
+questions = function(id, export_labels = TRUE, text = TRUE) {
   design = design(id)
   elements = "questionLabel"
   if (isTRUE(text)) {
@@ -17,6 +19,16 @@ questions = function(id, text = TRUE) {
     parse_question_element(x[elements])
   })
   questions = data.table::rbindlist(questions, fill = TRUE, idcol = "question")
+  if (isTRUE(export_labels)) {
+    col_map = data.table::rbindlist(design$exportColumnMap, idcol = "export_label",
+      fill = TRUE)[, .(export_label, question)]
+    col_map = unique(col_map, by = "question")
+    questions = merge(questions,
+      col_map,
+      all.x = TRUE,
+      all.y = FALSE,
+      by = "question")
+  }
   return(questions[])
 }
 

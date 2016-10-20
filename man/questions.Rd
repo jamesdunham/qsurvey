@@ -4,7 +4,7 @@
 \alias{questions}
 \title{Get question names, labels, and text}
 \usage{
-questions(id, text = TRUE)
+questions(id, export_labels = TRUE, text = TRUE)
 }
 \arguments{
 \item{id}{A Qualtrics survey identifier}
