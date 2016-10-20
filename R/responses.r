@@ -5,19 +5,20 @@
 #'   identifiers like "QID1"
 #'
 #' @return A data.table of survey responses
-#' @importFrom utils unzip
+#' @importFrom utils unzip txtProgressBar setTxtProgressBar
 #' @export
 responses = function(id, labels = TRUE) {
   r = qpost(endpoint = "responseexports", body = list(format = "json",
     surveyId = id, useLabels = labels))
   export_id = r$result$id
   export_progress = 0
+  pb = utils::txtProgressBar(max = 100, style = 3)
   while (export_progress < 100) {
     r_export = qget(endpoint = paste0("responseexports/", export_id))
-    # TODO: replace with txtProgressBar
     export_progress = r_export$result$percentComplete
-    cat(export_progress, "... ")
+    utils::setTxtProgressBar(pb, export_progress)
   }
+  close(pb)
   # we get the survey responses as a zip-formatted file
   bin = qget(url = r_export$result$file, as = "raw")
   # write it to disk so we can unzip it
