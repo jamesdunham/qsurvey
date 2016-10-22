@@ -1,11 +1,14 @@
 utils::globalVariables(c("choice"))
 
-#' Get item response choices
+#' Download survey response choices
 #'
-#' Request a table giving the response choices for each survey item.
+#' Retrieve a table giving the response choices for each question in a given
+#' survey.
 #'
 #' @inheritParams responses
 #' @return A data.table of response choices
+#' @seealso Download a survey's \code{\link{questions}},
+#'   \code{\link{responses}}, or \code{\link{design}}.
 #' @importFrom utils type.convert
 #' @export
 choices = function(id) {

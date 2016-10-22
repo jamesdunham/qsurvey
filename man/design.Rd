@@ -2,17 +2,23 @@
 % Please edit documentation in R/design.r
 \name{design}
 \alias{design}
-\title{Export a survey design}
+\title{Download a survey design}
 \usage{
-design(id)
+design(id, as = "json")
 }
 \arguments{
-\item{id}{A Qualtrics survey identifier}
+\item{id}{A Qualtrics survey identifier.}
+
+\item{as}{Desired type of content. See \link[httr]{content}.}
 }
 \value{
-A list representing the survey design
+By default, a list representing the survey design; see \code{as}.
 }
 \description{
-Retrieve a JSON representation of a survey's design, as a list.
+Retrieve a representation of the elements in a given survey.
+}
+\seealso{
+Download a survey's \code{\link{responses}},
+  \code{\link{questions}}, or question \code{\link{choices}}.
 }
 

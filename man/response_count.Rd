@@ -2,19 +2,28 @@
 % Please edit documentation in R/response_count.r
 \name{response_count}
 \alias{response_count}
-\title{Get response counts for a survey}
+\title{Download survey response counts}
 \usage{
 response_count(id)
 }
 \arguments{
-\item{id}{A Qualtrics survey identifier}
+\item{id}{A Qualtrics survey identifier.}
 }
 \value{
-A list giving response counts
+A list giving response counts.
 }
 \description{
-Response counts are given by category. \code{generated} responses are those
-created by the "Test Survey" tool. \code{deleted} responses were removed by
-the "Delete Data" tool.
+Response counts are given in three categories defined by the Qualtrics API:
+auditable, generated, and deleted. See Details.
+}
+\details{
+Categories:
+\itemize{
+\item \code{auditable}: typical responses
+\item \code{generated}: responses created using the Qualtrics control panel's
+"Test Survey" tool
+\item \code{deleted}: responses removed using the Qualtrics control panel's
+"Delete Data" tool
+}
 }
 

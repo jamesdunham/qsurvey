@@ -2,20 +2,24 @@
 % Please edit documentation in R/responses.r
 \name{responses}
 \alias{responses}
-\title{Get survey responses}
+\title{Download survey responses}
 \usage{
 responses(id, labels = TRUE)
 }
 \arguments{
-\item{id}{A Qualtrics survey identifier}
+\item{id}{A Qualtrics survey identifier.}
 
 \item{labels}{Use question labels and answer codes (default), instead of
-identifiers like "QID1"}
+identifiers like "QID1".}
 }
 \value{
-A data.table of survey responses
+A data.table of survey responses.
 }
 \description{
-Get survey responses
+Download survey responses
+}
+\seealso{
+Download a survey's \code{\link{questions}}, question
+  \code{\link{choices}}, or \code{\link{design}}.
 }
 

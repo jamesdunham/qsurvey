@@ -2,19 +2,25 @@
 % Please edit documentation in R/questions.r
 \name{questions}
 \alias{questions}
-\title{Get question names, labels, and text}
+\title{Download survey questions}
 \usage{
-questions(id, export_labels = TRUE, text = TRUE)
+questions(id, labels = TRUE, text = TRUE)
 }
 \arguments{
-\item{id}{A Qualtrics survey identifier}
+\item{id}{A Qualtrics survey identifier.}
 
-\item{text}{Retrieve question text (default), or don't}
+\item{labels}{Retrieve question labels (default), or don't.}
+
+\item{text}{Retrieve question text (default), or don't.}
 }
 \value{
 A data.table of question names, labels, and (optionally) text
 }
 \description{
 Retrieve the names, labels, and text of a given survey's questions.
+}
+\seealso{
+Download a survey's question \code{\link{choices}},
+  \code{\link{responses}}, or \code{\link{design}}.
 }
 

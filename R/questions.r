@@ -1,15 +1,18 @@
-utils::globalVariables(c("export_label", "question"))
+utils::globalVariables(c(".", "export_label", "question"))
 
-#' Get question names, labels, and text
+#' Download survey questions
 #'
 #' Retrieve the names, labels, and text of a given survey's questions.
 #'
 #' @inheritParams responses
-#' @param text Retrieve question text (default), or don't
+#' @param labels Retrieve question labels (default), or don't.
+#' @param text Retrieve question text (default), or don't.
 #'
 #' @return A data.table of question names, labels, and (optionally) text
+#' @seealso Download a survey's question \code{\link{choices}},
+#'   \code{\link{responses}}, or \code{\link{design}}.
 #' @export
-questions = function(id, export_labels = TRUE, text = TRUE) {
+questions = function(id, labels = TRUE, text = TRUE) {
   design = design(id)
   elements = "questionLabel"
   if (isTRUE(text)) {
@@ -19,7 +22,7 @@ questions = function(id, export_labels = TRUE, text = TRUE) {
     parse_question_element(x[elements])
   })
   questions = data.table::rbindlist(questions, fill = TRUE, idcol = "question")
-  if (isTRUE(export_labels)) {
+  if (isTRUE(labels)) {
     col_map = data.table::rbindlist(design$exportColumnMap, idcol = "export_label",
       fill = TRUE)[, .(export_label, question)]
     col_map = unique(col_map, by = "question")

@@ -2,17 +2,22 @@
 % Please edit documentation in R/choices.r
 \name{choices}
 \alias{choices}
-\title{Get item response choices}
+\title{Download survey response choices}
 \usage{
 choices(id)
 }
 \arguments{
-\item{id}{A Qualtrics survey identifier}
+\item{id}{A Qualtrics survey identifier.}
 }
 \value{
 A data.table of response choices
 }
 \description{
-Request a table giving the response choices for each survey item.
+Retrieve a table giving the response choices for each question in a given
+survey.
+}
+\seealso{
+Download a survey's \code{\link{questions}},
+  \code{\link{responses}}, or \code{\link{design}}.
 }
 

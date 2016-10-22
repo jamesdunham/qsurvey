@@ -1,12 +1,20 @@
-#' Get response counts for a survey
+#' Download survey response counts
 #'
-#' Response counts are given by category. \code{generated} responses are those
-#' created by the "Test Survey" tool. \code{deleted} responses were removed by
-#' the "Delete Data" tool.
+#' Response counts are given in three categories defined by the Qualtrics API:
+#' auditable, generated, and deleted. See Details.
+#'
+#' Categories:
+#' \itemize{
+#' \item \code{auditable}: typical responses
+#' \item \code{generated}: responses created using the Qualtrics control panel's
+#' "Test Survey" tool
+#' \item \code{deleted}: responses removed using the Qualtrics control panel's
+#' "Delete Data" tool
+#' }
 #'
 #' @inheritParams responses
 #'
-#' @return A list giving response counts
+#' @return A list giving response counts.
 #' @export
 response_count = function(id) {
   d = design(id)

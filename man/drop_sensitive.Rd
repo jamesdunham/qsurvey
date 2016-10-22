@@ -2,15 +2,15 @@
 % Please edit documentation in R/drop_sensitive.r
 \name{drop_sensitive}
 \alias{drop_sensitive}
-\title{Drop sensitive Qualtrics metadata from a survey response table}
+\title{Drop sensitive columns from survey responses}
 \usage{
 drop_sensitive(tbl)
 }
 \arguments{
-\item{tbl}{A data.frame of survey responses}
+\item{tbl}{A data.frame of survey responses.}
 }
 \value{
-The data.frame, less the sensitive columns
+The data.frame without the sensitive columns.
 }
 \description{
 Drop the columns that give approximate location, IP address, contact name,

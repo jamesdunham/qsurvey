@@ -1,4 +1,4 @@
-#' Drop sensitive Qualtrics metadata from a survey response table
+#' Drop sensitive columns from survey responses
 #'
 #' Drop the columns that give approximate location, IP address, contact name,
 #' and contact email from a table of survey responses.
@@ -14,9 +14,9 @@
 #' \item RecipientEmail
 #' }
 #'
-#' @param tbl A data.frame of survey responses
+#' @param tbl A data.frame of survey responses.
 #'
-#' @return The data.frame, less the sensitive columns
+#' @return The data.frame without the sensitive columns.
 #' @export
 drop_sensitive = function(tbl) {
   assertthat::assert_that(is.data.frame(tbl))

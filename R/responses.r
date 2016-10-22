@@ -1,10 +1,12 @@
-#' Get survey responses
+#' Download survey responses
 #'
-#' @param id A Qualtrics survey identifier
+#' @param id A Qualtrics survey identifier.
 #' @param labels Use question labels and answer codes (default), instead of
-#'   identifiers like "QID1"
+#'   identifiers like "QID1".
 #'
-#' @return A data.table of survey responses
+#' @return A data.table of survey responses.
+#' @seealso Download a survey's \code{\link{questions}}, question
+#'   \code{\link{choices}}, or \code{\link{design}}.
 #' @importFrom utils unzip txtProgressBar setTxtProgressBar
 #' @export
 responses = function(id, labels = TRUE) {

@@ -14,5 +14,6 @@ Imports:
     assertthat,
     data.table,
     httr,
-    jsonlite
+    jsonlite,
+    lubridate
 RoxygenNote: 5.0.1
