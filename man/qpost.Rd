@@ -4,23 +4,23 @@
 \alias{qpost}
 \title{Make POST requests}
 \usage{
-qpost(url = "https://az1.qualtrics.com/API/v3/", endpoint = NULL,
-  body = NULL, ...)
+qpost(endpoint = NULL, as, ...)
 }
 \arguments{
-\item{url}{The base API URL}
+\item{endpoint}{An API endpoint, e.g., \code{"surveys"}}
 
-\item{endpoint}{The endpoint name, e.g. \code{users}}
+\item{as}{Passed to \link{httr}[content]}
+
+\item{...}{Further arguments to \link[httr]{GET} or \link[httr]{POST},
+depending on \code{verb}}
 
 \item{body}{A named list of body data to post}
-
-\item{...}{Arguments passed to \link[httr]{GET}}
 }
 \value{
 The content of the request's response via \link[httr]{content}
 }
 \description{
-This function can be used to access API endpoints for which higher-level
-package functions are not available.
+Use this function to access API endpoints for which higher-level package
+functions are not available.
 }
 

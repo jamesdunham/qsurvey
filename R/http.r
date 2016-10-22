@@ -1,48 +1,80 @@
+#' Make requests of the Qualtrics API
+#'
+#' @inheritParams httr::VERB
+#' @param subdomain A Qualtrics subdomain, e.g. \code{"ca1"}; see the
+#'   \href{https://api.qualtrics.com/docs/root-url}{Qualtrics documentation}
+#' @param endpoint An API endpoint, e.g., \code{"surveys"}
+#' @param key A Qualtrics API key
+#' @param test Whether to send the request to \url{https://httpbin.org} for
+#'   testing purposes
+#' @param ... Further arguments to \link[httr]{GET} or \link[httr]{POST},
+#'   depending on \code{verb}
+#'
+#' @return A \link[httr]{response} object
+#' @export
+request = function(verb = "GET",
+  subdomain = "az1",
+  endpoint = NULL,
+  key = Sys.getenv("QUALTRICS_KEY"),
+  test = FALSE,
+  ...)
+{
+  url = paste0(
+    "https://",
+    paste(subdomain, "qualtrics.com/API/v3/", sep = "."),
+    endpoint
+  )
+  if (!test && (length(key) != 1 || !is.character(key) || key == "")) {
+      stop("Qualtrics API key needed\nSet the environment variable QUALTRICS_KEY")
+  }
+  if (test) {
+    message("replacing ", url, " with httpbin.org URL for test")
+    url = paste0("https://httpbin.org/", tolower(verb))
+    key = NA
+  }
+  if (identical(verb, "POST")) {
+    headers = httr::add_headers("content_type" = "application/json",
+      "x-api-token" = key)
+    r = httr::POST(url, headers, ...)
+  } else if (identical(verb, "GET")) {
+    headers = httr::add_headers("X-API-TOKEN" = key)
+    r = httr::GET(url, headers, ...)
+  }
+  httr::stop_for_status(r)
+  if (length(httr::content(r)$meta$notice)) {
+    warning(httr::content(r)$meta$notice)
+  }
+  return(r)
+}
+
 #' Make GET requests
 #'
-#' This function can be used to access API endpoints for which higher-level
-#' package functions are not available.
+#' Use this function to access API endpoints for which higher-level package
+#' functions are not available.
 #'
-#' @param url The base API URL
-#' @param endpoint The endpoint name, e.g. \code{users}
+#' @inheritParams request
 #' @param as Passed to \link{httr}[content]
-#' @param ... Arguments passed to \link[httr]{GET}
 #'
-#' @return The content of the request's response via \link[httr]{content}
+#' @return The content of the response via \link[httr]{content}
 #' @export
-qget = function(url = "https://az1.qualtrics.com/API/v3/", endpoint = NULL,
-    as = "parsed", ...)
+qget = function(endpoint = NULL, as, ...)
 {
-  url = paste0(url, endpoint)
-  headers = httr::add_headers("X-API-TOKEN" = get_api_key())
-  r = httr::GET(url, headers, ...)
-  check_code(r)
+  r = request(verb = "GET", endpoint = endpoint, ...)
   httr::content(r, as = as)
 }
 
 #' Make POST requests
 #'
-#' This function can be used to access API endpoints for which higher-level
-#' package functions are not available.
+#' Use this function to access API endpoints for which higher-level package
+#' functions are not available.
 #'
 #' @inheritParams qget
 #' @param body A named list of body data to post
 #'
 #' @return The content of the request's response via \link[httr]{content}
 #' @export
-qpost = function(url = "https://az1.qualtrics.com/API/v3/", endpoint = NULL,
-  body = NULL, ...)
+qpost = function(endpoint = NULL, as, ...)
 {
-  url = paste0(url, endpoint)
-  headers = httr::add_headers("x-api-token" = get_api_key(),
-    "content-type" = "application/json")
-  r =  httr::POST(url, headers, body = body, encode = "json")
-  check_code(r)
-  httr::content(r, ...)
-}
-
-check_code = function(r) {
-  if (r$status_code != 200) {
-    stop("http status code ", r$status_code)
-  }
+  r = request(verb = "POST", endpoint = endpoint, ...)
+  httr::content(r, as = as)
 }

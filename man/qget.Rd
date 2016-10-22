@@ -4,23 +4,21 @@
 \alias{qget}
 \title{Make GET requests}
 \usage{
-qget(url = "https://az1.qualtrics.com/API/v3/", endpoint = NULL,
-  as = "parsed", ...)
+qget(endpoint = NULL, as, ...)
 }
 \arguments{
-\item{url}{The base API URL}
-
-\item{endpoint}{The endpoint name, e.g. \code{users}}
+\item{endpoint}{An API endpoint, e.g., \code{"surveys"}}
 
 \item{as}{Passed to \link{httr}[content]}
 
-\item{...}{Arguments passed to \link[httr]{GET}}
+\item{...}{Further arguments to \link[httr]{GET} or \link[httr]{POST},
+depending on \code{verb}}
 }
 \value{
-The content of the request's response via \link[httr]{content}
+The content of the response via \link[httr]{content}
 }
 \description{
-This function can be used to access API endpoints for which higher-level
-package functions are not available.
+Use this function to access API endpoints for which higher-level package
+functions are not available.
 }
 
