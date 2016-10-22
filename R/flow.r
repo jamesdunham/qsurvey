@@ -6,10 +6,9 @@ utils::globalVariables(c("edges"))
 #'
 #' @return An edge matrix
 #' @export
-flow = function(id) {
-  d = design(id)
-  edges = matrix(NA, ncol =  4, nrow = length(unlist(d$flow)),
-    dimnames = list(c(), c("parent_id", "id", "type", "block_id")))
+flow = function(f) {
+  edges = matrix(NA, ncol =  4, nrow = length(unlist(f)),
+    dimnames = list(c(), c("parent", "id", "type", "block_id")))
   i = 0
   uid = 0
   walk_flow = function(parent) {
@@ -17,23 +16,32 @@ flow = function(id) {
     for (child in parent) {
       uid <<- uid + 1
       i <<- i + 1
-      edges[i, c("parent_id", "id")] <<- c(parent_id, uid)
+      edges[i, c("parent", "id")] <<- c(parent_id, uid)
       if ("type" %in% names(child)) {
         edges[i, "type"] <<- child$type
         if (child$type == "Block") {
-          edges[i, "block_id"] <<- child$id
+          if ("id" %in% names(child)) {
+            edges[i, "block_id"] <<- child$id
+          } else {
+            edges[i, "block_id"] <<- "missing"
+          }
         } else if (child$type %in% c("Branch", "BlockRandomizer")) {
           walk_flow(child$flow)
+          parent_id = parent_id + 1
         }
       }
+      parent_id = parent_id + 1
       uid <<- uid
       i <<- i
     }
   }
-  walk_flow(d$flow)
-  edges[!is.na(edges[, 1]), ]
+  walk_flow(f)
+  edges = as.data.frame(edges[!is.na(edges[, 1]), ], stringsAsFactors = FALSE)
+  data.table::setDT(edges)
+  numerics = c("id", "parent")
+  edges[, c(numerics) := lapply(.SD, type.convert), .SDcols = numerics]
+  return(edges[])
 }
-
 
 blocks = function(d) {
   # Extract from a design() list the block tree, as a list
