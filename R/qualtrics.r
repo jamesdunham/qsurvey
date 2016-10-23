@@ -17,7 +17,7 @@
 #'
 #' The package works by sending requests to the Qualtrics API. For
 #' authentication, an API key is needed. The key should be set with the
-#' environmental variable \code{QUALTRICS_KEY}  (See  \link[base]{Sys.setenv}.)
+#' environmental variable \code{QUALTRICS_KEY} (See \link[base]{Sys.setenv}.)
 #'
 #' Functionality focuses on retrieving survey responses and survey attributes.
 #' But to access API actions that are not available through higher-level package
