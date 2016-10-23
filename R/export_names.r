@@ -15,6 +15,6 @@ export_names = function(id) {
   sd = design(id)
   map = lapply(sd$exportColumnMap, `[[`, "question")
   ret = data.table::data.table("id" = unlist(map, recursive = FALSE),
-    "export_name" = names(map), key = "name")
+    "export_name" = names(map), key = "export_name")
   return(ret[])
 }
