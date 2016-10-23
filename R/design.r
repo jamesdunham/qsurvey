@@ -9,9 +9,9 @@
 #' @seealso Download a survey's \code{\link{responses}},
 #'   \code{\link{questions}}, or question \code{\link{choices}}.
 #' @export
-design = function(id, as = "json") {
+design = function(id, as = "parsed") {
   r = qget(action = paste0("surveys/", id), as = as)
-  if (identical(as, "json")) {
+  if (identical(as, "parsed")) {
     return(r$result)
   } else {
     return(r)

@@ -4,7 +4,7 @@
 \alias{design}
 \title{Download a survey design}
 \usage{
-design(id, as = "json")
+design(id, as = "parsed")
 }
 \arguments{
 \item{id}{A Qualtrics survey identifier.}

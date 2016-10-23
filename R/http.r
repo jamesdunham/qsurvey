@@ -31,11 +31,9 @@ request = function(verb = "GET",
   test = FALSE,
   ...)
 {
-  url = paste0(
-    "https://",
+  url = paste0("https://",
     paste(subdomain, "qualtrics.com/API/v3/", sep = "."),
-    action
-  )
+    action)
   if (!test && (length(key) != 1 || !is.character(key) || key == "")) {
       stop("Qualtrics API key needed. Set the environment variable QUALTRICS_KEY")
   }
@@ -47,14 +45,16 @@ request = function(verb = "GET",
   if (identical(verb, "POST")) {
     headers = httr::add_headers("content_type" = "application/json",
       "x-api-token" = key)
-    r = httr::POST(url, headers, ...)
+    r = httr::POST(url, headers, encode = "json", ...)
   } else if (identical(verb, "GET")) {
-    headers = httr::add_headers("X-API-TOKEN" = key)
+    headers = httr::add_headers("content_type" = "application/json",
+      "x-api-token" = key)
     r = httr::GET(url, headers, ...)
   }
   httr::stop_for_status(r)
-  if (length(httr::content(r)$meta$notice)) {
-    warning(httr::content(r)$meta$notice)
+  r_content = httr::content(r)
+  if ("meta" %in% names(r_content) && "notice" %in% names(r_content$meta)) {
+    warning(r_content$meta$notice)
   }
   return(r)
 }

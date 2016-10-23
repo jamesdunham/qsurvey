@@ -4,19 +4,41 @@
 \alias{responses}
 \title{Download survey responses}
 \usage{
-responses(id, labels = TRUE)
+responses(id, use_labels = TRUE, ...)
 }
 \arguments{
 \item{id}{A Qualtrics survey identifier.}
 
-\item{labels}{Use question labels and answer codes (default), instead of
-identifiers like "QID1".}
+\item{use_labels}{Use question labels and choice descriptions (default),
+instead of question and identifiers.}
+
+\item{...}{Additional parameters for the \code{responseexports} API.}
 }
 \value{
 A data.table of survey responses.
 }
 \description{
-Download survey responses
+Retrieve the responses to a survey.
+}
+\details{
+\code{responses} requests that Qualtrics prepare a zipfile for download; once
+it is ready, the archive is downloaded to a location given by
+\code{\link[base]{tempfile}} and unzipped; its JSON contents read and parsed;
+and the temporary files deleted.
+
+By default, descriptive question labels and choice descriptions (e.g.,
+\code{favorability} and \code{strongly approve}) are requested instead of
+question ids and choice codes (e.g., \code{QID1} and {5}). This is controlled
+by argument \code{use_labels}.
+
+Other parameters that affect the format of the survey responses are
+available. For example, passing \code{seenUnansweredRecode = "99"} in the
+call to \code{responses} will show \code{"99"} as the response to unanswered
+questions instead of \code{NA}. See the
+\href{https://api.qualtrics.com/docs/json}{Qualtrics documentation} for the
+details of these parameters. The parameters that cannot be changed via
+\code{...} are \code{format}, \code{surveyId}, and \code{useLabels}, the last
+of which is exposed as argument \code{use_labels}.
 }
 \seealso{
 Download a survey's \code{\link{questions}}, question
