@@ -32,7 +32,7 @@
 #' @importFrom utils unzip txtProgressBar setTxtProgressBar
 #' @importFrom jsonlite fromJSON
 #' @export
-responses = function(id, use_labels = TRUE, ...) {
+responses = function(id, use_labels = TRUE, verbose = TRUE, ...) {
   r = qpost(
     action = "responseexports",
     body = list(
@@ -44,7 +44,7 @@ responses = function(id, use_labels = TRUE, ...) {
   )
   export_id = r$result$id
   export_progress = 0
-  message("Qualtrics is preparing the responses for download")
+  message("Qualtrics is preparing responses for download...")
   pb = utils::txtProgressBar(max = 100, style = 3)
   while (export_progress < 100) {
     r_export = qget(action = paste0("responseexports/", export_id))
@@ -55,6 +55,7 @@ responses = function(id, use_labels = TRUE, ...) {
   # we get the survey responses as a zip-formatted file
   file_action = sub("https://az1.qualtrics.com/API/v3/", "",
     r_export$result$file, fixed = TRUE)
+  message("Downloading...")
   bin = qget(action = file_action, as = "raw")
   # write it to disk so we can unzip it
   temp_name = tempfile()
