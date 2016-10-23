@@ -32,7 +32,7 @@ request = function(verb = "GET",
   ...)
 {
   url = paste0("https://",
-    paste(subdomain, "qualtrics.com/API/v3/", sep = "."),
+    paste("az1", "qualtrics.com/API/v3/", sep = "."),
     action)
   if (!test && (length(key) != 1 || !is.character(key) || key == "")) {
       stop("Qualtrics API key needed. Set the environment variable QUALTRICS_KEY")
