@@ -4,5 +4,4 @@
 ^\.travis\.yml$
 ^README\.Rmd$
 ^README-.*\.png$
-^Output\.json$
-^f\.zip$
+^images$
