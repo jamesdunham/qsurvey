@@ -1,22 +1,30 @@
 utils::globalVariables(c("edges"))
 
-#' Get survey flow
+#' Download survey flow
 #'
 #' @inheritParams responses
 #'
-#' @return An edge matrix
+#' @return A data.table giving edges between flow elements, and their ids.
 #' @export
 flow = function(f) {
   edges = matrix(NA, ncol =  4, nrow = length(unlist(f)),
     dimnames = list(c(), c("parent", "id", "type", "block_id")))
   i = 0
   uid = 0
-  walk_flow = function(parent, increment = 1) {
+  walk_flow = function(parent, increment = 1, br_child_ids = NULL) {
     parent_id = uid
     for (child in parent) {
       uid <<- uid + 1
       i <<- i + 1
-      edges[i, c("parent", "id")] <<- c(parent_id, uid)
+      # if (length(br_child_ids)) {
+      #   i = seq.int(i, i + length(br_child_ids) - 1)
+      #   edges[i, "parent"] <<- br_child_ids
+      #   edges[i, "id"] <<- uid
+      #   br_child_ids = NULL
+      #   i = max(i)
+      # } else {
+        edges[i, c("parent", "id")] <<- c(parent_id, uid)
+      # }
       if ("type" %in% names(child)) {
         edges[i, "type"] <<- child$type
         if (child$type == "Block") {
@@ -28,8 +36,17 @@ flow = function(f) {
         } else if (child$type == "Branch") {
           walk_flow(child$flow)
           parent_id = parent_id - increment
+          # for (id in exit_ids) {
+          #   i = i + 1
+          #   edges[i, c("parent", "id")] <<- c(id, uid)
+          # }
         } else if  (child$type == "BlockRandomizer") {
+          # Note the id of this BR child; all its children will be parents of
+          # the next child.
+          # br_id = uid + 1
           walk_flow(child$flow, 0)
+          # # Get the ids of all the BR's children
+          # br_child_ids = edges[edges[, "parent"] == br_id, "id"]
         }
       }
       parent_id = parent_id + increment
@@ -42,6 +59,7 @@ flow = function(f) {
   data.table::setDT(edges)
   numerics = c("id", "parent")
   edges[, c(numerics) := lapply(.SD, type.convert), .SDcols = numerics]
+    edges
   return(edges[])
 }
 
@@ -98,14 +116,63 @@ block_questions = function(d) {
 #'
 #' @import igraph
 #' @export
-plot_flow = function(res) {
-  edges = as.matrix(res[, .(parent, id)][, lapply(.SD, as.numeric)])
-  v_labels = rbind(list("id" = 0L, type = "Start"),
-    res[, .(id, type = paste(res$type,
-      replace(res$block_id, is.na(res$block_id), "")))])
-  g = igraph::graph_from_data_frame(edges[, c("parent", "id")])
-  igraph::plot.igraph(g, edge.arrow.size = .1, layout = layout_as_tree(g),
-    vertex.label = setNames(v_labels$type, v_labels$id),
-    vertex.color = NA,
-    vertex.shape = "none")
+plot_flow = function(edges) {
+g = igraph::graph_from_data_frame(
+  as.matrix(edges[, .(previous, node)][, lapply(.SD, as.numeric)]),
+  vertices = rbind(data.frame("node" = 0, "name" = "Start"),
+    edges[, .("node" = as.numeric(node), name)]))
+igraph::plot.igraph(
+  g,
+  edge.arrow.size = .25,
+  layout = igraph::layout_as_tree(g),
+  # vertex.label = NA,
+  vertex.color = NA,
+  vertex.shape = "none")
 }
+
+search_flow = function(f) {
+  nodes = f[sapply(f, is.list)]
+  edges = list("node" = numeric(),  "parent" = numeric(),
+    name = character())
+  n = 0
+  parent_n = 0
+  while (length(nodes)) {
+    # n gives the id of the current node
+    n = n + 1
+    parent_n = ifelse(length(names(nodes[1])) && names(nodes[1]) != "",
+      as.numeric(names(nodes[1])), parent_n)
+    # nodes is a FIFO queue
+    node_type = nodes[[1]]$type
+    if (node_type == "Block") {
+      node_type = paste(node_type, nodes[[1]]$id)
+      nodes[1] = NULL
+    } else if (node_type %in% c("Branch", "BlockRandomizer")) {
+      node_flow = nodes[[1]]$flow
+      nodes = c(nodes, setNames(node_flow, rep(n, length(node_flow))))
+      nodes[1] = NULL
+    } else {
+      nodes[1] = NULL
+    }
+    edges = data.table::rbindlist(list(
+      edges,
+      data.frame(
+        "node" = n,
+        "parent" = parent_n,
+        "name" = as.character(node_type),
+        stringsAsFactors = FALSE
+      )),
+      fill = TRUE
+    )
+    message(parent_n, " - ", n, " (", node_type, ")")
+  }
+  order_siblings(edges)
+}
+
+order_siblings = function(edges) {
+  not_randomizers = unique(edges[name != "BlockRandomizer", node])
+  edges[parent %in% c(0, not_randomizers), previous := data.table::shift(node),
+    by = "parent"]
+  edges[is.na(previous), previous := parent]
+  edges[]
+}
+

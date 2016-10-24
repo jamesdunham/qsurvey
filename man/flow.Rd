@@ -2,14 +2,14 @@
 % Please edit documentation in R/flow.r
 \name{flow}
 \alias{flow}
-\title{Get survey flow}
+\title{Download survey flow}
 \usage{
 flow(f)
 }
 \value{
-An edge matrix
+A data.table giving edges between flow elements, and their ids.
 }
 \description{
-Get survey flow
+Download survey flow
 }
 
