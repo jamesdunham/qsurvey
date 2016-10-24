@@ -6,6 +6,7 @@ test_that("flow() handles block; block", {
     list(type = "Block", id = "BL_2"))
   expect_silent(flow(test_flow))
   res = search_flow(test_flow)
+  plot_flow(res)
   expect_equal(res$node, c(1, 2))
   expect_equal(res$parent, c(0, 0))
   expect_equal(res$previous, c(0, 1))

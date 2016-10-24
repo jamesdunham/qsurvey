@@ -4,7 +4,7 @@
 \alias{plot_flow}
 \title{Plot flow}
 \usage{
-plot_flow(res)
+plot_flow(edges)
 }
 \description{
 Plot flow

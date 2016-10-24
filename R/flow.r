@@ -117,18 +117,28 @@ block_questions = function(d) {
 #' @import igraph
 #' @export
 plot_flow = function(edges) {
-g = igraph::graph_from_data_frame(
-  as.matrix(edges[, .(previous, node)][, lapply(.SD, as.numeric)]),
-  vertices = rbind(data.frame("node" = 0, "name" = "Start"),
-    edges[, .("node" = as.numeric(node), name)]))
-igraph::plot.igraph(
-  g,
-  edge.arrow.size = .25,
-  layout = igraph::layout_as_tree(g),
-  # vertex.label = NA,
-  vertex.color = NA,
-  vertex.shape = "none")
+  g = igraph::graph_from_data_frame(
+    as.matrix(edges[, .(previous, node)][, lapply(.SD, as.numeric)]),
+    vertices = rbind(data.frame("node" = 0, "name" = "Start"),
+      edges[, .("node" = as.numeric(node), name)]))
+  edge_layout = data.table::copy(edges)
+  edge_layout[, y := data.table::frank(previous, ties.method = "first"), by = "parent"]
+  edge_layout[, x := data.table::frank(parent, ties.method = "first"), by = "previous"]
+  edge_layout = rbind(edge_layout, list(node = 0, name = "Start", x = 1, y = 0),
+    fill = TRUE)
+  setorder(edge_layout, x, y)
+  igraph::plot.igraph(
+    g,
+    edge.arrow.size = .1,
+    layout = as.matrix(edge_layout[, .(x, y)]),
+    # vertex.label = NA,
+    vertex.color = NA,
+    vertex.shape = "none")
 }
+# edges = res
+# res = search_flow(sd$flow)
+# res_layout[]
+# plot_flow(res)
 
 search_flow = function(f) {
   nodes = f[sapply(f, is.list)]
@@ -176,3 +186,6 @@ order_siblings = function(edges) {
   edges[]
 }
 
+# TODO: create better layout based on edges
+# TODO: indicate which edges are probabilistic
+# TODO: link up with questions and walk_cols
