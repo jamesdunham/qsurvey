@@ -11,7 +11,7 @@ flow = function(f) {
     dimnames = list(c(), c("parent", "id", "type", "block_id")))
   i = 0
   uid = 0
-  walk_flow = function(parent) {
+  walk_flow = function(parent, increment = 1) {
     parent_id = uid
     for (child in parent) {
       uid <<- uid + 1
@@ -25,12 +25,14 @@ flow = function(f) {
           } else {
             edges[i, "block_id"] <<- "missing"
           }
-        } else if (child$type %in% c("Branch", "BlockRandomizer")) {
+        } else if (child$type == "Branch") {
           walk_flow(child$flow)
-          parent_id = parent_id + 1
+          parent_id = parent_id - increment
+        } else if  (child$type == "BlockRandomizer") {
+          walk_flow(child$flow, 0)
         }
       }
-      parent_id = parent_id + 1
+      parent_id = parent_id + increment
       uid <<- uid
       i <<- i
     }
@@ -90,4 +92,20 @@ block_questions = function(d) {
   # block_tbl columns are expected to be consistent, so fill = FALSE
   tbl = data.table::rbindlist(blocks, idcol = "block")
   return(tbl[])
+}
+
+#' Plot flow
+#'
+#' @import igraph
+#' @export
+plot_flow = function(res) {
+  edges = as.matrix(res[, .(parent, id)][, lapply(.SD, as.numeric)])
+  v_labels = rbind(list("id" = 0L, type = "Start"),
+    res[, .(id, type = paste(res$type,
+      replace(res$block_id, is.na(res$block_id), "")))])
+  g = igraph::graph_from_data_frame(edges[, c("parent", "id")])
+  igraph::plot.igraph(g, edge.arrow.size = .1, layout = layout_as_tree(g),
+    vertex.label = setNames(v_labels$type, v_labels$id),
+    vertex.color = NA,
+    vertex.shape = "none")
 }
