@@ -1,68 +1,5 @@
 utils::globalVariables(c("edges"))
 
-#' Download survey flow
-#'
-#' @inheritParams responses
-#'
-#' @return A data.table giving edges between flow elements, and their ids.
-#' @export
-flow = function(f) {
-  edges = matrix(NA, ncol =  4, nrow = length(unlist(f)),
-    dimnames = list(c(), c("parent", "id", "type", "block_id")))
-  i = 0
-  uid = 0
-  walk_flow = function(parent, increment = 1, br_child_ids = NULL) {
-    parent_id = uid
-    for (child in parent) {
-      uid <<- uid + 1
-      i <<- i + 1
-      # if (length(br_child_ids)) {
-      #   i = seq.int(i, i + length(br_child_ids) - 1)
-      #   edges[i, "parent"] <<- br_child_ids
-      #   edges[i, "id"] <<- uid
-      #   br_child_ids = NULL
-      #   i = max(i)
-      # } else {
-        edges[i, c("parent", "id")] <<- c(parent_id, uid)
-      # }
-      if ("type" %in% names(child)) {
-        edges[i, "type"] <<- child$type
-        if (child$type == "Block") {
-          if ("id" %in% names(child)) {
-            edges[i, "block_id"] <<- child$id
-          } else {
-            edges[i, "block_id"] <<- "missing"
-          }
-        } else if (child$type == "Branch") {
-          walk_flow(child$flow)
-          parent_id = parent_id - increment
-          # for (id in exit_ids) {
-          #   i = i + 1
-          #   edges[i, c("parent", "id")] <<- c(id, uid)
-          # }
-        } else if  (child$type == "BlockRandomizer") {
-          # Note the id of this BR child; all its children will be parents of
-          # the next child.
-          # br_id = uid + 1
-          walk_flow(child$flow, 0)
-          # # Get the ids of all the BR's children
-          # br_child_ids = edges[edges[, "parent"] == br_id, "id"]
-        }
-      }
-      parent_id = parent_id + increment
-      uid <<- uid
-      i <<- i
-    }
-  }
-  walk_flow(f)
-  edges = as.data.frame(edges[!is.na(edges[, 1]), ], stringsAsFactors = FALSE)
-  data.table::setDT(edges)
-  numerics = c("id", "parent")
-  edges[, c(numerics) := lapply(.SD, type.convert), .SDcols = numerics]
-    edges
-  return(edges[])
-}
-
 blocks = function(d) {
   # Extract from a design() list the block tree, as a list
 
@@ -115,7 +52,8 @@ block_questions = function(d) {
 search_flow = function(f) {
   nodes = f[sapply(f, is.list)]
   edges = list("node" = numeric(),  "parent" = numeric(),
-    name = character())
+    "name" = character(),
+    "subset" = numeric())
   n = 0
   parent_n = 0
   while (length(nodes)) {
@@ -123,6 +61,7 @@ search_flow = function(f) {
     n = n + 1
     parent_n = ifelse(length(names(nodes[1])) && names(nodes[1]) != "",
       as.numeric(names(nodes[1])), parent_n)
+    br_options = NULL
     # nodes is a FIFO queue
     node_type = nodes[[1]]$type
     if (node_type == "Block") {
@@ -131,6 +70,12 @@ search_flow = function(f) {
     } else if (node_type %in% c("Branch", "BlockRandomizer")) {
       node_flow = nodes[[1]]$flow
       nodes = c(nodes, setNames(node_flow, rep(n, length(node_flow))))
+      if (node_type == "BlockRandomizer") {
+        br_options = list(
+          nodes[[1]]$randomizationOptions$randomSubset,
+          nodes[[1]]$randomizationOptions$evenPresentation
+        )
+      }
       nodes[1] = NULL
     } else {
       nodes[1] = NULL
@@ -141,6 +86,8 @@ search_flow = function(f) {
         "node" = n,
         "parent" = parent_n,
         "name" = as.character(node_type),
+        "br_subset" = ifelse(is.null(br_options), NA, br_options[[1]]),
+        "br_presentation" = ifelse(is.null(br_options), NA, br_options[[2]]),
         stringsAsFactors = FALSE
       )),
       fill = TRUE
@@ -205,14 +152,9 @@ add_node_colors = function(edges) {
 }
 
 add_edge_colors = function(edges) {
-  edges[, edge_color := stringr::str_replace_all(
-    edge_type,
-    c(
-      "deterministic" = "#000000",
-      "conditional" = "orange",
-      "random" = "orange"
-    )
-  )]
+  edges[edge_type == "deterministic", edge_color :=  "#000000"]
+  edges[edge_type %in% c("conditional", "orange"), edge_color :=  "orange"]
+  edges[]
 }
 
 add_block_descriptions = function(edges, design) {
