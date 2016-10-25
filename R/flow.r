@@ -112,34 +112,6 @@ block_questions = function(d) {
   return(tbl[])
 }
 
-#' Plot flow
-#'
-#' @import igraph
-#' @export
-plot_flow = function(edges) {
-  g = igraph::graph_from_data_frame(
-    as.matrix(edges[, .(previous, node)][, lapply(.SD, as.numeric)]),
-    vertices = rbind(data.frame("node" = 0, "name" = "Start"),
-      edges[, .("node" = as.numeric(node), name)]))
-  edge_layout = data.table::copy(edges)
-  edge_layout[, y := data.table::frank(previous, ties.method = "first"), by = "parent"]
-  edge_layout[, x := data.table::frank(parent, ties.method = "first"), by = "previous"]
-  edge_layout = rbind(edge_layout, list(node = 0, name = "Start", x = 1, y = 0),
-    fill = TRUE)
-  setorder(edge_layout, x, y)
-  igraph::plot.igraph(
-    g,
-    edge.arrow.size = .1,
-    layout = as.matrix(edge_layout[, .(x, y)]),
-    # vertex.label = NA,
-    vertex.color = NA,
-    vertex.shape = "none")
-}
-# edges = res
-# res = search_flow(sd$flow)
-# res_layout[]
-# plot_flow(res)
-
 search_flow = function(f) {
   nodes = f[sapply(f, is.list)]
   edges = list("node" = numeric(),  "parent" = numeric(),
@@ -175,7 +147,9 @@ search_flow = function(f) {
     )
     message(parent_n, " - ", n, " (", node_type, ")")
   }
-  order_siblings(edges)
+  edges = order_siblings(edges)
+  edges = add_edge_types(edges)
+  edges[]
 }
 
 order_siblings = function(edges) {
@@ -186,6 +160,43 @@ order_siblings = function(edges) {
   edges[]
 }
 
-# TODO: create better layout based on edges
-# TODO: indicate which edges are probabilistic
-# TODO: link up with questions and walk_cols
+add_edge_types = function(edges) {
+  is_branch = unique(edges[name == "Branch", node])
+  edges[parent %in% is_branch, `:=`(type = "conditional",
+    color = "orange")]
+
+  is_randomizer = unique(edges[name == "BlockRandomizer", node])
+  edges[parent %in% is_randomizer, `:=`(type = "random",
+    color = "green")]
+
+  edges[is.na(type), `:=`(type = "deterministic",
+    color = "black")]
+  edges[]
+}
+
+#' Plot flow
+#'
+#' @import igraph
+#' @export
+plot_flow = function(edges) {
+  nodes = create_nodes(
+    nodes = c(0, edges$node),
+    label = c("StartSurvey", edges$name))
+  edges = create_edges(
+    from = edges$previous,
+    to = edges$node,
+    rel = edges$type,
+    color = edges$color)
+  create_graph(
+    nodes_df = nodes,
+    edges_df = edges,
+    graph_attrs = "layout = dot") %>%
+    render_graph()
+}
+
+# res = search_flow(sd$flow)
+# plot_flow(res)
+
+# TODO:
+# try adding invisible edges between siblings for spacing
+# replace block IDs with block names
