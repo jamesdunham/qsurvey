@@ -1,10 +1,10 @@
 library(testthat)
 
-test_that("flow() handles block; block", {
+test_that("search_flow() handles block; block", {
   test_flow = list(
     list(type = "Block", id = "BL_1"),
     list(type = "Block", id = "BL_2"))
-  expect_silent(flow(test_flow))
+  expect_silent(search_flow(test_flow))
   res = search_flow(test_flow)
   plot_flow(res)
   expect_equal(res$node, c(1, 2))
@@ -13,7 +13,7 @@ test_that("flow() handles block; block", {
   expect_equal(res$name, paste0("Block BL_", 1:2))
 })
 
-test_that("flow() handles WebService; block; branch -> blocks; block", {
+test_that("search_flow() handles WebService; block; branch -> blocks; block", {
   test_flow = list(
     list(type = "WebService"),
     list(id = "BL_1", type = "Block"),
@@ -23,7 +23,7 @@ test_that("flow() handles WebService; block; branch -> blocks; block", {
     )),
     list(id = "BL_4", type = "Block")
   )
-  expect_silent(flow(test_flow))
+  expect_silent(search_flow(test_flow))
   res = search_flow(test_flow)
   plot_flow(res)
   expect_equal(res$node, 1:6)
@@ -32,7 +32,7 @@ test_that("flow() handles WebService; block; branch -> blocks; block", {
     paste0("Block BL_", c(4, 2, 3))))
 })
 
-test_that("flow() handles branch->randomizer->blocks; block", {
+test_that("search_flow() handles branch->randomizer->blocks; block", {
   test_flow = list(
     list(type = "Branch",
       flow = list(
@@ -43,7 +43,7 @@ test_that("flow() handles branch->randomizer->blocks; block", {
       )),
     list(id = "BL_3", type = "Block")
   )
-  expect_silent(flow(test_flow))
+  expect_silent(search_flow(test_flow))
   res = search_flow(test_flow)
   plot_flow(res)
   expect_equal(res$node, 1:5)
@@ -52,7 +52,7 @@ test_that("flow() handles branch->randomizer->blocks; block", {
   expect_equal(res$name, c("Branch", "Block BL_3", "BlockRandomizer", paste0("Block BL_", 1:2)))
 })
 
-test_that("flow() handles randomizer->blocks; block", {
+test_that("search_flow() handles randomizer->blocks; block", {
   test_flow = list(
         list(type = "BlockRandomizer", flow = list(
           list(id = "BL_1", type = "Block"),
@@ -60,7 +60,7 @@ test_that("flow() handles randomizer->blocks; block", {
         )),
     list(id = "BL_3", type = "Block")
   )
-  expect_silent(flow(test_flow))
+  expect_silent(search_flow(test_flow))
   res = search_flow(test_flow)
   plot_flow(res)
   expect_equal(res$node, 1:4)
