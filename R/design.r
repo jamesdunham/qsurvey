@@ -1,4 +1,4 @@
-#' Download a survey design
+#' Download a survey's design
 #'
 #' Retrieve a representation of the elements in a given survey.
 #'

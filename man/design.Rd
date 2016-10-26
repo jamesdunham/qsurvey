@@ -2,7 +2,7 @@
 % Please edit documentation in R/design.r
 \name{design}
 \alias{design}
-\title{Download a survey design}
+\title{Download a survey's design}
 \usage{
 design(id, as = "parsed")
 }

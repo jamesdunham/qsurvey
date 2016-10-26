@@ -3,6 +3,8 @@ function() {
   id = "SV_bKQGl5WB66K9yFT"
 
   sd = design(id)
+  plot_flow(sd)
+  edges(sd)
   r = responses(id, use_labels = FALSE)
   r[, grepl('fraud', names(r)), with = FALSE]
   r[, grepl('confidence', names(r)), with = FALSE]

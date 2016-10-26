@@ -4,7 +4,7 @@
 \alias{responses}
 \title{Download survey responses}
 \usage{
-responses(id, use_labels = TRUE, ...)
+responses(id, use_labels = TRUE, verbose = TRUE, ...)
 }
 \arguments{
 \item{id}{A Qualtrics survey identifier.}

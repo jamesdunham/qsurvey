@@ -14,8 +14,9 @@ Suggests:
 Imports:
     assertthat,
     data.table,
+    DiagrammeR,
     httr,
-    igraph,
     jsonlite,
-    lubridate
+    lubridate,
+    stringr
 RoxygenNote: 5.0.1
