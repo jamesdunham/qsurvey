@@ -1,33 +1,18 @@
-function() {
+function(responses, design) {
+  assertthat::assert_that("qualtrics_design" %in% class(design))
   key_from_file()
   id = "SV_bKQGl5WB66K9yFT"
-
-  sd = design(id)
-  plot_flow(sd)
-  edges(sd)
+  # design = survey_design(id)
+  plot_flow(design)
+  edges(design)
   r = responses(id, use_labels = FALSE)
-  r[, grepl('fraud', names(r)), with = FALSE]
-  r[, grepl('confidence', names(r)), with = FALSE]
   r = responses(id, use_labels = TRUE)
-  r[, grepl('fraud', names(r)), with = FALSE]
-  r[, grepl('confidence', names(r)), with = FALSE]
-  r[, grepl('husted', names(r)), with = FALSE]
 
-  prop.table(table(r[, fraud_statement_attribution], useNA = 'always'))
-  prop.table(table(r[, husted_intro], useNA = 'always'))
-  names(r)
-  stopifnot(nrow(r) > 0)
-  qu = questions(id)
-  str(qu)
   ch = choices(id)
   en = export_names(id)
-  en[grepl('fraud', export_name)]
-  ch[question %in% c("QID20", "QID21")]
-
   sq = questions(id)
   sq[, id := as.numeric(sub("QID", "", question))]
   data.table::setkeyv(sq, "id")
-
   stopifnot(all(sq$export_label %in% names(r)))
 
   # there are 45 export labels
