@@ -1,18 +1,19 @@
 utils::globalVariables(c("choice"))
 
-#' Download survey response choices
+#' Get survey response choices
 #'
 #' Retrieve a table giving the response choices for each question in a given
 #' survey.
 #'
-#' @inheritParams responses
+#' @param design A \code{\link{qualtrics_design-class}} object.
 #' @return A data.table of response choices
+#'
 #' @seealso Download a survey's \code{\link{questions}},
 #'   \code{\link{responses}}, or \code{\link{design}}.
 #' @importFrom utils type.convert
 #' @export
-choices = function(id) {
-  design = design(id)
+choices = function(design) {
+  assertthat::assert_that("qualtrics_design" %in% class(design))
   choices = lapply(design$questions, function(x) {
     lapply(x[["choices"]], function(l) {
       parse_question_element(l)

@@ -2,12 +2,12 @@
 % Please edit documentation in R/choices.r
 \name{choices}
 \alias{choices}
-\title{Download survey response choices}
+\title{Get survey response choices}
 \usage{
-choices(id)
+choices(design)
 }
 \arguments{
-\item{id}{A Qualtrics survey identifier.}
+\item{design}{A \code{\link{qualtrics_design-class}} object.}
 }
 \value{
 A data.table of response choices

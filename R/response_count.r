@@ -12,11 +12,11 @@
 #' "Delete Data" tool
 #' }
 #'
-#' @inheritParams responses
+#' @inheritParams choices
 #'
 #' @return A list giving response counts.
 #' @export
-response_count = function(id) {
-  d = design(id)
-  d$responseCounts
+response_counts = function(design) {
+  assertthat::assert_that("qualtrics_design" %in% class(design))
+  design$responseCounts
 }

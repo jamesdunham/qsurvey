@@ -2,12 +2,12 @@
 % Please edit documentation in R/questions.r
 \name{questions}
 \alias{questions}
-\title{Download survey questions}
+\title{Get survey questions}
 \usage{
-questions(id, labels = TRUE, text = TRUE)
+questions(design, labels = TRUE, text = TRUE)
 }
 \arguments{
-\item{id}{A Qualtrics survey identifier.}
+\item{design}{A \code{\link{qualtrics_design-class}} object.}
 
 \item{labels}{Retrieve question labels (default), or don't.}
 
@@ -20,7 +20,7 @@ A data.table of question names, labels, and (optionally) text
 Retrieve the names, labels, and text of a given survey's questions.
 }
 \seealso{
-Download a survey's question \code{\link{choices}},
-  \code{\link{responses}}, or \code{\link{design}}.
+Retrieve a survey's question \code{\link{choices}} or
+  \code{\link{responses}}.
 }
 

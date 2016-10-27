@@ -13,7 +13,7 @@ Main features:
 
 \itemize{
   \item Download survey \link{responses} into an R session
-  \item Download a survey \link{design}
+  \item Download a survey \link[=survey_design]{design}
   \item \link[=surveys]{List survey metadata} (e.g. active/closed status and
   expiration dates)
   \item \link[=drop_sensitive]{Drop sensitive fields} from survey responses

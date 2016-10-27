@@ -4,10 +4,7 @@
 \alias{surveys}
 \title{Download survey metadata}
 \usage{
-surveys(...)
-}
-\arguments{
-\item{...}{Further arguments to \code{\link{request}}.}
+surveys()
 }
 \value{
 A data.table of survey metadata

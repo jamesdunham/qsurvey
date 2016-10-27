@@ -2,12 +2,12 @@
 % Please edit documentation in R/export_names.r
 \name{export_names}
 \alias{export_names}
-\title{Download export names for survey response fields}
+\title{Get export names for survey response fields}
 \usage{
-export_names(id)
+export_names(design)
 }
 \arguments{
-\item{id}{A Qualtrics survey identifier.}
+\item{design}{A \code{\link{qualtrics_design-class}} object.}
 }
 \value{
 A two-column data.table giving \code{id} and \code{export_name}

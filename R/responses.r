@@ -24,11 +24,12 @@
 #' @param id A Qualtrics survey identifier.
 #' @param use_labels Use question labels and choice descriptions (default),
 #'   instead of question and identifiers.
+#' @param verbose Print progress.
 #' @param ... Additional parameters for the \code{responseexports} API.
 #'
 #' @return A data.table of survey responses.
-#' @seealso Download a survey's \code{\link{questions}}, question
-#'   \code{\link{choices}}, or \code{\link{design}}.
+#' @seealso Retrieve a survey's \code{\link{questions}} or question
+#'   \code{\link{choices}}.
 #' @importFrom utils unzip txtProgressBar setTxtProgressBar
 #' @importFrom jsonlite fromJSON
 #' @export
@@ -44,18 +45,24 @@ responses = function(id, use_labels = TRUE, verbose = TRUE, ...) {
   )
   export_id = r$result$id
   export_progress = 0
-  message("Qualtrics is preparing responses for download...")
-  pb = utils::txtProgressBar(max = 100, style = 3)
+  if (isTRUE(verbose))  {
+    message("Qualtrics is preparing responses for download...")
+    pb = utils::txtProgressBar(max = 100, style = 3)
+  }
   while (export_progress < 100) {
     r_export = qget(action = paste0("responseexports/", export_id))
-    export_progress = r_export$result$percentComplete
-    utils::setTxtProgressBar(pb, export_progress)
+    if (isTRUE(verbose))  {
+      export_progress = r_export$result$percentComplete
+      utils::setTxtProgressBar(pb, export_progress)
+    }
   }
-  close(pb)
+  if (isTRUE(verbose))  {
+    close(pb)
+    message("Downloading...")
+  }
   # we get the survey responses as a zip-formatted file
   file_action = sub("https://az1.qualtrics.com/API/v3/", "",
     r_export$result$file, fixed = TRUE)
-  message("Downloading...")
   bin = qget(action = file_action, as = "raw")
   # write it to disk so we can unzip it
   temp_name = tempfile()

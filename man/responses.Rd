@@ -12,6 +12,8 @@ responses(id, use_labels = TRUE, verbose = TRUE, ...)
 \item{use_labels}{Use question labels and choice descriptions (default),
 instead of question and identifiers.}
 
+\item{verbose}{Print progress.}
+
 \item{...}{Additional parameters for the \code{responseexports} API.}
 }
 \value{
@@ -41,7 +43,7 @@ details of these parameters. The parameters that cannot be changed via
 of which is exposed as argument \code{use_labels}.
 }
 \seealso{
-Download a survey's \code{\link{questions}}, question
-  \code{\link{choices}}, or \code{\link{design}}.
+Retrieve a survey's \code{\link{questions}} or question
+  \code{\link{choices}}.
 }
 

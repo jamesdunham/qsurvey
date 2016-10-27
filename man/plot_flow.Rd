@@ -3,14 +3,14 @@
 \name{plot_flow}
 \alias{edges}
 \alias{plot_flow}
-\title{Represent a survey's design as a graph}
+\title{Represent a survey design as a graph}
 \usage{
 plot_flow(design)
 
 edges(design)
 }
 \arguments{
-\item{design}{The result of a call to \code{\link{design}}.}
+\item{design}{A \code{\link{qualtrics_design-class}} object.}
 }
 \value{
 \code{plot_flow} invisibly returns a DiagrammeR \code{dgr_graph}

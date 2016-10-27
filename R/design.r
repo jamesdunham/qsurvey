@@ -10,12 +10,12 @@
 #'   \code{\link{questions}}, or question \code{\link{choices}}.
 #' @import assertthat
 #' @export
-design = function(id, as = "parsed") {
+survey_design = function(id, as = "parsed") {
   assertthat::assert_that(assertthat::is.string(id))
-  r = qget(action = paste0("surveys/", id), as = as)
+  ret = qget(action = paste0("surveys/", id), as = as)
   if (identical(as, "parsed")) {
-    return(r$result)
-  } else {
-    return(r)
+    ret = ret$result
   }
+  class(ret) <- c("qualtrics_design", class(ret))
+  return(ret)
 }

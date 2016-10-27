@@ -1,19 +1,21 @@
-utils::globalVariables(c("edges"))
+utils::globalVariables(c("edges", "br_subset", "edge_type", "edge_color", "name",
+  "node", "parent", "width", "previous", "node_color", "node_shape"))
 
-#' Represent a survey's design as a graph
+#' Represent a survey design as a graph
 #'
 #' \code{plot_flow} and \code{edges} represent a survey's design as a directed
 #' graph that shows possible paths through the elements of the survey.
 #'
-#' @param design The result of a call to \code{\link{design}}.
-#'
+#' @inheritParams choices
 #' @return \code{plot_flow} invisibly returns a DiagrammeR \code{dgr_graph}
 #'   object. As a side effect, it renders the graph. \code{edges} returns a
 #'   data.table of graph edges.
+#'
 #' @import DiagrammeR
 #' @aliases edges
 #' @export
 plot_flow = function(design) {
+  assertthat::assert_that("qualtrics_design" %in% class(design))
   edge_tbl = search_flow(design$flow)
   edge_tbl = add_edge_types(edge_tbl)
   edge_tbl = add_edge_colors(edge_tbl)
@@ -46,6 +48,7 @@ plot_flow = function(design) {
 #' @inheritParams plot_flow
 #' @export
 edges = function(design) {
+  assertthat::assert_that("qualtrics_design" %in% class(design))
   edge_tbl = search_flow(design$flow)
   edge_tbl[]
 }

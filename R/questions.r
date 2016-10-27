@@ -1,19 +1,19 @@
 utils::globalVariables(c(".", "export_label", "question"))
 
-#' Download survey questions
+#' Get survey questions
 #'
 #' Retrieve the names, labels, and text of a given survey's questions.
 #'
-#' @inheritParams responses
+#' @inheritParams choices
 #' @param labels Retrieve question labels (default), or don't.
 #' @param text Retrieve question text (default), or don't.
 #'
 #' @return A data.table of question names, labels, and (optionally) text
-#' @seealso Download a survey's question \code{\link{choices}},
-#'   \code{\link{responses}}, or \code{\link{design}}.
+#' @seealso Retrieve a survey's question \code{\link{choices}} or
+#'   \code{\link{responses}}.
 #' @export
-questions = function(id, labels = TRUE, text = TRUE) {
-  design = design(id)
+questions = function(design, labels = TRUE, text = TRUE) {
+  assertthat::assert_that("qualtrics_design" %in% class(design))
   elements = "questionLabel"
   if (isTRUE(text)) {
     elements = c(elements, "questionText")

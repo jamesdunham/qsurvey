@@ -7,7 +7,7 @@
 #' \itemize{
 #'   \item Download survey \link{responses} into an R session
 #   \item Import and export survey designs
-#'   \item Download a survey \link{design}
+#'   \item Download a survey \link[=survey_design]{design}
 #   \item Set active/closed status and expiration dates
 #'   \item \link[=surveys]{List survey metadata} (e.g. active/closed status and
 #'   expiration dates)
