@@ -1,4 +1,4 @@
-#' The qualtrics package: overview
+#' The qsurvey package: overview
 #'
 #' A toolkit for working with the Qualtrics platform and its survey data in R.
 #'

@@ -1,4 +1,4 @@
-Package: qualtrics
+Package: qsurvey
 Title: A toolkit for working with the Qualtrics platform and its survey data in R
 Version: 0.0.0.9000
 Authors@R: person("James", "Dunham", email = "james@jdunham.io", role = c("aut", "cre"))

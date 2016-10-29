@@ -1,5 +1,5 @@
 library(testthat)
-library(qualtrics)
+library(qsurvey)
 api_key = "foo"
 
 test_check("qualtrics")
