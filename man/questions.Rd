@@ -4,7 +4,7 @@
 \alias{questions}
 \title{Get survey questions}
 \usage{
-questions(design, labels = TRUE, text = TRUE)
+questions(design, labels = TRUE, text = TRUE, html = FALSE)
 }
 \arguments{
 \item{design}{A \code{\link{qualtrics_design-class}} object.}

@@ -2,7 +2,7 @@ function(responses, design) {
   assertthat::assert_that("qualtrics_design" %in% class(design))
   key_from_file()
   id = "SV_bKQGl5WB66K9yFT"
-  # design = survey_design(id)
+  design = survey_design(id)
   plot_flow(design)
   edges(design)
   r = responses(id, use_labels = FALSE)

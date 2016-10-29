@@ -12,16 +12,19 @@ utils::globalVariables(c(".", "export_label", "question"))
 #' @seealso Retrieve a survey's question \code{\link{choices}} or
 #'   \code{\link{responses}}.
 #' @export
-questions = function(design, labels = TRUE, text = TRUE) {
+questions = function(design, labels = TRUE, text = TRUE, html = FALSE) {
   assertthat::assert_that("qualtrics_design" %in% class(design))
   elements = "questionLabel"
   if (isTRUE(text)) {
     elements = c(elements, "questionText")
   }
   questions = lapply(design$questions, function(x) {
-    parse_question_element(x[elements])
+    parse_question_element(x[elements], html)
   })
   questions = data.table::rbindlist(questions, fill = TRUE, idcol = "question")
+  # the only indicator of question order in design$questions is the list order.
+  # this could be checked against their order of appearance in design$blocks
+  questions[, q_order := .I]
   if (isTRUE(labels)) {
     col_map = data.table::rbindlist(design$exportColumnMap, idcol = "export_label",
       fill = TRUE)[, .(export_label, question)]
@@ -32,14 +35,19 @@ questions = function(design, labels = TRUE, text = TRUE) {
       all.y = FALSE,
       by = "question")
   }
+  data.table::setkey(questions, "q_order")
   return(questions[])
 }
 
-parse_question_element = function(l) {
+parse_question_element = function(l, html) {
   # Missing elements will be NULL in json but must be NA in data.table output
   lapply(l, function(x) {
     x = ifelse(is.null(x), NA, x)
     # Also drop HTML tags from question text
-    gsub("(<[^>]*>)", "", x)
+    if (!isTRUE(html)) {
+      return(gsub("(<[^>]*>)", "", x))
+    } else {
+      return(x)
+    }
   })
 }
