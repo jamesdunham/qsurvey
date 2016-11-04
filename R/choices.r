@@ -13,7 +13,8 @@ utils::globalVariables(c("choice"))
 #' @importFrom utils type.convert
 #' @export
 choices = function(design) {
-  assertthat::assert_that("qualtrics_design" %in% class(design))
+
+  assert_is_design(design)
   choices = lapply(design$questions, function(x) {
     lapply(x[["choices"]], function(l) {
       parse_question_element(l)

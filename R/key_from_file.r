@@ -9,9 +9,10 @@
 #'   not (the default).
 #'
 #' @return Invisibly returns the value of the environment variable
-#'   \code{QUALTRICS_KEY}.
+#'   \code{QUALTRICS_KEY}, after setting it as a side effect.
 #' @export
 key_from_file = function(file = ".api_key", verbose = FALSE) {
+
   if (file.exists(file)) {
     f = readLines(file)
     if (length(f) && nchar(f[1])) {

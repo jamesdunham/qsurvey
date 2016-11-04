@@ -14,7 +14,7 @@ not (the default).}
 }
 \value{
 Invisibly returns the value of the environment variable
-  \code{QUALTRICS_KEY}.
+  \code{QUALTRICS_KEY}, after setting it as a side effect.
 }
 \description{
 The environment variable \code{QUALTRICS_KEY} should give an API key for

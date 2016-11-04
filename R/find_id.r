@@ -30,6 +30,7 @@ find_id = function(pattern,
   ignore.case = TRUE,
   perl = TRUE,
   fixed = FALSE) {
+
   svy_tbl = surveys()
   is_match = grepl(pattern,
     svy_tbl$name,

@@ -11,12 +11,15 @@ plot_flow(design)
 \item{design}{A \code{\link{qualtrics_design-class}} object.}
 }
 \value{
-\code{plot_flow} invisibly returns a DiagrammeR \code{dgr_graph}
-  object. As a side effect, it renders the graph. \code{edges} returns a
-  data.table of graph edges.
+\code{plot_flow} invisibly returns a visNetwork object. As a side
+  effect, it renders the graph.
 }
 \description{
 \code{plot_flow} and \code{edges} represent a survey's design as a directed
 graph that shows possible paths through the elements of the survey.
+}
+\seealso{
+\code{nodes} and \code{edges} for node and edge data in tabular
+  form.
 }
 

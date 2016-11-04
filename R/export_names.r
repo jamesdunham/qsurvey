@@ -1,7 +1,7 @@
 #' Get export names for survey response fields
 #'
 #' Retrieve the descriptive export names (e.g., \code{favorability}) associated
-#' with survey question identifiers (e.g., \code{QID1}).
+#' with question ids (e.g., \code{QID1}).
 #'
 #' In some cases, there is more than one export name associated with a given
 #' survey question identifier. Multiple-choice, multiple-answer questions have a
@@ -12,7 +12,8 @@
 #'   pairs.
 #' @export
 export_names = function(design) {
-  assertthat::assert_that("qualtrics_design" %in% class(design))
+
+  assert_is_design(design)
   map = lapply(design$exportColumnMap, `[[`, "question")
   ret = data.table::data.table("id" = unlist(map, recursive = FALSE),
     "export_name" = names(map), key = "export_name")

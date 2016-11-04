@@ -29,9 +29,10 @@ request = function(verb = "GET",
   action = NULL,
   key = Sys.getenv("QUALTRICS_KEY"),
   test = FALSE,
-  ...)
-{
+  ...) {
+
   url = paste0("https://",
+    # FIXME: az1 load-balancing subdomain is hardcoded
     paste("az1", "qualtrics.com/API/v3/", sep = "."),
     action)
   if (!test && (length(key) != 1 || !is.character(key) || key == "")) {
@@ -65,8 +66,8 @@ request = function(verb = "GET",
 #' @param as Desired type of content. See \link[httr]{content}.
 #'
 #' @export
-qget = function(action = NULL, as = "parsed", ...)
-{
+qget = function(action = NULL, as = "parsed", ...) {
+
   r = request(verb = "GET", action = action, ...)
   httr::content(r, as = as)
 }
@@ -75,8 +76,8 @@ qget = function(action = NULL, as = "parsed", ...)
 #' @aliases qpost
 #'
 #' @export
-qpost = function(action = NULL, as = "parsed", ...)
-{
+qpost = function(action = NULL, as = "parsed", ...) {
+
   r = request(verb = "POST", action = action, body, ...)
   httr::content(r, as = as)
 }

@@ -33,11 +33,11 @@
 #' @importFrom utils unzip txtProgressBar setTxtProgressBar
 #' @importFrom jsonlite fromJSON
 #' @export
-responses = function(id, use_labels = TRUE, verbose = TRUE, ...) {
+responses = function(id, format = "json", use_labels = TRUE, verbose = TRUE, ...) {
   r = qpost(
     action = "responseexports",
     body = list(
-      format = "json",
+      format = format,
       surveyId = id,
       useLabels = use_labels,
       ...
@@ -68,12 +68,18 @@ responses = function(id, use_labels = TRUE, verbose = TRUE, ...) {
   temp_name = tempfile()
   writeBin(bin, temp_name)
   f_unzip = utils::unzip(temp_name, exdir = tempdir())
-  json = jsonlite::fromJSON(f_unzip)
+  if (format == "json") {
+    json = jsonlite::fromJSON(f_unzip)
+    tbl = json[[1]]
+  } else if (format %in% c("csv", "csv2013")) {
+    tbl = read.csv(f_unzip, stringsAsFactors = FALSE)
+  } else {
+    stop("only json, csv, and csv2013 export formats are supported")
+  }
   # clean up files
   file.remove(temp_name)
   file.remove(f_unzip)
   # f_json is a list whose sole element is the data.frame of responses
-  tbl = json[[1]]
   data.table::setDT(tbl)
   return(tbl[])
 }

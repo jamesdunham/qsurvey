@@ -39,7 +39,7 @@ questions = function(design, labels = TRUE, text = TRUE, html = FALSE) {
   return(questions[])
 }
 
-parse_question_element = function(l, html) {
+parse_question_element = function(l, html = FALSE) {
   # Missing elements will be NULL in json but must be NA in data.table output
   lapply(l, function(x) {
     x = ifelse(is.null(x), NA, x)

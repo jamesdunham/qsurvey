@@ -4,14 +4,16 @@
 #' graph that shows possible paths through the elements of the survey.
 #'
 #' @inheritParams choices
-#' @return \code{plot_flow} invisibly returns a DiagrammeR \code{dgr_graph}
-#'   object. As a side effect, it renders the graph. \code{edges} returns a
-#'   data.table of graph edges.
+#' @return \code{plot_flow} invisibly returns a visNetwork object. As a side
+#'   effect, it renders the graph.
 #'
 #' @import visNetwork
 #' @aliases edges
+#' @seealso \code{nodes} and \code{edges} for node and edge data in tabular
+#'   form.
 #' @export
 plot_flow = function(design) {
+
   edge_tbl = edges(design)
   edge_tbl = add_edge_colors(edge_tbl)
 
@@ -28,4 +30,38 @@ plot_flow = function(design) {
   visNetwork::visHierarchicalLayout(net, direction = "LR", sortMethod = "directed")
 
   invisible(net)
+}
+
+
+add_node_shapes = function(edge_tbl) {
+  # When plotting, node shape depends on node type
+
+  edge_tbl[type == "EmbeddedData", shape := "dot"]
+  edge_tbl[type == "BlockRandomizer", shape := "dot"]
+  edge_tbl[type == "Branch", shape := "dot"]
+  edge_tbl[type == "Block", shape := "dot"]
+  # StartSurvey isn't a flow element type in the Qualtrics API, but is used in
+  # qsurvey to represent the start of the survey
+  edge_tbl[type %in% c("StartSurvey", "EndSurvey"), shape := "dot"]
+  edge_tbl[is.na(shape), shape := "dot"]
+  edge_tbl[]
+}
+
+add_node_colors = function(edge_tbl) {
+  # When plotting, node color depends on node type
+
+  edge_tbl[type %in% c("StartSurvey", "EndSurvey"), color := "#fef4ab"]
+  edge_tbl[type == "Block", color := "#d9d9d9"]
+  edge_tbl[type == "Branch", color := "#fc9272"]
+  edge_tbl[type == "BlockRandomizer", color := "#fc9272"]
+  edge_tbl[type == "EmbeddedData", color := "#a3c4cd"]
+  edge_tbl[]
+}
+
+add_edge_colors = function(edge_tbl) {
+  # When plotting, edge color depends on edge type
+
+  edge_tbl[type == "deterministic", color :=  "#000000"]
+  edge_tbl[type %in% c("conditional", "random"), color :=  "orange"]
+  edge_tbl[]
 }

@@ -13,6 +13,10 @@ nodes(design, ids = FALSE)
 \item{design}{A \code{\link{qualtrics_design-class}} object.}
 }
 \description{
-Represent survey flows as node or edge tables
+A survey flow can usefully be considered a directed graph. \code{edges} shows
+its edge pairs, and \code{nodes} gives its nodes.
+}
+\seealso{
+\code{plot_flow} for a visNetwork graph of a survey flow.
 }
 

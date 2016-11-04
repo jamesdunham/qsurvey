@@ -3,10 +3,15 @@ utils::globalVariables(c("edges", "br_subset", "edge_type", "edge_color", "name"
 
 #' Represent survey flows as node or edge tables
 #'
+#' A survey flow can usefully be considered a directed graph. \code{edges} shows
+#' its edge pairs, and \code{nodes} gives its nodes.
+#'
 #' @inheritParams choices
 #' @aliases nodes
+#' @seealso \code{plot_flow} for a visNetwork graph of a survey flow.
 #' @export
 edges = function(design) {
+
   assertthat::assert_that("qualtrics_design" %in% class(design))
   edge_tbl = search_flow(design$flow)
   edge_tbl = add_edge_types(edge_tbl)
@@ -19,6 +24,7 @@ edges = function(design) {
 #' @rdname edges
 #' @export
 nodes = function(design, ids = FALSE) {
+
   assertthat::assert_that("qualtrics_design" %in% class(design))
   node_tbl = search_flow(design$flow)
   data.table::setnames(node_tbl, c("node_type"), c("type"))
@@ -45,13 +51,16 @@ nodes = function(design, ids = FALSE) {
   node_tbl[type == "StartSurvey", label := "Start"]
   node_tbl[type == "EndSurvey", label := "End"]
   node_tbl[type == "EmbeddedData", label := "Set Data"]
-  # finally use types in place of missing labels
+  # use types in place of missing labels
   node_tbl[is.na(label), label := type]
 
   node_tbl[]
 }
 
+
 search_flow = function(f) {
+  # Conduct a breadth-first search of a survey flow
+
   nodes = f[sapply(f, is.list)]
   edges = list(
     "id" = numeric(),
@@ -103,7 +112,12 @@ search_flow = function(f) {
   edges[]
 }
 
+
 order_siblings = function(edge_tbl) {
+  # Consecutive elements of the same generation always appear to a respondent in
+  # the same order (unless their parent is a BlockRandomizer). Edges should
+  # connect the parent and the first sibling, and then each consecutive sibling.
+
   not_randomizers = unique(edge_tbl[node_type != "BlockRandomizer", id])
   edge_tbl[parent_id %in% c(0, not_randomizers), from := data.table::shift(id),
     by = "parent_id"]
@@ -111,49 +125,15 @@ order_siblings = function(edge_tbl) {
   edge_tbl[]
 }
 
+
 add_edge_types = function(edge_tbl) {
+  # Edge type (conditional, random, or deterministic) depends on parent node
+  # type
+
   is_branch = unique(edge_tbl[node_type == "Branch", id])
   edge_tbl[parent_id %in% is_branch, `:=`(edge_type = "conditional")]
   is_randomizer = unique(edge_tbl[node_type == "BlockRandomizer", id])
   edge_tbl[parent_id %in% is_randomizer, `:=`(edge_type = "random")]
   edge_tbl[is.na(edge_type), `:=`(edge_type = "deterministic")]
-  edge_tbl[]
-}
-
-add_node_shapes = function(edge_tbl) {
-  edge_tbl[type == "EmbeddedData", shape := "dot"]
-  edge_tbl[type == "BlockRandomizer", shape := "dot"]
-  edge_tbl[type == "Branch", shape := "dot"]
-  edge_tbl[type == "Block", shape := "dot"]
-  # StartSurvey isn't a flow element type in the Qualtrics API, but is used in
-  # qsurvey to represent the start of the survey
-  edge_tbl[type %in% c("StartSurvey", "EndSurvey"), shape := "dot"]
-  edge_tbl[is.na(shape), shape := "dot"]
-  edge_tbl[]
-}
-
-add_node_colors = function(edge_tbl) {
-  edge_tbl[type %in% c("StartSurvey", "EndSurvey"), color := "#fef4ab"]
-  edge_tbl[type == "Block", color := "#d9d9d9"]
-  edge_tbl[type == "Branch", color := "#fc9272"]
-  edge_tbl[type == "BlockRandomizer", color := "#fc9272"]
-  edge_tbl[type == "EmbeddedData", color := "#a3c4cd"]
-  edge_tbl[]
-}
-
-add_edge_colors = function(edge_tbl) {
-  edge_tbl[type == "deterministic", color :=  "#000000"]
-  edge_tbl[type %in% c("conditional", "random"), color :=  "orange"]
-  edge_tbl[]
-}
-
-#' @importFrom stringr str_wrap
-add_block_descriptions = function(edge_tbl, design) {
-  edge_tbl[grepl("^Block ", name), node_type := unlist(lapply(name, function(x) {
-    stringr::str_wrap(design$blocks[[sub("^Block ", "", x)]]$description,
-      width = 15)
-  }))]
-  edge_tbl[grepl("^BlockRandomizer$", name), node_type :=
-      paste0(node_type, "\n", br_subset)]
   edge_tbl[]
 }

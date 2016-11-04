@@ -7,7 +7,7 @@
 render_survey(design)
 }
 \arguments{
-\item{choices}{Foo}
+\item{design}{A \code{\link{qualtrics_design-class}} object.}
 }
 \value{
 Invisibly returns the data.table underlying the Shiny UI.

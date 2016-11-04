@@ -15,7 +15,7 @@ A two-column data.table giving \code{id} and \code{export_name}
 }
 \description{
 Retrieve the descriptive export names (e.g., \code{favorability}) associated
-with survey question identifiers (e.g., \code{QID1}).
+with question ids (e.g., \code{QID1}).
 }
 \details{
 In some cases, there is more than one export name associated with a given

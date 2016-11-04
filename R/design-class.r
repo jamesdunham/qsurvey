@@ -1,3 +1,5 @@
+# qualtrics_design is an S3 class implemented by design(), whose return value is
+# a list with 'qualtrics_design' added to its class().
 print.qualtrics_design = function(x) {
     message('name:\t\t', x$name)
     message('id:\t\t', x$id)
@@ -7,4 +9,13 @@ print.qualtrics_design = function(x) {
      ifelse(x[["isActive"]], " (active)", " (closed)"))
     message("questions:\t", length(x$questions))
     message("blocks:\t\t", length(x$blocks))
+}
+
+#' @import assertthat
+assert_is_design = function(design) {
+  assertthat::assert_that("qualtrics_design" %in% class(design))
+}
+
+assert_is_table = function(tbl) {
+  assertthat::assert_that("data.frame" %in% class(tbl))
 }

@@ -5,21 +5,20 @@
 \alias{values_to_labels}
 \title{Recode survey responses}
 \usage{
-values_to_labels(tbl, id)
+values_to_labels(tbl, design, keep = FALSE)
 
-labels_to_values(tbl, id)
+labels_to_values(tbl, design, keep = FALSE)
 }
 \arguments{
 \item{tbl}{A data.frame of survey responses.}
-
-\item{id}{A Qualtrics survey identifier.}
 }
 \value{
 The data.frame with recoded responses.
 }
 \description{
-\code{values_to_labels} recodes survey responses that contain choice values
-or ids (like \code{"5"}) using descriptive labels (like \code{"strongly
-approve"}). \code{labels_to_values} does the reverse.
+\code{values_to_labels} recodes survey responses that contain choice ids or
+recodes (like \code{"5"}) to descriptive labels (like \code{"strongly
+approve"}). \code{labels_to_values} does the reverse, replacing descriptive
+labels with choice ids or recodes.
 }
 
