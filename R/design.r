@@ -9,13 +9,21 @@
 #' @seealso Download a survey's \code{\link{responses}},
 #'   \code{\link{questions}}, or question \code{\link{choices}}.
 #' @export
-survey_design = function(id, as = "parsed") {
+#' @examples
+#' \dontrun{
+#' 
+#' # set the API key from .api_key file
+#' key_from_file()
+#'
+#' # id should be a valid survey ID
+#' design = survey_design("SV_cuxfjYWRTB30ouh")
+#' print(design)
+#' }
+survey_design = function(id) {
 
-  assert_is_design(design)
-  ret = qget(action = paste0("surveys/", id), as = as)
-  if (identical(as, "parsed")) {
-    ret = ret$result
-  }
+  assertthat::assert_that(assertthat::is.string(id))
+  req = qget(action = paste0("surveys/", id))
+  ret = req$result
   class(ret) <- c("qualtrics_design", class(ret))
   return(ret)
 }

@@ -11,6 +11,13 @@
 #' @return A two-column data.table giving \code{id} and \code{export_name}
 #'   pairs.
 #' @export
+#' @examples
+#' \dontrun{ # requires API key
+#' # set an API key and retrieve a survey design
+#' key_from_file()
+#' design = survey_design("SV_cuxfjYWRTB30ouh")
+#' export_names(design)
+#' }
 export_names = function(design) {
 
   assert_is_design(design)
