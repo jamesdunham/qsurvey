@@ -4,7 +4,11 @@
 \alias{surveys}
 \title{Download survey metadata}
 \usage{
-surveys()
+surveys(key = Sys.getenv("QUALTRICS_KEY"))
+}
+\arguments{
+\item{key}{A Qualtrics API key (by default, the value of the environmental
+variable \code{QUALTRICS_KEY}).}
 }
 \value{
 A data.table of survey metadata

@@ -14,6 +14,7 @@
 #' @export
 plot_flow = function(design) {
 
+  assertthat::assert_that("qualtrics_design" %in% class(design))
   edge_tbl = edges(design)
   edge_tbl = add_edge_colors(edge_tbl)
 

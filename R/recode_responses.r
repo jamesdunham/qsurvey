@@ -11,6 +11,8 @@
 #' @export
 values_to_labels = function(tbl, design, keep = FALSE) {
 
+  assertthat::assert_that(is.data.frame(tbl))
+  assertthat::assert_that("qualtrics_design" %in% class(design))
   # TODO: give choice of ids or recodes
   ret = map_values_and_labels(tbl, design, keep, direction = "VL")
   return(ret[])
@@ -21,6 +23,8 @@ values_to_labels = function(tbl, design, keep = FALSE) {
 #' @export
 labels_to_values = function(tbl, design, keep = FALSE) {
 
+  assertthat::assert_that(is.data.frame(tbl))
+  assertthat::assert_that("qualtrics_design" %in% class(design))
   ret = map_values_and_labels(tbl, design, keep, direction = "LV")
   return(ret[])
 }
