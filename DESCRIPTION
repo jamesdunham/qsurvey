@@ -5,7 +5,7 @@ Authors@R: person("James", "Dunham", email = "james@jdunham.io", role = c("aut",
 Description: Download responses and designs directly into a session, then examine branching, randomization, and question attributes like validation; represent survey flows as directed graphs for interactive review in Shiny; map question ids to labels and translate between choice codes and descriptions in response data. 
 Depends:
     R (>= 3.3.0)
-License: MIT + file LICENSE
+License: GPL-3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests:
