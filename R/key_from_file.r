@@ -11,6 +11,11 @@
 #' @return Invisibly returns the value of the environment variable
 #'   \code{QUALTRICS_KEY}, after setting it as a side effect.
 #' @export
+#' @examples
+#' \dontrun{
+#' key = key_from_file()
+#' identical(key, Sys.getenv("QUALTRICS_KEY"))
+#' }
 key_from_file = function(file = ".api_key", verbose = FALSE) {
 
   if (file.exists(file)) {
