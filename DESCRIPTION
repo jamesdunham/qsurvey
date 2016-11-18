@@ -18,6 +18,8 @@ Imports:
     httr,
     jsonlite,
     lubridate,
+    magrittr,
+    shiny,
     stringr,
     visNetwork
 RoxygenNote: 5.0.1

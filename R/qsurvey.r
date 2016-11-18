@@ -31,5 +31,5 @@
 #'
 #' @name qualtrics
 #' @docType package
-#' @import assertthat data.table jsonlite
+#' @import assertthat data.table jsonlite magrittr shiny
 NULL
