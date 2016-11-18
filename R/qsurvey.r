@@ -29,7 +29,7 @@
 #' while staffing \href{http://web.mit.edu/polisci/research/perl.html}{MIT
 #' PERL}.
 #'
-#' @name qualtrics
+#' @name qsurvey
 #' @docType package
 #' @import assertthat data.table jsonlite magrittr shiny
 NULL
