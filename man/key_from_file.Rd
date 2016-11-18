@@ -21,4 +21,10 @@ The environment variable \code{QUALTRICS_KEY} should give an API key for
 communication with the Qualtrics survey platform. \code{key_from_file} sets
 it using the contents of a file.
 }
+\examples{
+\dontrun{
+key = key_from_file()
+identical(key, Sys.getenv("QUALTRICS_KEY"))
+}
+}
 
