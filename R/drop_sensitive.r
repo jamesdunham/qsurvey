@@ -94,7 +94,7 @@ drop_cols = function(tbl, drop_cols) {
 
   data.table::setDT(tbl)
   for (col in drop_cols) {
-    tbl[, col := NULL, with = FALSE]
+    tbl[, (col) := NULL]
   }
-  tbl[]
+  return(tbl[])
 }
