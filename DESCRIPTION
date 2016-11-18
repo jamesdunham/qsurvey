@@ -2,8 +2,7 @@ Package: qsurvey
 Title: A toolkit for working with the Qualtrics platform and its survey data in R
 Version: 0.0.0.9000
 Authors@R: person("James", "Dunham", email = "james@jdunham.io", role = c("aut", "cre"))
-Description: Download survey responses into an R session; retrieve question 
-  names, labels, text, and choices; and manipulate Qualtrics data.
+Description: Download responses and designs directly into a session, then examine branching, randomization, and question attributes like validation; represent survey flows as directed graphs for interactive review in Shiny; map question ids to labels and translate between choice codes and descriptions in response data. 
 Depends:
     R (>= 3.3.0)
 License: MIT + file LICENSE
@@ -20,3 +19,4 @@ Imports:
     stringr,
     visNetwork
 RoxygenNote: 5.0.1
+
