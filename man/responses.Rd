@@ -4,7 +4,8 @@
 \alias{responses}
 \title{Download survey responses}
 \usage{
-responses(id, format = "json", use_labels = TRUE, verbose = TRUE, ...)
+responses(id, format = "json", use_labels = TRUE, verbose = TRUE,
+  key = Sys.getenv("QUALTRICS_KEY"), ...)
 }
 \arguments{
 \item{id}{A Qualtrics survey identifier.}
@@ -13,6 +14,9 @@ responses(id, format = "json", use_labels = TRUE, verbose = TRUE, ...)
 instead of question and identifiers.}
 
 \item{verbose}{Print progress.}
+
+\item{key}{A Qualtrics API key (by default, the value of the environmental
+variable \code{QUALTRICS_KEY}).}
 
 \item{...}{Additional parameters for the \code{responseexports} API.}
 }

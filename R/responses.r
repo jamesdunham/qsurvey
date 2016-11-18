@@ -26,6 +26,7 @@
 #'   instead of question and identifiers.
 #' @param verbose Print progress.
 #' @param ... Additional parameters for the \code{responseexports} API.
+#' @inheritParams request
 #'
 #' @return A data.table of survey responses.
 #' @seealso Retrieve a survey's \code{\link{questions}} or question
@@ -33,7 +34,8 @@
 #' @importFrom utils unzip txtProgressBar setTxtProgressBar
 #' @importFrom jsonlite fromJSON
 #' @export
-responses = function(id, format = "json", use_labels = TRUE, verbose = TRUE, ...) {
+responses = function(id, format = "json", use_labels = TRUE, verbose = TRUE, 
+                     key = Sys.getenv("QUALTRICS_KEY"), ...) {
   r = qpost(
     action = "responseexports",
     body = list(

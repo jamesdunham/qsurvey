@@ -4,18 +4,30 @@
 \alias{survey_design}
 \title{Download a survey's design}
 \usage{
-survey_design(id, as = "parsed")
+survey_design(id, key = Sys.getenv("QUALTRICS_KEY"))
 }
 \arguments{
 \item{id}{A Qualtrics survey identifier.}
 
-\item{as}{Desired type of content. See \link[httr]{content}.}
+\item{key}{A Qualtrics API key (by default, the value of the environmental
+variable \code{QUALTRICS_KEY}).}
 }
 \value{
 By default, a list representing the survey design; see \code{as}.
 }
 \description{
 Retrieve a representation of the elements in a given survey.
+}
+\examples{
+\dontrun{
+
+# set the API key from .api_key file
+key_from_file()
+
+# id should be a valid survey ID
+design = survey_design("SV_cuxfjYWRTB30ouh")
+print(design)
+}
 }
 \seealso{
 Download a survey's \code{\link{responses}},

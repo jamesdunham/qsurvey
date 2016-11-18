@@ -19,10 +19,10 @@
 #' design = survey_design("SV_cuxfjYWRTB30ouh")
 #' print(design)
 #' }
-survey_design = function(id) {
+survey_design = function(id, key = Sys.getenv("QUALTRICS_KEY")) {
 
   assertthat::assert_that(assertthat::is.string(id))
-  req = qget(action = paste0("surveys/", id))
+  req = qget(action = paste0("surveys/", id), key = key)
   ret = req$result
   class(ret) <- c("qualtrics_design", class(ret))
   return(ret)

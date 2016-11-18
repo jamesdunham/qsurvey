@@ -22,4 +22,12 @@ In some cases, there is more than one export name associated with a given
 survey question identifier. Multiple-choice, multiple-answer questions have a
 unique export name for each choice, but only one question identifier.
 }
+\examples{
+\dontrun{ # requires API key
+# set an API key and retrieve a survey design
+key_from_file()
+design = survey_design("SV_cuxfjYWRTB30ouh")
+export_names(design)
+}
+}
 
