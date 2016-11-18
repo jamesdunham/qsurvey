@@ -6,6 +6,8 @@ Description: Download responses and designs directly into a session, then examin
 Depends:
     R (>= 3.3.0)
 License: GPL-3 | file LICENSE
+URL: http://jdunham.io/qsurvey
+BugReports: https://github.com/jamesdunham/qsurvey/issues
 Encoding: UTF-8
 LazyData: true
 Suggests:
