@@ -24,14 +24,10 @@ plot_flow = function(design) {
   net = visNetwork::visInteraction(net, dragNodes = FALSE, dragView = FALSE, zoomView = FALSE)
   net = visNetwork::visEdges(net, arrows = "to")
   net = visNetwork::visNodes(net, shape = "dot")
-  # net = visNetwork::visLegend(net, useGroups = FALSE, addEdges =
-      # data.frame(label = c("deterministic", "conditional"), color = c("black", "orange")),
-    # position = "right", main = "Edges")
   visNetwork::visHierarchicalLayout(net, direction = "LR", sortMethod = "directed")
 
   invisible(net)
 }
-
 
 add_node_shapes = function(edge_tbl) {
   # When plotting, node shape depends on node type
