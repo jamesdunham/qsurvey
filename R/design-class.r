@@ -6,8 +6,8 @@ print.qualtrics_design = function(x) {
     assertthat::assert_that(assertthat::has_name(x, nm))
   }
   message('name:\t\t', x$name)
-  message('id:\t\t', x$id)
-  message("created:\t", lubridate::date(x$creationDate))
+  message('id:\t\t\t', x$id)
+  message("created:\t\t", lubridate::date(x$creationDate))
   message("modified:\t", lubridate::date(x$lastModifiedDate))
   message("responses:\t", x$responseCounts$auditable,
           ifelse(x[["isActive"]], " (active)", " (closed)"))

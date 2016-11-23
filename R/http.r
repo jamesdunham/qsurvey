@@ -13,7 +13,7 @@
 #' @inheritParams httr::VERB
 #' @param subdomain A Qualtrics subdomain.
 #' @param action An API action (like \code{"surveys"}).
-#' @param key A Qualtrics API key (by default, the value of the environmental
+#' @param key A Qualtrics API key (by default, the value of the environment
 #'   variable \code{QUALTRICS_KEY}).
 #' @param test Whether to send the request to \url{https://httpbin.org} for
 #'   testing purposes, rather than to the Qualtrics API.

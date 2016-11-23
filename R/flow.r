@@ -15,7 +15,7 @@ edges = function(design) {
   assertthat::assert_that("qualtrics_design" %in% class(design))
   edge_tbl = search_flow(design$flow)
   edge_tbl = add_edge_types(edge_tbl)
-  edge_tbl[, c("node_type", "label", "parent_id") := NULL, with = FALSE]
+  edge_tbl[, c("node_type", "label", "parent_id") := NULL]
   data.table::setnames(edge_tbl, c("id", "edge_type"), c("to", "type"))
   data.table::setcolorder(edge_tbl, c("from", setdiff(names(edge_tbl), "from")))
   edge_tbl[]
@@ -28,30 +28,25 @@ nodes = function(design, ids = FALSE) {
   assertthat::assert_that("qualtrics_design" %in% class(design))
   node_tbl = search_flow(design$flow)
   data.table::setnames(node_tbl, c("node_type"), c("type"))
-  node_tbl[, c("from") := NULL, with = FALSE]
-
-  # the parent_id of level-1 nodes is 0; create a node with id 0 to represent
-  # the start of the survey, though no sucha type exists in the Qualtrics API
-  # node_tbl = data.table::rbindlist(list(data.frame(id = 0, type = "StartSurvey"),
-    # node_tbl), fill = TRUE)
+  node_tbl[, c("from") := NULL]
 
   # add descriptive labels for blocks
   block_tbl = blocks(design)
   node_tbl = merge(node_tbl, block_tbl, all.x = TRUE, all.y = FALSE,
-    by.x = "label", by.y = "id")
+    by.x = "label", by.y = "block_id")
   # use descriptions instead of BL_xx ids in block labels
   if (isTRUE(ids)) {
     node_tbl[type == "Block", block_id := label]
   }
-  node_tbl[type == "Block", label := description]
-  node_tbl[, description := NULL]
+  node_tbl[type == "Block", label := block_description]
+  node_tbl[, block_description := NULL]
   data.table::setcolorder(node_tbl, union(c("id", "parent_id", "type",
     "label"), names(node_tbl)))
 
   node_tbl[type == "StartSurvey", label := "Start"]
   node_tbl[type == "EndSurvey", label := "End"]
   node_tbl[type == "EmbeddedData", label := "Set Data"]
-  # use types in place of missing labels
+  # use node types in place of missing labels
   node_tbl[is.na(label), label := type]
 
   node_tbl[]

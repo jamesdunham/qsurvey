@@ -25,9 +25,8 @@ plot_flow = function(design) {
   net = visNetwork::visInteraction(net, dragNodes = FALSE, dragView = FALSE, zoomView = FALSE)
   net = visNetwork::visEdges(net, arrows = "to")
   net = visNetwork::visNodes(net, shape = "dot")
-  visNetwork::visHierarchicalLayout(net, direction = "LR", sortMethod = "directed")
-
-  invisible(net)
+  net = visNetwork::visHierarchicalLayout(net, direction = "LR", sortMethod = "directed")
+  net
 }
 
 add_node_shapes = function(edge_tbl) {

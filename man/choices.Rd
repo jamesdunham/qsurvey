@@ -10,11 +10,10 @@ choices(design)
 \item{design}{A \code{\link{qualtrics_design-class}} object.}
 }
 \value{
-A data.table of response choices
+A data.table of response choices.
 }
 \description{
-Retrieve a table giving the response choices for each question in a given
-survey.
+Retrieve a table giving the response choices for each question in a survey.
 }
 \seealso{
 Download a survey's \code{\link{questions}},

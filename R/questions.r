@@ -18,25 +18,26 @@ questions = function(design, labels = TRUE, text = TRUE, html = FALSE) {
   if (isTRUE(text)) {
     elements = c(elements, "questionText")
   }
-  questions = lapply(design$questions, function(x) {
+  q_tbl = lapply(design$questions, function(x) {
     parse_question_element(x[elements], html)
   })
-  questions = data.table::rbindlist(questions, fill = TRUE, idcol = "question")
+  q_tbl = data.table::rbindlist(q_tbl, fill = TRUE, idcol = "question_id")
   # the only indicator of question order in design$questions is the list order.
   # this could be checked against their order of appearance in design$blocks
-  questions[, q_order := .I]
+  q_tbl[, q_order := .I]
   if (isTRUE(labels)) {
     col_map = data.table::rbindlist(design$exportColumnMap, idcol = "export_label",
       fill = TRUE)[, .(export_label, question)]
     col_map = unique(col_map, by = "question")
-    questions = merge(questions,
+    q_tbl = merge(q_tbl,
       col_map,
       all.x = TRUE,
       all.y = FALSE,
-      by = "question")
+      by.x = "question_id",
+      by.y = "question")
   }
-  data.table::setkey(questions, "q_order")
-  return(questions[])
+  data.table::setkey(q_tbl, "q_order")
+  return(q_tbl[])
 }
 
 parse_question_element = function(l, html = FALSE) {

@@ -1,0 +1,17 @@
+authors:
+ James Dunham:
+   href: http://jdunham.io
+
+templates:
+ params:
+   bootswatch: readable
+
+navbar:
+ right:
+   - icon: fa-github fa-lg
+     href: https://github.com/jamesdunham/qsurvey
+
+# reference:
+#   - title: 
+#     desc: >
+#     - contents:

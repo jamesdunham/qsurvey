@@ -11,15 +11,10 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' 
-#' # set the API key from .api_key file
-#' key_from_file()
-#'
-#' # id should be a valid survey ID
-#' design = survey_design("SV_cuxfjYWRTB30ouh")
-#' print(design)
+#' svy_design = design("SV_cuxfjYWRTB30ouh")
+#' print(svy_design)
 #' }
-survey_design = function(id, key = Sys.getenv("QUALTRICS_KEY")) {
+design = function(id, key = Sys.getenv("QUALTRICS_KEY")) {
 
   assertthat::assert_that(assertthat::is.string(id))
   req = qget(action = paste0("surveys/", id), key = key)

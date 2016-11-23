@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_id.r
 \name{find_id}
 \alias{find_id}
-\title{Find survey IDs by searching survey names}
+\title{Find survey ids by searching survey names}
 \usage{
 find_id(pattern, first = TRUE, ignore.case = TRUE, perl = TRUE,
   fixed = FALSE)
@@ -23,13 +23,15 @@ See Details.}
     matched as is.  Overrides all conflicting arguments.}
 }
 \value{
-A named character vector.
+A named character vector giving the id(s) of matching surveys.
 }
 \description{
 \code{find_id} searches for survey names that match argument \code{pattern}.
+All arguments but \code{first} are passed to \code{\link[base]{grepl}} for
+pattern matching.
 }
 \details{
-\code{find_id} retrieves the names and IDs of all available surveys (using
+\code{find_id} retrieves the names and ids of all available surveys (using
 \code{\link{surveys}}), and then uses \code{\link[base]{grepl}} to search the
 names for matches.
 
@@ -37,8 +39,5 @@ For \code{first = TRUE} (the default), only the id of the first matching name
 (if any) will be returned. Matches are sorted by \code{lastModified}
 timestamp (descending), so \code{first = TRUE} gives the id of the matching
 survey most recently modified.
-
-All arguments but \code{first} are passed to \code{\link[base]{grepl}} for
-pattern matching.
 }
 

@@ -7,7 +7,7 @@
 surveys(key = Sys.getenv("QUALTRICS_KEY"))
 }
 \arguments{
-\item{key}{A Qualtrics API key (by default, the value of the environmental
+\item{key}{A Qualtrics API key (by default, the value of the environment
 variable \code{QUALTRICS_KEY}).}
 }
 \value{

@@ -8,8 +8,8 @@
 #'
 #' @inheritParams choices
 #'
-#' @return A data.table giving the \code{id} and \code{description} of each
-#'   block, and optionally its elements.
+#' @return A data.table giving the \code{block_id} and \code{block_description}
+#' of each block, and optionally its elements.
 #' @export
 blocks = function(design, elements = FALSE) {
 
@@ -19,17 +19,17 @@ blocks = function(design, elements = FALSE) {
     # children rbindlisting over *their* children; 2. rbindlist over the return
     # from the lapply
     data.table::rbindlist(x[["elements"]], fill = TRUE)[,
-      description := x[["description"]]][,
-      randomization := paste(unlist(x[["randomization"]]), collapse = ", ")]
+      block_description := x[["description"]]][,
+      block_randomization := paste(unlist(x[["randomization"]]), collapse = ", ")]
   })
   block_tbl =
-    data.table::rbindlist(block_list, use.names = TRUE, fill = TRUE, idcol = "id")
+    data.table::rbindlist(block_list, use.names = TRUE, fill = TRUE, idcol = "block_id")
   # FIXME: fragile?
   data.table::setnames(block_tbl, c("type", "questionId"), c("element_type", "question_id"))
-  data.table::setcolorder(block_tbl, union(c("id", "description", "element_type", "question_id"),
+  data.table::setcolorder(block_tbl, union(c("block_id", "block_description", "element_type", "question_id"),
     names(block_tbl)))
   if (!isTRUE(elements)) {
-    block_tbl = unique(block_tbl, by = "id")[, .(id, description)]
+    block_tbl = unique(block_tbl, by = "block_id")[, .(block_id, block_description)]
   }
   block_tbl[]
 }

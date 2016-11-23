@@ -1,10 +1,12 @@
 utils::globalVariables(c("lastModified"))
 
-#' Find survey IDs by searching survey names
+#' Find survey ids by searching survey names
 #'
 #' \code{find_id} searches for survey names that match argument \code{pattern}.
+#' All arguments but \code{first} are passed to \code{\link[base]{grepl}} for
+#' pattern matching.
 #'
-#' \code{find_id} retrieves the names and IDs of all available surveys (using
+#' \code{find_id} retrieves the names and ids of all available surveys (using
 #' \code{\link{surveys}}), and then uses \code{\link[base]{grepl}} to search the
 #' names for matches.
 #'
@@ -13,15 +15,12 @@ utils::globalVariables(c("lastModified"))
 #' timestamp (descending), so \code{first = TRUE} gives the id of the matching
 #' survey most recently modified.
 #'
-#' All arguments but \code{first} are passed to \code{\link[base]{grepl}} for
-#' pattern matching.
-#'
 #' @param first Whether to return only the first match (default) or all matches.
 #'   See Details.
 #' @param pattern Character string containing a regular expression (or character
 #'   string for \code{fixed = TRUE}).
 #' @inheritParams base::grepl
-#' @return A named character vector.
+#' @return A named character vector giving the id(s) of matching surveys.
 #'
 #' @importFrom stats setNames
 #' @export

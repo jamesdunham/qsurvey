@@ -53,8 +53,8 @@ responses = function(id, format = "json", use_labels = TRUE, verbose = TRUE,
   }
   while (export_progress < 100) {
     r_export = qget(action = paste0("responseexports/", export_id))
+    export_progress = r_export$result$percentComplete
     if (isTRUE(verbose))  {
-      export_progress = r_export$result$percentComplete
       utils::setTxtProgressBar(pb, export_progress)
     }
   }

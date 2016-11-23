@@ -15,7 +15,7 @@ instead of question and identifiers.}
 
 \item{verbose}{Print progress.}
 
-\item{key}{A Qualtrics API key (by default, the value of the environmental
+\item{key}{A Qualtrics API key (by default, the value of the environment
 variable \code{QUALTRICS_KEY}).}
 
 \item{...}{Additional parameters for the \code{responseexports} API.}

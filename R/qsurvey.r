@@ -1,6 +1,6 @@
 #' The qsurvey package: overview
 #'
-#' A toolkit for working with the Qualtrics platform and its survey data in R.
+#' qsurvey is a toolkit for working with the Qualtrics platform and its survey data in R.
 #' Download responses and designs directly into a session, then:
 #'
 #' \itemize{
@@ -12,8 +12,8 @@
 #'
 #' The package works by sending requests to the Qualtrics API. For
 #' authentication, an API key is needed. See the
-#' \href{https://www.qualtrics.com/support/integrations/api-integration/api-integration}{Qualtrics
-#' documentation}.
+#' \href{Qualtrics
+#' documentation}{https://www.qualtrics.com/support/integrations/api-integration/api-integration}.
 #' The key should be set with the environment variable \code{QUALTRICS_KEY} (see
 #' \link[base]{Sys.setenv}) or the \code{key_from_file} function.
 #'
@@ -23,11 +23,10 @@
 #' \code{\link{qpost}}, or \code{\link{request}}.
 #'
 #' I'm aware of two other Qualtrics packages.
-#' \href{https://github.com/jbryer/qualtrics}{Jason Bryer} wrote one in 2012.
-#' \href{https://github.com/ericpgreen/qualtrics}{Eric Green} forked and revised
+#' \href{Jason Bryer}{https://github.com/jbryer/qualtrics} wrote one in 2012.
+#' \href{Eric Green}{https://github.com/ericpgreen/qualtrics} forked and revised
 #' it for v2.3 of the Qualtrics API, most recently in 2014. I started qsurvey
-#' while staffing \href{http://web.mit.edu/polisci/research/perl.html}{MIT
-#' PERL}.
+#' while staffing \href{MIT PERL}{http://web.mit.edu/polisci/research/perl.html}.
 #'
 #' @name qsurvey
 #' @docType package

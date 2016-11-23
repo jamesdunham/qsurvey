@@ -20,7 +20,7 @@ qpost(action = NULL, as = "parsed", ...)
 
 \item{action}{An API action (like \code{"surveys"}).}
 
-\item{key}{A Qualtrics API key (by default, the value of the environmental
+\item{key}{A Qualtrics API key (by default, the value of the environment
 variable \code{QUALTRICS_KEY}).}
 
 \item{test}{Whether to send the request to \url{https://httpbin.org} for
