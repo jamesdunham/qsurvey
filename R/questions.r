@@ -13,18 +13,22 @@ utils::globalVariables(c(".", "export_label", "question"))
 #'   \code{\link{responses}}.
 #' @export
 questions = function(design, labels = TRUE, text = TRUE, html = FALSE) {
+
   assertthat::assert_that("qualtrics_design" %in% class(design))
   elements = "questionLabel"
   if (isTRUE(text)) {
     elements = c(elements, "questionText")
   }
+
   q_tbl = lapply(design$questions, function(x) {
     parse_question_element(x[elements], html)
   })
   q_tbl = data.table::rbindlist(q_tbl, fill = TRUE, idcol = "question_id")
+
   # the only indicator of question order in design$questions is the list order.
   # this could be checked against their order of appearance in design$blocks
   q_tbl[, q_order := .I]
+
   if (isTRUE(labels)) {
     col_map = data.table::rbindlist(design$exportColumnMap, idcol = "export_label",
       fill = TRUE)[, .(export_label, question)]
@@ -40,10 +44,11 @@ questions = function(design, labels = TRUE, text = TRUE, html = FALSE) {
   return(q_tbl[])
 }
 
-parse_question_element = function(l, html = FALSE) {
+parse_question_element = function(element, html = FALSE) {
   # Missing elements will be NULL in json but must be NA in data.table output
-  lapply(l, function(x) {
+  lapply(element, function(x) {
     x = ifelse(is.null(x), NA, x)
+    # FIXME: not the right place to do this
     # Also drop HTML tags from question text
     if (!isTRUE(html)) {
       return(gsub("(<[^>]*>)", "", x))
@@ -51,4 +56,20 @@ parse_question_element = function(l, html = FALSE) {
       return(x)
     }
   })
+}
+
+
+question_id_labels = function() {
+  # Give question_id, questionLabel, and export_label
+
+  # d = design("SV_bjfQVw5IqkmNslD")
+  # questions(d)
+}
+
+question_text = function() {
+
+}
+
+question_order = function() {
+
 }

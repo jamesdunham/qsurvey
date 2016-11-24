@@ -50,12 +50,14 @@ map_values_and_labels = function(tbl, design, keep, direction = c("VL", "LV")) {
   } else {
     stop("direction can be 'VL' or 'LV'")
   }
+
   # FIXME: unique() gives only the first export name for each question
   tbl = data.table::setDT(tbl)
   n = nrow(tbl)
   if (!any(c(map$export_name, map$question) %in% names(tbl))) {
     stop("couldn't find expected columns in tbl")
   }
+
   for (colname in intersect(union(map$export_name, map$question), names(tbl))) {
     # FIXME: colname might be a value in question instead of export_name
     crosswalk_tbl = map[export_name == colname, .(recode, description)]

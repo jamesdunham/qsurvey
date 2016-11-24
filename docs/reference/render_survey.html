@@ -75,7 +75,10 @@
     </div>
 
     
-    <p>Render a survey design with a Shiny app</p>
+    <p>The Shiny app renders a visualization of the survey flow: blocks, branching,
+randomization, etc. On selection of a block, its questions are visible.
+Selecting a question in turn shows its text. An example is available online
+through shinyapps.io (TODO).</p>
     
 
     <pre><span class='fu'>render_survey</span>(<span class='no'>design</span>)</pre>
@@ -88,7 +91,8 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Invisibly returns the data.table underlying the Shiny UI.</p>
+    <p><code>render_survey</code> invisibly returns the table underlying the Shiny
+UI.</p>
     
 
   </div>

@@ -4,19 +4,17 @@
 #' useful in programming or when higher-level package functions are not
 #' available. \code{qget} and \code{qpost} are wrappers for \code{request}.
 #'
-#' For help specifying valid subdomains and API actions, see the
-#' \href{https://api.qualtrics.com/docs/root-url}{Qualtrics documentation}.
-#'
-#' If \code{test} is \code{TRUE}, the API key is removed, and then the request
-#' is sent to the value of \code{paste0("https://httpbin.org/", tolower(verb)}.
+#' For help with subdomains, see the
+#' \href{https://api.qualtrics.com/docs/root-url}{Qualtrics documentation}. Each
+#' Qualtrics account is assigned a subdomain, and using another will work but
+#' produce a warning.
 #'
 #' @inheritParams httr::VERB
-#' @param subdomain A Qualtrics subdomain.
+#' @param subdomain A Qualtrics subdomain (by default, the value of the
+#'   environment variable \code{QUALTRICS_SUBDOMAIN}.
 #' @param action An API action (like \code{"surveys"}).
 #' @param key A Qualtrics API key (by default, the value of the environment
 #'   variable \code{QUALTRICS_KEY}).
-#' @param test Whether to send the request to \url{https://httpbin.org} for
-#'   testing purposes, rather than to the Qualtrics API.
 #' @param ... Further arguments to \code{\link[httr]{GET}} or
 #'   \code{\link[httr]{POST}}, depending on \code{verb}.
 #'
@@ -25,40 +23,32 @@
 #'   \code{\link[httr]{content}}.
 #' @export
 request = function(verb = "GET",
-  subdomain = "az1",
+  subdomain = Sys.getenv("QUALTRICS_SUBDOMAIN"),
   action = NULL,
   key = Sys.getenv("QUALTRICS_KEY"),
-  test = FALSE,
   ...) {
 
+  assert_key_set(key)
+  subdomain = set_if_missing(subdomain)
+  assertthat::assert_that(assertthat::is.string(verb))
+  assertthat::assert_that(assertthat::is.string(subdomain))
+  assertthat::assert_that(assertthat::is.string(action))
+
   url = paste0("https://",
-    # FIXME: az1 load-balancing subdomain is hardcoded
-    paste("az1", "qualtrics.com/API/v3/", sep = "."),
+    paste(subdomain, "qualtrics.com/API/v3/", sep = "."),
     action)
-  if (!test && (length(key) != 1 || !is.character(key) || key == "")) {
-      stop("Qualtrics API key needed. Set the environment variable QUALTRICS_KEY")
+
+  if (verb == "POST") {
+    response = httr::POST(url, add_qheaders(key), encode = "json", ...)
+  } else if (verb == "GET") {
+    response = httr::GET(url, add_qheaders(key), ...)
   }
-  if (test) {
-    message("replacing ", url, " with httpbin.org URL for test")
-    url = paste0("https://httpbin.org/", tolower(verb))
-    key = NA
-  }
-  if (identical(verb, "POST")) {
-    headers = httr::add_headers("content_type" = "application/json",
-      "x-api-token" = key)
-    r = httr::POST(url, headers, encode = "json", ...)
-  } else if (identical(verb, "GET")) {
-    headers = httr::add_headers("content_type" = "application/json",
-      "x-api-token" = key)
-    r = httr::GET(url, headers, ...)
-  }
-  httr::stop_for_status(r)
-  r_content = httr::content(r)
-  if ("meta" %in% names(r_content) && "notice" %in% names(r_content$meta)) {
-    warning(r_content$meta$notice)
-  }
-  return(r)
+
+  httr::stop_for_status(response)
+  warn_on_notice(response)
+  return(response)
 }
+
 
 #' @rdname request
 #' @aliases qget
@@ -78,6 +68,48 @@ qget = function(action = NULL, as = "parsed", ...) {
 #' @export
 qpost = function(action = NULL, as = "parsed", ...) {
 
-  r = request(verb = "POST", action = action, body, ...)
+  r = request(verb = "POST", action = action, ...)
   httr::content(r, as = as)
+}
+
+warn_on_notice = function(response) {
+  # If the meta element of the request response content has an element notice,
+  # pass it on to the user as a warning. Known to happen if incorrect subdomain
+  # is used.
+
+  content = httr::content(response)
+  if ("meta" %in% names(content) && "notice" %in% names(content$meta)) {
+    warning(content$meta$notice)
+  }
+}
+
+add_qheaders = function(key) {
+  # Add Qualtrics headers to a httr request
+
+  httr::add_headers("content_type" = "application/json", "x-api-token" = key)
+}
+
+set_if_missing = function(subdomain) {
+  # If the subdomain is a length-zero string, the environment variable
+  # QUALTRICS_SUBDOMAIN hasn't been (properly) set. Return a valid subdomain to
+  # be used and throw a warnning.
+
+  if (subdomain == "") {
+    warning("Set the environment variable QUALTRICS_SUBDOMAIN for better performance. ",
+      "See https://api.qualtrics.com/docs/root-url.")
+    subdomain = "az1"
+  }
+  return(subdomain)
+}
+
+assert_key_set = function(key) {
+  # A key should be provided in the call to request() or set by the user and
+  # retrieved by Sys.getenv(). If not, stop.
+
+  assertthat::assert_that(assertthat::is.string(key))
+  if (key == "") {
+    stop("Qualtrics API key needed. Set the environment variable QUALTRICS_KEY.")
+  } else {
+    return(TRUE)
+  }
 }

@@ -33,3 +33,4 @@ key_from_file = function(file = ".api_key", verbose = FALSE) {
   }
   invisible(Sys.getenv("QUALTRICS_KEY"))
 }
+

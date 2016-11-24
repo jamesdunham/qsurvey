@@ -6,4 +6,3 @@ uncamel = function(nms) {
     tolower(x)
   })
 }
-

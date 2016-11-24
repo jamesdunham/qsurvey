@@ -98,9 +98,10 @@ not (the default).</dd>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>key</span> <span class='kw'>=</span> <span class='fu'>key_from_file</span>()</div><div class='output co'>#&gt; <span class='error'>Error in key_from_file(): Couldn&#39;t read .api_key</span></div><div class='input'><span class='fu'>identical</span>(<span class='no'>key</span>, <span class='fu'>Sys.getenv</span>(<span class='st'>"QUALTRICS_KEY"</span>))</div><div class='output co'>#&gt; <span class='error'>Error in identical(key, Sys.getenv(&quot;QUALTRICS_KEY&quot;)): object &#39;key&#39; not found</span></div><div class='input'>
-</div></pre>
+    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
+<span class='co'># key = key_from_file()</span>
+<span class='co'># identical(key, Sys.getenv("QUALTRICS_KEY"))</span>
+<span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

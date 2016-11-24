@@ -1,4 +1,4 @@
-#' Download survey response counts
+#' Print survey response counts
 #'
 #' Response counts are given in three categories defined by the Qualtrics API:
 #' auditable, generated, and deleted. See Details.
@@ -14,9 +14,9 @@
 #'
 #' @inheritParams choices
 #'
-#' @return A list giving response counts.
+#' @return A named integer vector giving response counts.
 #' @export
 response_counts = function(design) {
   assertthat::assert_that("qualtrics_design" %in% class(design))
-  design$responseCounts
+  unlist(design$responseCounts)
 }

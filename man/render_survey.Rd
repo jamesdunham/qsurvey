@@ -10,9 +10,13 @@ render_survey(design)
 \item{design}{A \code{\link{qualtrics_design-class}} object.}
 }
 \value{
-Invisibly returns the data.table underlying the Shiny UI.
+\code{render_survey} invisibly returns the table underlying the Shiny
+UI.
 }
 \description{
-Render a survey design with a Shiny app
+The Shiny app renders a visualization of the survey flow: blocks, branching,
+randomization, etc. On selection of a block, its questions are visible.
+Selecting a question in turn shows its text. An example is available online
+through shinyapps.io (TODO).
 }
 

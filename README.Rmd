@@ -46,10 +46,6 @@ Qualtrics assigns each survey a unique id. You can search by survey name for an
 id using `find_id()`. Use `surveys()` to see the ids and other metadata for all
 surveys, in a table similar to the Qualtrics Control Panel overview.
 
-```{r}
-find_id(pattern = "test")
-```
-
 
 ### Survey responses
 
@@ -68,7 +64,7 @@ responses.
 ### Survey design
 
 To retrieve a survey's design use `design()`. This returns a `qualtrics_design`
-object that many other qsurvey functions operate on. 
+object that many other qsurvey functions can operate on. 
 
 ```{r}
 d = design(id = "SV_cuxfjYWRTB30ouh")
