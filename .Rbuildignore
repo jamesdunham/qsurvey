@@ -1,0 +1,4 @@
+^.*\.Rproj$
+^.*\.yml$
+^docs$
+^README.*$

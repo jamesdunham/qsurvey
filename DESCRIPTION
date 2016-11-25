@@ -1,0 +1,33 @@
+Package: qsurvey
+Title: A toolkit for working with the Qualtrics platform and its survey data in R
+Version: 0.0.1
+Date: 2016-11-25
+Authors@R: person("James", "Dunham", email = "james@jdunham.io", role = c("aut", "cre"))
+Description: qsurvey is a toolkit for working with the Qualtrics platform and
+    its survey data in R.  It focuses on testing and review of surveys before
+    fielding, and analysis of responses afterward. Examine branching,
+    randomization, and question attributes; represent survey flows as directed
+    graphs for plotting or interactive review in Shiny; download and manipulate
+    response data. For more see the project site.
+Depends:
+    R (>= 3.3.0)
+License: GPL-3 | file LICENSE
+URL: http://jdunham.io/qsurvey
+BugReports: https://github.com/jamesdunham/qsurvey/issues
+Encoding: UTF-8
+LazyData: true
+Suggests:
+    testthat
+Imports:
+    assertthat,
+    data.table,
+    DT,
+    httr,
+    jsonlite,
+    lubridate,
+    magrittr,
+    shiny,
+    stringr,
+    visNetwork
+RoxygenNote: 5.0.1
+
