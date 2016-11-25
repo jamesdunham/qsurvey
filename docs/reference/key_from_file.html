@@ -96,10 +96,16 @@ not (the default).</dd>
     <p>Invisibly returns the value of the environment variable
   <code>QUALTRICS_KEY</code>, after setting it as a side effect.</p>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The environment variable for the API key can be set during
+startup (recommended), interactively with
+<code><a href='http://www.rdocumentation.org/packages/base/topics/Sys.setenv'>Sys.setenv</a></code> or through <code>key_from_file</code>.</p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># key = key_from_file()</span>
+<span class='co'># key &lt;- key_from_file()</span>
 <span class='co'># identical(key, Sys.getenv("QUALTRICS_KEY"))</span>
 <span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
@@ -109,6 +115,8 @@ not (the default).</dd>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

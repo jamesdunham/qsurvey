@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Download survey response counts — response_counts • qsurvey</title>
+<title>Get survey response counts — response_counts • qsurvey</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -71,7 +71,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Download survey response counts</h1>
+    <h1>Get survey response counts</h1>
     </div>
 
     
@@ -79,17 +79,18 @@
 auditable, generated, and deleted. See Details.</p>
     
 
-    <pre><span class='fu'>response_counts</span>(<span class='no'>design</span>)</pre>
+    <pre><span class='fu'>response_counts</span>(<span class='no'>design_object</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>design</dt>
-      <dd>A <code>qualtrics_design-class</code> object.</dd>
+      <dt>design_object</dt>
+      <dd>A <code><a href='design.html'>qualtrics_design-class</a></code> object retrieved
+from Qualtrics by <code><a href='design.html'>design</a></code>.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list giving response counts.</p>
+    <p>A named integer vector giving response counts.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 

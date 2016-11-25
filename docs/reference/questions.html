@@ -75,24 +75,21 @@
     </div>
 
     
-    <p>Retrieve the names, labels, and text of a given survey&#39;s questions.</p>
+    <p>Retrieve identifiers and text for a given survey&#39;s questions.</p>
     
 
-    <pre><span class='fu'>questions</span>(<span class='no'>design</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>text</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>html</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre><span class='fu'>questions</span>(<span class='no'>design_object</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>design</dt>
-      <dd>A <code>qualtrics_design-class</code> object.</dd>
-      <dt>labels</dt>
-      <dd>Retrieve question labels (default), or don&#39;t.</dd>
-      <dt>text</dt>
-      <dd>Retrieve question text (default), or don&#39;t.</dd>
+      <dt>design_object</dt>
+      <dd>A <code><a href='design.html'>qualtrics_design-class</a></code> object retrieved
+from Qualtrics by <code><a href='design.html'>design</a></code>.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data.table of question names, labels, and (optionally) text</p>
+    <p><code>questions</code> returns a table of question identifiers and text.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

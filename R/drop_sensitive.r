@@ -1,3 +1,5 @@
+utils::globalVariables(c("export_name"))
+
 #' Drop columns from survey responses
 #'
 #' \code{drop_sensitive} drops the columns that give approximate location, IP
@@ -35,30 +37,30 @@
 #' @return The data.frame without the dropped columns.
 #' @aliases drop_meta keep_questions
 #' @export
-drop_sensitive = function(tbl) {
+drop_sensitive <- function(tbl) {
 
   assert_is_table(tbl)
-  cols = c("LocationLatitude",
+  cols <- c("LocationLatitude",
     "LocationLongitude",
     "LocationAccuracy",
     "IPAddress",
     "RecipientLastName",
     "RecipientFirstName",
     "RecipientEmail")
-  cols = intersect(cols, names(tbl))
+  cols <- intersect(cols, names(tbl))
 
-  tbl = drop_cols(tbl, cols)
+  tbl <- drop_cols(tbl, cols)
   return(tbl[])
 }
 
 
 #' @rdname drop_sensitive
 #' @export
-drop_meta = function(tbl) {
+drop_meta <- function(tbl) {
 
   assert_is_table(tbl)
-  tbl = drop_sensitive(tbl)
-  cols = c(
+  tbl <- drop_sensitive(tbl)
+  cols <- c(
     "EndDate",
     "ExternalDataReference",
     "Finished",
@@ -66,35 +68,36 @@ drop_meta = function(tbl) {
     "ResponseSet",
     "StartDate",
     "Status")
-  cols = intersect(cols, names(tbl))
+  cols <- intersect(cols, names(tbl))
 
-  tbl = drop_cols(tbl, cols)
+  tbl <- drop_cols(tbl, cols)
   return(tbl)
 }
 
 
 #' @rdname drop_sensitive
+#' @inheritParams choices
 #' @export
-keep_questions = function(tbl, design) {
+keep_questions <- function(tbl, design_object) {
 
   assert_is_table(tbl)
-  assert_is_design(design)
+  assert_is_design(design_object)
 
-  cols = setdiff(names(tbl), export_names(design)[, export_name])
-  tbl = drop_cols(tbl, cols)
+  cols <- setdiff(names(tbl), export_names(design_object)[, export_name])
+  tbl <- drop_cols(tbl, cols)
   return(tbl[])
 }
 
 
-drop_cols = function(tbl, drop_cols) {
-  ## Given a data.frame tbl, drop columns given by the character drop_cols
+drop_cols <- function(tbl, cols) {
+  ## Given a data.frame tbl, drop columns given by the character cols
 
   assert_is_table(tbl)
-  assertthat::assert_that(is.character(drop_cols))
+  assertthat::assert_that(is.character(cols))
 
   data.table::setDT(tbl)
-  for (col in drop_cols) {
-    tbl[, (col) := NULL]
+  for (colname in cols) {
+    tbl[, (colname) := NULL]
   }
   return(tbl[])
 }

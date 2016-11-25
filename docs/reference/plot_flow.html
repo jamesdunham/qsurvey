@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Represent a survey design as a graph — plot_flow • qsurvey</title>
+<title>Plot a survey flow — plot_flow • qsurvey</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -71,31 +71,31 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Represent a survey design as a graph</h1>
+    <h1>Plot a survey flow</h1>
     </div>
 
     
-    <p><code>plot_flow</code> and <code>edges</code> represent a survey&#39;s design as a directed
-graph that shows possible paths through the elements of the survey.</p>
+    <p><code>plot_flow</code> shows a survey&#39;s flow as a directed graph showing possible
+pathways through the elements of the survey.</p>
     
 
-    <pre><span class='fu'>plot_flow</span>(<span class='no'>design</span>)</pre>
+    <pre><span class='fu'>plot_flow</span>(<span class='no'>design_object</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>design</dt>
-      <dd>A <code>qualtrics_design-class</code> object.</dd>
+      <dt>design_object</dt>
+      <dd>A <code><a href='design.html'>qualtrics_design-class</a></code> object retrieved
+from Qualtrics by <code><a href='design.html'>design</a></code>.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>plot_flow</code> invisibly returns a visNetwork object. As a side
-  effect, it renders the graph.</p>
+    <p><code>plot_flow</code> returns a visNetwork object.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code>nodes</code> and <code>edges</code> for node and edge data in tabular
-  form.</p>
+    <p><code><a href='edges.html'>nodes</a></code> and <code><a href='edges.html'>edges</a></code> for node and edge data in tabular
+  form. <code><a href='render_flow.html'>render_flow</a></code> for a Shiny app.</p>
     
 
   </div>

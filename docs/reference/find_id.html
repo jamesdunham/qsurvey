@@ -103,7 +103,8 @@ See Details.</dd>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A named character vector giving the id(s) of matching surveys.</p>
+    <p>A named character vector giving the id(s) of matching surveys, or an
+empty character vector if there are no matches.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -111,9 +112,9 @@ See Details.</dd>
 <code><a href='surveys.html'>surveys</a></code>), and then uses <code><a href='http://www.rdocumentation.org/packages/base/topics/grep'>grepl</a></code> to search the
 names for matches.</p>
     <p>For <code>first = TRUE</code> (the default), only the id of the first matching name
-(if any) will be returned. Matches are sorted by <code>lastModified</code>
-timestamp (descending), so <code>first = TRUE</code> gives the id of the matching
-survey most recently modified.</p>
+(if any) is returned. Matches are sorted by <code>lastModified</code> timestamp
+(descending), so <code>first = TRUE</code> gives the id of the matching survey most
+recently modified.</p>
     
 
   </div>

@@ -7,21 +7,21 @@
 #' @inheritParams drop_sensitive
 #' @inheritParams choices
 #'
-#' @return The data.frame with renamed columns.
+#' @return The table with renamed columns.
 #' @aliases names_to_ids
 #' @export
-ids_to_names = function(tbl, design) {
-  en = export_names(design)
+ids_to_names <- function(tbl, design_object) {
+  en <- export_names(design_object)
   data.table::setDT(tbl)
-  data.tabel::setnames(tbl, en$id, en$export_name)
+  data.table::setnames(tbl, en$id, en$export_name)
   return(tbl[])
 }
 
 #' @rdname ids_to_names
 #' @export
-names_to_ids = function(tbl, design) {
-  en = export_names(design)
+names_to_ids <- function(tbl, design_object) {
+  en <- export_names(design_object)
   data.table::setDT(tbl)
-  data.tabel::setnames(tbl, en$export_name, en$id)
+  data.table::setnames(tbl, en$export_name, en$id)
   return(tbl[])
 }

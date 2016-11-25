@@ -48,46 +48,52 @@ devtools::<span class="kw">install_github</span>(<span class="st">"jamesdunham/q
 <div id="usage" class="section level2">
 <h2 class="hasAnchor"><a href="#usage" class="anchor"> </a>Usage</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(qsurvey)</code></pre></div>
-<p>A <a href="https://www.qualtrics.com/support/integrations/api-integration/api-integration">Qualtrics API key</a> is needed to communicate with the survey platform. Set the environment variable <code>QUALTRICS_KEY</code> to your key value. You can do this <a href="https://www.rdocumentation.org/packages/base/versions/3.3.1/topics/Startup?">during R startup</a> (recommended), interactively with <a href="https://www.rdocumentation.org/packages/base/versions/3.3.1/topics/Sys.setenv"><code>Sys.setenv()</code></a>, or through <code><a href="reference/key_from_file.html">key_from_file()</a></code>.</p>
+<p>A <a href="https://www.qualtrics.com/support/integrations/api-integration/api-integration">Qualtrics API key</a> is needed to communicate with the survey platform. Set the environment variable <code>QUALTRICS_KEY</code> to your key value. You can do this <a href="https://www.rdocumentation.org/packages/base/versions/3.3.1/topics/Startup">during R startup</a> (recommended), interactively with <a href="https://www.rdocumentation.org/packages/base/versions/3.3.1/topics/Sys.setenv"><code>Sys.setenv()</code></a>, or through <code><a href="reference/key_from_file.html">key_from_file()</a></code>.</p>
 <p>Qualtrics assigns each survey a unique id. You can search by survey name for an id using <code><a href="reference/find_id.html">find_id()</a></code>. Use <code><a href="reference/surveys.html">surveys()</a></code> to see the ids and other metadata for all surveys, in a table similar to the Qualtrics Control Panel overview.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/find_id.html">find_id</a></span>(<span class="dt">pattern =</span> <span class="st">"test"</span>)
-<span class="co">#&gt; ..</span>
-<span class="co">#&gt;                 test </span>
-<span class="co">#&gt; "SV_cuxfjYWRTB30ouh"</span></code></pre></div>
 <div id="survey-responses" class="section level3">
 <h3 class="hasAnchor"><a href="#survey-responses" class="anchor"> </a>Survey responses</h3>
 <p>Pass a survey&rsquo;s id to <code><a href="reference/responses.html">responses()</a></code> to retrieve responses. This is equivalent to using the &ldquo;Export Data&rdquo; tool in the &ldquo;Data and Analysis&rdquo; view of the Control Panel and then reading the resulting file into R.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r =<span class="st"> </span><span class="kw"><a href="reference/responses.html">responses</a></span>(<span class="dt">id =</span> <span class="st">"SV_cuxfjYWRTB30ouh"</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<p>The responses vignette demonstrates qsurvey tools for working with survey responses.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r &lt;-<span class="st"> </span><span class="kw"><a href="reference/responses.html">responses</a></span>(<span class="dt">id =</span> <span class="st">"SV_0CGgkDZJaUvxnGl"</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre></div>
 </div>
 <div id="survey-design" class="section level3">
 <h3 class="hasAnchor"><a href="#survey-design" class="anchor"> </a>Survey design</h3>
-<p>To retrieve a survey&rsquo;s design use <code><a href="reference/design.html">design()</a></code>. This returns a <code>qualtrics_design</code> object that many other qsurvey functions operate on.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d =<span class="st"> </span><span class="kw"><a href="reference/design.html">design</a></span>(<span class="dt">id =</span> <span class="st">"SV_cuxfjYWRTB30ouh"</span>)
+<p>To retrieve a survey&rsquo;s design use <code><a href="reference/design.html">design()</a></code>. This returns a <code>qualtrics_design</code> object that many other qsurvey functions can operate on.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span><span class="kw"><a href="reference/design.html">design</a></span>(<span class="dt">id =</span> <span class="st">"SV_0CGgkDZJaUvxnGl"</span>)
 
 <span class="kw">print</span>(d)
-<span class="co">#&gt; name:        test</span>
-<span class="co">#&gt; id:          SV_cuxfjYWRTB30ouh</span>
-<span class="co">#&gt; created:     2016-10-19</span>
-<span class="co">#&gt; modified:    2016-11-18</span>
+<span class="co">#&gt; name:        Student Feedback</span>
+<span class="co">#&gt; id:          SV_0CGgkDZJaUvxnGl</span>
+<span class="co">#&gt; created:     2016-11-24</span>
+<span class="co">#&gt; modified:    2016-11-24</span>
 <span class="co">#&gt; responses:   0 (closed)</span>
-<span class="co">#&gt; questions:   10</span>
-<span class="co">#&gt; blocks:      6</span></code></pre></div>
+<span class="co">#&gt; questions:   26</span>
+<span class="co">#&gt; blocks:      3</span></code></pre></div>
 <p>For example, use <code><a href="reference/questions.html">questions()</a></code> to see the text and other attributes of each survey question.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svy_q =<span class="st"> </span><span class="kw"><a href="reference/questions.html">questions</a></span>(<span class="dt">design =</span> d)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svy_q &lt;-<span class="st"> </span><span class="kw"><a href="reference/questions.html">questions</a></span>(<span class="dt">design_object =</span> d)
 
-svy_q[<span class="dv">1</span>:<span class="dv">2</span>, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]  <span class="co"># subset for briefer output</span>
-<span class="co">#&gt;    question_id                           questionText</span>
-<span class="co">#&gt; 1:        QID1 This is the question text for mc_sa_1.</span>
-<span class="co">#&gt; 2:        QID2 This is the question text for mc_sa_2.</span></code></pre></div>
+svy_q[<span class="dv">1</span>:<span class="dv">2</span>, ]  
+<span class="co">#&gt;    question_order  question_id export_name</span>
+<span class="co">#&gt; 1:              1 QID132224516          Q1</span>
+<span class="co">#&gt; 2:              2 QID132224536          Q3</span>
+<span class="co">#&gt;                                                       question_text</span>
+<span class="co">#&gt; 1: Overall, how satisfied or dissatisfied were you with this class?</span>
+<span class="co">#&gt; 2:                                  How interesting was this class?</span></code></pre></div>
 </div>
 <div id="visualization" class="section level3">
 <h3 class="hasAnchor"><a href="#visualization" class="anchor"> </a>Visualization</h3>
-<p>Visualize a survey flow with <code><a href="reference/plot_flow.html">plot_flow()</a></code>. Or for interactive review of a survey&rsquo;s flow and content in a Shiny app, use <code><a href="reference/render_survey.html">render_survey()</a></code>. The vignette on visualization demonstrates.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/plot_flow.html">plot_flow</a></span>(<span class="dt">design =</span> d)</code></pre></div>
-<div id="htmlwidget-df2c08526632671063f9" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-df2c08526632671063f9">{"x":{"nodes":{"id":[2,3,7,8,9,5,11,12,6,10,13,1,4],"parent_id":[0,0,0,1,1,0,3,4,0,2,4,0,0],"type":["Branch","Branch","EndSurvey","EmbeddedData","EmbeddedData","Block","Block","Block","Block","Block","Block","BlockRandomizer","BlockRandomizer"],"label":["Branch","Branch","End","Set Data","Set Data","Display Logic","Matrix Table","Randomized Block A","Slider","Multiple Choice, Single Answer","Randomized Block B","Randomize: 1 of 2 (evenly)","Randomize: 1 of 2 (evenly)"],"color":["#fc9272","#fc9272","#fef4ab","#a3c4cd","#a3c4cd","#d9d9d9","#d9d9d9","#d9d9d9","#d9d9d9","#d9d9d9","#d9d9d9","#fc9272","#fc9272"]},"edges":{"from":[0,1,2,3,4,5,6,1,1,2,3,4,4],"to":[1,2,3,4,5,6,7,8,9,10,11,12,13],"type":["deterministic","deterministic","deterministic","deterministic","deterministic","deterministic","deterministic","random","random","conditional","conditional","random","random"],"color":["#000000","#000000","#000000","#000000","#000000","#000000","#000000","orange","orange","orange","orange","orange","orange"]},"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"interaction":{"dragNodes":false,"dragView":false,"zoomView":false},"edges":{"arrows":"to"},"layout":{"hierarchical":{"enabled":true,"direction":"LR","sortMethod":"directed"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null},"evals":[],"jsHooks":[]}</script></div>
+<p>Visualize a survey flow with <code><a href="reference/plot_flow.html">plot_flow()</a></code>. Or for interactive review of a survey&rsquo;s flow and content in a Shiny app, use <code><a href="reference/render_flow.html">render_flow()</a></code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/plot_flow.html">plot_flow</a></span>(<span class="dt">design_object =</span> d)</code></pre></div>
+<div id="htmlwidget-7fd3ebc77ffaf1e51152" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7fd3ebc77ffaf1e51152">{"x":{"nodes":{"id":[2,3,1],"parent_id":[0,0,0],"type":["Block","Block","Block"],"label":["Teacher Evaluation","Student Performance","Class Evaluation"],"block_id":["BL_0wUDDTxrMh9vOAd","BL_6FK8SIrVsXuBxFX","BL_agzU0yMolbPdFGd"],"color":["#d9d9d9","#d9d9d9","#d9d9d9"]},"edges":{"from":[0,1,2],"to":[1,2,3],"type":["deterministic","deterministic","deterministic"],"color":["#000000","#000000","#000000"]},"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"interaction":{"dragNodes":false,"dragView":false,"zoomView":false},"edges":{"arrows":"to"},"layout":{"hierarchical":{"enabled":true,"direction":"LR","sortMethod":"directed"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null},"evals":[],"jsHooks":[]}</script></div>
 </div>
+<div id="related" class="section level2">
+<h2 class="hasAnchor"><a href="#related" class="anchor"> </a>Related</h2>
+<ul><li><p><a href="https://github.com/JasperHG90/qualtRics">qualtRics</a> is another R package for working with the Qualtrics API that began around the same time as qsurvey.</p></li>
+<li><p><a href="https://github.com/saberry/qualtricsR">qualtricsR</a> focuses on survey creation.</p></li>
+<li><p>I&rsquo;m aware of two R packages for earlier versions of the Qualtrics API. <a href="https://github.com/jbryer/qualtrics">Jason Bryer</a> wrote one in 2012. <a href="https://github.com/ericpgreen/qualtrics">Eric Green</a> forked and revised it for v2.3 of the Qualtrics API, most recently in 2014.</p></li>
+<li><p><a href="https://github.com/ctesta01/QualtricsTools">QualtricsTools</a> generates reports from Qualtrics data via Shiny.</p></li>
+<li><p>Python: <a href="https://github.com/Baguage/pyqualtrics">PyQualtrics</a>; <a href="https://github.com/cwade/surveyhelper">SurveyHelper</a>.</p></li>
+</ul></div>
 </div>
 </div>
   </div>

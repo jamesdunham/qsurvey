@@ -1,5 +1,8 @@
 library(testthat)
 library(qsurvey)
 
-key_from_file(system.file(".api_key", package = "qsurvey"))
-test_check("qualtrics")
+if (Sys.getenv("QUALTRICS_KEY") == "") {
+  stop("Tests require the environment variable QUALTRICS_KEY. See ",
+    "https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Checking-and-building-packages")
+}
+test_check("qsurvey")

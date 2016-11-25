@@ -1,5 +1,6 @@
 test_that("print.qualtrics_design asserts that elements exist", {
-  d = design("SV_cuxfjYWRTB30ouh")
+  svy_tbl <- surveys()
+  d = design(svy_tbl$id[1])
   d$blocks = NULL
-  expect_error(print(d), "d does not have name blocks")
+  expect_error(print(d), "x does not have name blocks")
 })

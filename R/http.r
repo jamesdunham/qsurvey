@@ -1,4 +1,4 @@
-#' Send GET and POST requests to the Qualtrics API
+#' Send a request to the Qualtrics API
 #'
 #' These are lower-level functions for direct access to API actions. They may be
 #' useful in programming or when higher-level package functions are not
@@ -11,39 +11,52 @@
 #'
 #' @inheritParams httr::VERB
 #' @param subdomain A Qualtrics subdomain (by default, the value of the
-#'   environment variable \code{QUALTRICS_SUBDOMAIN}.
+#'   environment variable \code{QUALTRICS_SUBDOMAIN}).
 #' @param action An API action (like \code{"surveys"}).
 #' @param key A Qualtrics API key (by default, the value of the environment
 #'   variable \code{QUALTRICS_KEY}).
+#' @param api_url A complete API URL. If used, argument \code{action} and
+#'   \code{subdomain} are ignored.
+#' @param verbose Output API calls to \code{\link[base]{stderr}}.
 #' @param ... Further arguments to \code{\link[httr]{GET}} or
 #'   \code{\link[httr]{POST}}, depending on \code{verb}.
 #'
 #' @return For \code{request}, a \code{\link[httr]{response}} object. For
 #'   \code{qget} and \code{qpost}, its content as extracted by
 #'   \code{\link[httr]{content}}.
+#' @importFrom httr GET POST VERB add_headers content modify_url stop_for_status
 #' @export
-request = function(verb = "GET",
-  subdomain = Sys.getenv("QUALTRICS_SUBDOMAIN"),
+request <- function(verb = "GET",
   action = NULL,
   key = Sys.getenv("QUALTRICS_KEY"),
+  subdomain = Sys.getenv("QUALTRICS_SUBDOMAIN"),
+  api_url = NULL,
+  verbose = FALSE,
   ...) {
 
   assert_key_set(key)
-  subdomain = set_if_missing(subdomain)
-  assertthat::assert_that(assertthat::is.string(verb))
+  subdomain <- set_if_missing(subdomain)
   assertthat::assert_that(assertthat::is.string(subdomain))
-  assertthat::assert_that(assertthat::is.string(action))
+  assertthat::assert_that(assertthat::is.string(verb))
+  assertthat::assert_that(assertthat::is.flag(verbose))
 
-  url = paste0("https://",
-    paste(subdomain, "qualtrics.com/API/v3/", sep = "."),
-    action)
-
-  if (verb == "POST") {
-    response = httr::POST(url, add_qheaders(key), encode = "json", ...)
-  } else if (verb == "GET") {
-    response = httr::GET(url, add_qheaders(key), ...)
+  if (!length(api_url)) {
+    # if api_url wasn't given, expect action
+    assertthat::assert_that(assertthat::is.string(action))
+    api_url <- build_api_url(action, subdomain)
+  } else {
+    # if api_url was given, expect it as a string and ignore action
+    assertthat::assert_that(assertthat::is.string(api_url))
   }
 
+  if (verbose) {
+    message("Sending ", verb, " request to ", api_url)
+  }
+  response <- httr::VERB(verb,
+    api_url,
+    add_qheaders(key),
+    encode = ifelse(identical(verb, "POST"), "json", NULL),
+    ...)
   httr::stop_for_status(response)
   warn_on_notice(response)
   return(response)
@@ -56,9 +69,14 @@ request = function(verb = "GET",
 #' @param as Desired type of content. See \link[httr]{content}.
 #'
 #' @export
-qget = function(action = NULL, as = "parsed", ...) {
+qget <- function(action = NULL,
+  as = "parsed", 
+  key = Sys.getenv("QUALTRICS_KEY"),
+  subdomain = Sys.getenv("QUALTRICS_SUBDOMAIN"),
+  ...) {
 
-  r = request(verb = "GET", action = action, ...)
+  r <- request(verb = "GET", action = action, key = key, subdomain = subdomain,
+    ...)
   httr::content(r, as = as)
 }
 
@@ -66,33 +84,38 @@ qget = function(action = NULL, as = "parsed", ...) {
 #' @aliases qpost
 #'
 #' @export
-qpost = function(action = NULL, as = "parsed", ...) {
+qpost <- function(action = NULL,
+  as = "parsed",
+  key = Sys.getenv("QUALTRICS_KEY"),
+  subdomain = Sys.getenv("QUALTRICS_SUBDOMAIN"),
+  ...) {
 
-  r = request(verb = "POST", action = action, ...)
+  r <- request(verb = "POST", action = action, key = key, subdomain = subdomain,
+    ...)
   httr::content(r, as = as)
 }
 
-warn_on_notice = function(response) {
+warn_on_notice <- function(response) {
   # If the meta element of the request response content has an element notice,
   # pass it on to the user as a warning. Known to happen if incorrect subdomain
   # is used.
 
-  content = httr::content(response)
+  content <- httr::content(response)
   if ("meta" %in% names(content) && "notice" %in% names(content$meta)) {
     warning(content$meta$notice)
   }
 }
 
-add_qheaders = function(key) {
+add_qheaders <- function(key) {
   # Add Qualtrics headers to a httr request
 
   httr::add_headers("content_type" = "application/json", "x-api-token" = key)
 }
 
-set_if_missing = function(subdomain) {
+set_if_missing <- function(subdomain) {
   # If the subdomain is a length-zero string, the environment variable
   # QUALTRICS_SUBDOMAIN hasn't been (properly) set. Return a valid subdomain to
-  # be used and throw a warnning.
+  # be used (\code{az1}) and throw a warning.
 
   if (subdomain == "") {
     warning("Set the environment variable QUALTRICS_SUBDOMAIN for better performance. ",
@@ -102,14 +125,15 @@ set_if_missing = function(subdomain) {
   return(subdomain)
 }
 
-assert_key_set = function(key) {
-  # A key should be provided in the call to request() or set by the user and
-  # retrieved by Sys.getenv(). If not, stop.
+build_api_url <- function(action, subdomain, query = NULL) {
+  # Build a Qualtrics API URL from specified and fixed parts
 
-  assertthat::assert_that(assertthat::is.string(key))
-  if (key == "") {
-    stop("Qualtrics API key needed. Set the environment variable QUALTRICS_KEY.")
-  } else {
-    return(TRUE)
-  }
+  assertthat::assert_that(assertthat::is.string(subdomain))
+  assertthat::assert_that(assertthat::is.string(action))
+
+  httr::modify_url("",
+    scheme = "https",
+    hostname = paste(subdomain, "qualtrics.com", sep = "."),
+    path = paste("API/v3", action, sep = "/"),
+    query = query)
 }

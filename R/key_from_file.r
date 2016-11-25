@@ -4,6 +4,10 @@
 #' communication with the Qualtrics survey platform. \code{key_from_file} sets
 #' it using the contents of a file.
 #'
+#' The environment variable for the API key can be set during
+#' \link[=Startup]{startup} (recommended), interactively with
+#' \code{\link[base]{Sys.setenv}} or through \code{key_from_file}.
+#'
 #' @param file A filename.
 #' @param verbose Whether to print the result of reading from \code{file}, or
 #'   not (the default).
@@ -13,13 +17,13 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' key = key_from_file()
+#' key <- key_from_file()
 #' identical(key, Sys.getenv("QUALTRICS_KEY"))
 #' }
-key_from_file = function(file = ".api_key", verbose = FALSE) {
+key_from_file <- function(file = ".api_key", verbose = FALSE) {
 
   if (file.exists(file)) {
-    f = readLines(file)
+    f <- readLines(file)
     if (length(f) && nchar(f[1])) {
       Sys.setenv("QUALTRICS_KEY" = f[1])
       if (isTRUE(verbose)) {

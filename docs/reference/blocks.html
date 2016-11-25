@@ -82,18 +82,21 @@ each block (questions and page breaks), in a long table of block-element
 pairs.</p>
     
 
-    <pre><span class='fu'>blocks</span>(<span class='no'>design</span>, <span class='kw'>elements</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre><span class='fu'>blocks</span>(<span class='no'>design_object</span>, <span class='kw'>elements</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>design</dt>
-      <dd>A <code>qualtrics_design-class</code> object.</dd>
+      <dt>design_object</dt>
+      <dd>A <code><a href='design.html'>qualtrics_design-class</a></code> object retrieved
+from Qualtrics by <code><a href='design.html'>design</a></code>.</dd>
+      <dt>elements</dt>
+      <dd>Show the elements of each block, or don&#39;t (default).</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data.table giving the <code>block_id</code> and <code>block_description</code>
-of each block, and optionally its elements.</p>
+    <p>A table giving the <code>block_id</code> and <code>block_description</code> of
+each block, and optionally its elements.</p>
     
 
   </div>

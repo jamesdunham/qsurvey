@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Render a survey design with a Shiny app — render_survey • qsurvey</title>
+<title>Render a survey design with a Shiny app — render_flow • qsurvey</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,24 +77,35 @@
     
     <p>The Shiny app renders a visualization of the survey flow: blocks, branching,
 randomization, etc. On selection of a block, its questions are visible.
-Selecting a question in turn shows its text. An example is available online
-through shinyapps.io (TODO).</p>
+Selecting a question in turn shows its text.</p>
     
 
-    <pre><span class='fu'>render_survey</span>(<span class='no'>design</span>)</pre>
+    <pre><span class='fu'>render_flow</span>(<span class='no'>design_object</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>design</dt>
-      <dd>A <code>qualtrics_design-class</code> object.</dd>
+      <dt>design_object</dt>
+      <dd>A <code><a href='design.html'>qualtrics_design-class</a></code> object retrieved
+from Qualtrics by <code><a href='design.html'>design</a></code>.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>render_survey</code> invisibly returns the table underlying the Shiny
+    <p><code>render_flow</code> invisibly returns the table underlying the Shiny
 UI.</p>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <p><code><a href='plot_flow.html'>plot_flow</a></code> for a visNetwork plot, or
+<code><a href='edges.html'>nodes</a></code> and <code><a href='edges.html'>edges</a></code> for node and edge data in tabular
+form.</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
+<span class='co'># svy_design &lt;- design("SV_0VVlb9QwJ4bsBKZ")</span>
+<span class='co'># render_flow(svy_design)</span>
+<span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -102,7 +113,11 @@ UI.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

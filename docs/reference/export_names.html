@@ -75,22 +75,23 @@
     </div>
 
     
-    <p>Retrieve the descriptive export names (e.g., <code>favorability</code>) associated
-with question ids (e.g., <code>QID1</code>).</p>
+    <p>Retrieve the descriptive export names associated with question ids (e.g.,
+<code>QID1</code>).</p>
     
 
-    <pre><span class='fu'>export_names</span>(<span class='no'>design</span>)</pre>
+    <pre><span class='fu'>export_names</span>(<span class='no'>design_object</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>design</dt>
-      <dd>A <code>qualtrics_design-class</code> object.</dd>
+      <dt>design_object</dt>
+      <dd>A <code><a href='design.html'>qualtrics_design-class</a></code> object retrieved
+from Qualtrics by <code><a href='design.html'>design</a></code>.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A two-column data.table giving <code>id</code> and <code>export_name</code>
-  pairs.</p>
+    <p>A two-column giving <code>question_id</code> and <code>export_name</code>
+  pairs. See details.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -99,11 +100,6 @@ survey question identifier. Multiple-choice, multiple-answer questions have a
 unique export name for each choice, but only one question identifier.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># design = survey_design("SV_cuxfjYWRTB30ouh")</span>
-<span class='co'># export_names(design)</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -113,9 +109,7 @@ unique export name for each choice, but only one question identifier.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>

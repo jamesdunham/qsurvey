@@ -1,5 +1,3 @@
-library(testthat)
-
 test_that("search_flow() handles block; block", {
   test_flow = list(
     list(type = "Block", id = "BL_1"),
@@ -37,10 +35,12 @@ test_that("search_flow() handles branch->randomizer->blocks; block", {
     list(type = "Branch",
       flow = list(
         list(type = "BlockRandomizer", flow = list(
-          list(id = "BL_1", type = "Block"),
-          list(id = "BL_2", type = "Block")
-        ))
-      )),
+            list(id = "BL_1", type = "Block"),
+            list(id = "BL_2", type = "Block")
+            ),
+          randomizationOptions = list(randomSubset = 2)
+          )
+        )),
     list(id = "BL_3", type = "Block")
   )
   expect_silent(search_flow(test_flow))
@@ -48,16 +48,18 @@ test_that("search_flow() handles branch->randomizer->blocks; block", {
   expect_equal(res$id, 1:5)
   expect_equal(res$parent, c(0, 0, 1, 3, 3))
   expect_equal(res$from, c(0, 1, 1, 3, 3))
-  expect_equal(res$label, c(NA, "BL_3", NA, paste0("BL_", 1:2)))
+  expect_equal(res$label, c(NA, "BL_3", "Randomize: 2 of 2", paste0("BL_", 1:2)))
   expect_equal(res$node_type, c("Branch", "Block", "BlockRandomizer", rep("Block", 2)))
 })
 
 test_that("search_flow() handles randomizer->blocks; block", {
   test_flow = list(
-        list(type = "BlockRandomizer", flow = list(
-          list(id = "BL_1", type = "Block"),
-          list(id = "BL_2", type = "Block")
-        )),
+    list(type = "BlockRandomizer", flow = list(
+        list(id = "BL_1", type = "Block"),
+        list(id = "BL_2", type = "Block")
+        ),
+      randomizationOptions = list(randomSubset = 1)
+      ),
     list(id = "BL_3", type = "Block")
   )
   expect_silent(search_flow(test_flow))
@@ -66,5 +68,5 @@ test_that("search_flow() handles randomizer->blocks; block", {
   expect_equal(res$parent, c(0, 0, 1, 1))
   expect_equal(res$from, c(0, 1, 1, 1))
   expect_equal(res$node_type, c("BlockRandomizer", rep("Block", 3)))
-  expect_equal(res$label, c("BlockRandomizer", paste0("BL_", c(3, 1, 2))))
+  expect_equal(res$label, c("Randomize: 1 of 2", paste0("BL_", c(3, 1, 2))))
 })
