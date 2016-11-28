@@ -23,6 +23,11 @@ The result is sorted by the \code{last_modified} timestamp in descending
 order.
 }
 \examples{
+\dontrun{
 surveys()
+}
+}
+\seealso{
+\code{\link{find_id}}
 }
 

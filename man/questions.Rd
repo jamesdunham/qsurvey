@@ -17,7 +17,6 @@ from Qualtrics by \code{\link{design}}.}
 Retrieve identifiers and text for a given survey's questions.
 }
 \seealso{
-Retrieve a survey's question \code{\link{choices}} or
-  \code{\link{responses}}.
+\code{\link{blocks}}, \code{\link{choices}}
 }
 

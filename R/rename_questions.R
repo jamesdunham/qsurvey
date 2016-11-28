@@ -9,6 +9,8 @@
 #'
 #' @return The table with renamed columns.
 #' @aliases names_to_ids
+#' @seealso \code{\link{drop_meta}}, \code{\link{drop_sensitive}}, 
+#' \code{\link{keep_questions}} 
 #' @export
 ids_to_names <- function(tbl, design_object) {
   en <- export_names(design_object)

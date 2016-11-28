@@ -18,7 +18,6 @@ from Qualtrics by \code{\link{design}}.}
 pathways through the elements of the survey.
 }
 \seealso{
-\code{\link{nodes}} and \code{\link{edges}} for node and edge data in tabular
-  form. \code{\link{render_flow}} for a Shiny app.
+\code{\link{edges}}, \code{\link{nodes}}, \code{\link{render_flow}}
 }
 

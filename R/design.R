@@ -9,8 +9,7 @@
 #' @return \code{design()} returns a \code{qualtrics_design} object, which is an
 #' S3 class built from a list. 
 #'
-#' @seealso Download a survey's \code{\link{responses}},
-#'   \code{\link{questions}}, or question \code{\link{choices}}.
+#' @seealso \code{\link{responses}}
 #' @aliases qualtrics_design-class
 #' @export
 #' @examples

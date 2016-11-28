@@ -10,6 +10,7 @@
 #' @inheritParams choices
 #' @return A two-column giving \code{question_id} and \code{export_name}
 #'   pairs. See details.
+#' @seealso \code{\link{questions}}
 #' @export
 export_names <- function(design_object) {
 

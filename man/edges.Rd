@@ -18,6 +18,6 @@ A survey flow can usefully be considered a directed graph. \code{edges} shows
 its edge pairs, and \code{nodes} gives its nodes.
 }
 \seealso{
-\code{\link{plot_flow}} for a visNetwork graph of a survey flow.
+\code{\link{plot_flow}}, \code{\link{render_flow}}
 }
 

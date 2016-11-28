@@ -34,7 +34,6 @@ print(design_object)
 }
 }
 \seealso{
-Download a survey's \code{\link{responses}},
-  \code{\link{questions}}, or question \code{\link{choices}}.
+\code{\link{responses}}
 }
 

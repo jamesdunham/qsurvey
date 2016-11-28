@@ -41,4 +41,7 @@ For \code{first = TRUE} (the default), only the id of the first matching name
 (descending), so \code{first = TRUE} gives the id of the matching survey most
 recently modified.
 }
+\seealso{
+\code{\link{surveys}}
+}
 

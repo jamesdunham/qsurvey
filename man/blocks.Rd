@@ -23,4 +23,7 @@ if argument \code{elements = TRUE}, \code{blocks} also shows the elements of
 each block (questions and page breaks), in a long table of block-element
 pairs.
 }
+\seealso{
+\code{\link{choices}}, \code{\link{questions}}
+}
 

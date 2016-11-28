@@ -23,4 +23,7 @@ In some cases, there is more than one export name associated with a given
 survey question identifier. Multiple-choice, multiple-answer questions have a
 unique export name for each choice, but only one question identifier.
 }
+\seealso{
+\code{\link{questions}}
+}
 

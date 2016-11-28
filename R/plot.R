@@ -7,8 +7,7 @@
 #' @return \code{plot_flow} returns a visNetwork object.
 #'
 #' @importFrom visNetwork visEdges visHierarchicalLayout visInteraction visNetwork 
-#' @seealso \code{\link{nodes}} and \code{\link{edges}} for node and edge data in tabular
-#'   form. \code{\link{render_flow}} for a Shiny app.
+#' @seealso \code{\link{edges}}, \code{\link{nodes}}, \code{\link{render_flow}}
 #' @export
 plot_flow <- function(design_object) {
 

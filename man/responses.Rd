@@ -50,7 +50,6 @@ changed via \code{...} are \code{surveyId} (exposed as argument \code{id}),
 (which must be \code{json}).
 }
 \seealso{
-Retrieve a survey's \code{\link{questions}} or question
-  \code{\link{choices}}.
+\code{\link{design}}
 }
 

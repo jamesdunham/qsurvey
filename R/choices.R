@@ -8,8 +8,7 @@ utils::globalVariables(c("choice", "choice_id"))
 #' from Qualtrics by \code{\link{design}}.
 #' @return A table of response choices. 
 #'
-#' @seealso Download a survey's \code{\link{questions}},
-#'   \code{\link{responses}}, or \code{\link{design}}.
+#' @seealso \code{\link{blocks}}, \code{\link{questions}}
 #' @importFrom utils type.convert
 #' @export
 choices <- function(design_object) {

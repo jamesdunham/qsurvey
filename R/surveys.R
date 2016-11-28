@@ -10,8 +10,11 @@ utils::globalVariables(c("choice", "last_modified"))
 #' @return A data.table of survey metadata
 #' @importFrom lubridate ymd_hms
 #' @export
+#' @seealso \code{\link{find_id}}
 #' @examples
+#' \dontrun{
 #' surveys()
+#' }
 surveys <- function(key = Sys.getenv("QUALTRICS_KEY"),
   subdomain = Sys.getenv("QUALTRICS_SUBDOMAIN")) {
 

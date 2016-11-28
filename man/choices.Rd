@@ -17,7 +17,6 @@ A table of response choices.
 Retrieve a table giving the response choices for each question in a survey.
 }
 \seealso{
-Download a survey's \code{\link{questions}},
-  \code{\link{responses}}, or \code{\link{design}}.
+\code{\link{blocks}}, \code{\link{questions}}
 }
 

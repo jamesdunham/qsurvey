@@ -13,6 +13,7 @@ utils::globalVariables(c(".", "block_description", "block_randomization", "block
 #'
 #' @return A table giving the \code{block_id} and \code{block_description} of
 #' each block, and optionally its elements.
+#' @seealso \code{\link{choices}}, \code{\link{questions}}
 #' @export
 blocks <- function(design_object, elements = FALSE) {
 

@@ -23,4 +23,8 @@ The table with renamed columns.
 question identifier names (e.g. \code{QID2}) using question names (e.g.,
 \code{approval}). \code{names_to_ids} does the reverse.
 }
+\seealso{
+\code{\link{drop_meta}}, \code{\link{drop_sensitive}}, 
+\code{\link{keep_questions}}
+}
 
