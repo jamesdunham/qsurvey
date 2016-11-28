@@ -1,0 +1,9 @@
+d <- packageDescription("qsurvey")
+bibentry(bibtype = "Manual",
+         header = "To cite the 'qsurvey', use:",
+         title = paste0(d$Package, ": ", d$Title),
+         author = person("James", "Dunham", role = c("aut", "cre")),
+         year = format(strptime(d$Date, "%Y-%m-%d", tz = "GMT"), "%Y"),
+         url = d$URL,
+         note = paste("R package version", d$Version),
+         key = "qsurvey-package")
