@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Download survey metadata — surveys • qsurvey</title>
+<title>Articles • qsurvey</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -34,7 +34,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-vignette-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -58,6 +58,9 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
+  <a href="../news/index.html">News</a>
+</li>
+<li>
   <a href="https://github.com/jamesdunham/qsurvey">
     <span class="fa fa-github fa-lg"></span>
      
@@ -75,57 +78,21 @@
       
       </header>
 
-      <div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header">
-    <h1>Download survey metadata</h1>
+      <div class="page-header">
+  <h1>Vignette reference <small>version&nbsp;0.0.2</small></h1>
+</div>
+
+<div class="row">
+  <div class="col-md-9">
+    <div class="section ">
+      <h3>All vignettes</h3>
+      <p class="section-desc"></p>
+
+      <ul>
+        <li><a href="design.html">Survey Designs</a></li>
+        <li><a href="responses.html">Responses</a></li>
+      </ul>
     </div>
-
-    
-    <p>Retrieve names, identifiers, and other metadata for all available surveys.
-The result is sorted by the <code>last_modified</code> timestamp in descending
-order.</p>
-    
-
-    <pre><span class='fu'>surveys</span>(<span class='kw'>key</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"QUALTRICS_KEY"</span>),
-  <span class='kw'>subdomain</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"QUALTRICS_SUBDOMAIN"</span>))</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>key</dt>
-      <dd>A Qualtrics API key (by default, the value of the environment
-variable <code>QUALTRICS_KEY</code>).</dd>
-      <dt>subdomain</dt>
-      <dd>A Qualtrics subdomain (by default, the value of the
-environment variable <code>QUALTRICS_SUBDOMAIN</code>).</dd>
-    </dl>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A data.table of survey metadata</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <p><code><a href='find_id.html'>find_id</a></code></p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># surveys()</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
   </div>
 </div>
 

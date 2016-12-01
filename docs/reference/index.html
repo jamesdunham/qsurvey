@@ -49,17 +49,27 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../articles/design.html">Survey Designs</a>
+</li>
+<li>
+  <a href="../articles/responses.html">Survey Responses</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
-      </ul>
-      
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
+<li>
   <a href="https://github.com/jamesdunham/qsurvey">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -72,12 +82,50 @@
   <div class="col-md-9">
     <div class="page-header">
       <h1>Function reference</h1>
-      <h4>version&nbsp;0.0.1</h4>
+      <h4>version&nbsp;0.0.2</h4>
     </div>
 
     <div class="contents">
-      <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-      <p class="section-desc"></p>
+      <h2 id="section-qualtrics-api" class="hasAnchor"><a href="#section-qualtrics-api" class="anchor"></a>Qualtrics API</h2>
+      <p class="section-desc"><p>Functions for retrieving data from the Qualtrics survey platform.</p></p>
+
+      
+      <p><a href="design.html">Download a survey's design</a></p>
+      <ul>
+        <li><code><a href="design.html">design</a></code></li><li><code><a href="design.html">qualtrics_design-class</a></code></li>
+      </ul>
+      
+      <p><a href="find_id.html">Find survey ids by searching survey names</a></p>
+      <ul>
+        <li><code><a href="find_id.html">find_id</a></code></li>
+      </ul>
+      
+      <p><a href="key_from_file.html">Set the environment variable for the API key from a file</a></p>
+      <ul>
+        <li><code><a href="key_from_file.html">key_from_file</a></code></li>
+      </ul>
+      
+      <p><a href="qsurvey.html">The qsurvey package: overview</a></p>
+      <ul>
+        <li><code><a href="qsurvey.html">qsurvey</a></code></li><li><code><a href="qsurvey.html">qsurvey-package</a></code></li>
+      </ul>
+      
+      <p><a href="request.html">Send a request to the Qualtrics API</a></p>
+      <ul>
+        <li><code><a href="request.html">qget</a></code></li><li><code><a href="request.html">qpost</a></code></li><li><code><a href="request.html">request</a></code></li>
+      </ul>
+      
+      <p><a href="responses.html">Download survey responses</a></p>
+      <ul>
+        <li><code><a href="responses.html">responses</a></code></li>
+      </ul>
+      
+      <p><a href="surveys.html">Download survey metadata</a></p>
+      <ul>
+        <li><code><a href="surveys.html">surveys</a></code></li>
+      </ul>
+          <h2 id="section-designs" class="hasAnchor"><a href="#section-designs" class="anchor"></a>Designs</h2>
+      <p class="section-desc"><p>Functions for reviewing survey designs.</p></p>
 
       
       <p><a href="blocks.html">Get block ids, descriptions, and elements</a></p>
@@ -90,16 +138,6 @@
         <li><code><a href="choices.html">choices</a></code></li>
       </ul>
       
-      <p><a href="design.html">Download a survey's design</a></p>
-      <ul>
-        <li><code><a href="design.html">design</a></code></li><li><code><a href="design.html">qualtrics_design-class</a></code></li>
-      </ul>
-      
-      <p><a href="drop_sensitive.html">Drop columns from survey responses</a></p>
-      <ul>
-        <li><code><a href="drop_sensitive.html">drop_meta</a></code></li><li><code><a href="drop_sensitive.html">drop_sensitive</a></code></li><li><code><a href="drop_sensitive.html">keep_questions</a></code></li>
-      </ul>
-      
       <p><a href="edges.html">Represent survey flows as node or edge tables</a></p>
       <ul>
         <li><code><a href="edges.html">edges</a></code></li><li><code><a href="edges.html">nodes</a></code></li>
@@ -110,29 +148,9 @@
         <li><code><a href="export_names.html">export_names</a></code></li>
       </ul>
       
-      <p><a href="find_id.html">Find survey ids by searching survey names</a></p>
-      <ul>
-        <li><code><a href="find_id.html">find_id</a></code></li>
-      </ul>
-      
-      <p><a href="ids_to_names.html">Rename response table columns</a></p>
-      <ul>
-        <li><code><a href="ids_to_names.html">ids_to_names</a></code></li><li><code><a href="ids_to_names.html">names_to_ids</a></code></li>
-      </ul>
-      
-      <p><a href="key_from_file.html">Set the environment variable for the API key from a file</a></p>
-      <ul>
-        <li><code><a href="key_from_file.html">key_from_file</a></code></li>
-      </ul>
-      
       <p><a href="plot_flow.html">Plot a survey flow</a></p>
       <ul>
         <li><code><a href="plot_flow.html">plot_flow</a></code></li>
-      </ul>
-      
-      <p><a href="qsurvey.html">The qsurvey package: overview</a></p>
-      <ul>
-        <li><code><a href="qsurvey.html">qsurvey</a></code></li><li><code><a href="qsurvey.html">qsurvey-package</a></code></li>
       </ul>
       
       <p><a href="questions.html">Get survey questions</a></p>
@@ -145,24 +163,22 @@
         <li><code><a href="render_flow.html">render_flow</a></code></li>
       </ul>
       
-      <p><a href="request.html">Send a request to the Qualtrics API</a></p>
-      <ul>
-        <li><code><a href="request.html">qget</a></code></li><li><code><a href="request.html">qpost</a></code></li><li><code><a href="request.html">request</a></code></li>
-      </ul>
-      
       <p><a href="response_counts.html">Get survey response counts</a></p>
       <ul>
         <li><code><a href="response_counts.html">response_counts</a></code></li>
       </ul>
+          <h2 id="section-responses" class="hasAnchor"><a href="#section-responses" class="anchor"></a>Responses</h2>
+      <p class="section-desc"><p>Functions for manipulating survey response tables.</p></p>
+
       
-      <p><a href="responses.html">Download survey responses</a></p>
+      <p><a href="drop_sensitive.html">Drop columns from survey responses</a></p>
       <ul>
-        <li><code><a href="responses.html">responses</a></code></li>
+        <li><code><a href="drop_sensitive.html">drop_meta</a></code></li><li><code><a href="drop_sensitive.html">drop_sensitive</a></code></li><li><code><a href="drop_sensitive.html">keep_questions</a></code></li>
       </ul>
       
-      <p><a href="surveys.html">Download survey metadata</a></p>
+      <p><a href="ids_to_names.html">Rename response table columns</a></p>
       <ul>
-        <li><code><a href="surveys.html">surveys</a></code></li>
+        <li><code><a href="ids_to_names.html">ids_to_names</a></code></li><li><code><a href="ids_to_names.html">names_to_ids</a></code></li>
       </ul>
     
     </div>
@@ -171,7 +187,9 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-qualtrics-api">Qualtrics API</a></li>
+      <li><a href="#section-designs">Designs</a></li>
+      <li><a href="#section-responses">Responses</a></li>
     </ul>
   </div>
 </div>
