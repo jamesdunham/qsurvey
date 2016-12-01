@@ -26,6 +26,10 @@ utils::globalVariables(c("lastModified"))
 #' @seealso \code{\link{surveys}}
 #' @importFrom stats setNames
 #' @export
+#' @examples
+#' \dontrun{
+#' find_id("demographics")
+#' }
 find_id <- function(pattern,
   first = TRUE,
   ignore.case = TRUE,
