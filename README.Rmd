@@ -60,6 +60,9 @@ Panel and then reading the resulting file into R.
 r <- responses(id = "SV_0CGgkDZJaUvxnGl", verbose = FALSE)
 ```
 
+For functions that work with survey responses see `names_to_ids()` and
+`drop_meta()`.
+
 
 ### Survey design
 
@@ -81,6 +84,8 @@ svy_q <- questions(design_object = d)
 svy_q[1:2, ]  
 ```
 
+See also `choices()`, `blocks()`, and `response_counts()`.
+
 
 ### Visualization
 
@@ -90,6 +95,8 @@ survey's flow and content in a Shiny app, use `render_flow()`.
 ```{r}
 plot_flow(design_object = d)
 ```
+
+See also `edges()` and `nodes()`.
 
 
 ## Related
