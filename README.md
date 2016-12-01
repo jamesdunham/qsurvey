@@ -2,7 +2,7 @@
 qsurvey
 =======
 
-[![Build Status](https://travis-ci.org/jamesdunham/qsurvey.svg?branch=master)](https://travis-ci.org/jamesdunham/qsurvey) [![CRAN Status Badge](http://www.r-pkg.org/badges/version/qsurvey)](https://cran.r-project.org/package=qsurvey)
+[![Build Status](https://travis-ci.org/jamesdunham/qsurvey.svg?branch=master)](https://travis-ci.org/jamesdunham/qsurvey) [![CRAN Status Badge](http://www.r-pkg.org/badges/version/qsurvey)](https://cran.r-project.org/package=qsurvey) [![codecov](https://codecov.io/github/jamesdunham/qsurvey/branch/master/graphs/badge.svg)](https://codecov.io/github/jamesdunham/qsurvey)
 
 qsurvey is a toolkit for working with the Qualtrics survey platform and its data in R. It focuses on testing and review of surveys before fielding, and analysis of responses afterward.
 
@@ -81,7 +81,7 @@ plot_flow(design_object = d)
 
 <!--html_preserve-->
 
-<script type="application/json" data-for="htmlwidget-7466c5311e38ad7e4535">{"x":{"nodes":{"id":[2,3,1],"parent_id":[0,0,0],"type":["Block","Block","Block"],"label":["Teacher Evaluation","Student Performance","Class Evaluation"],"block_id":["BL_0wUDDTxrMh9vOAd","BL_6FK8SIrVsXuBxFX","BL_agzU0yMolbPdFGd"],"color":["#d9d9d9","#d9d9d9","#d9d9d9"]},"edges":{"from":[0,1,2],"to":[1,2,3],"type":["deterministic","deterministic","deterministic"],"color":["#000000","#000000","#000000"]},"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"interaction":{"dragNodes":false,"dragView":false,"zoomView":false},"edges":{"arrows":"to"},"layout":{"hierarchical":{"enabled":true,"direction":"LR","sortMethod":"directed"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-e79aff70e3e021fb71ba">{"x":{"nodes":{"id":[2,3,1],"parent_id":[0,0,0],"type":["Block","Block","Block"],"label":["Teacher Evaluation","Student Performance","Class Evaluation"],"block_id":["BL_0wUDDTxrMh9vOAd","BL_6FK8SIrVsXuBxFX","BL_agzU0yMolbPdFGd"],"color":["#d9d9d9","#d9d9d9","#d9d9d9"]},"edges":{"from":[0,1,2],"to":[1,2,3],"type":["deterministic","deterministic","deterministic"],"color":["#000000","#000000","#000000"]},"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"interaction":{"dragNodes":false,"dragView":false,"zoomView":false},"edges":{"arrows":"to"},"layout":{"hierarchical":{"enabled":true,"direction":"LR","sortMethod":"directed"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null},"evals":[],"jsHooks":[]}</script>
 <!--/html_preserve-->
 See also `edges()` and `nodes()`.
 
