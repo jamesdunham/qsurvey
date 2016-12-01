@@ -1,4 +1,4 @@
-utils::globalVariables(c(".", "id", "block_id", "q_order", "node_id", "question_id",
+utils::globalVariables(c(".", "id", "block_id", "question_order", "node_id", "question_id",
     "questionText"))
 
 #' Render a survey design with a Shiny app
@@ -13,7 +13,7 @@ utils::globalVariables(c(".", "id", "block_id", "q_order", "node_id", "question_
 #' UI.
 #' @seealso \code{\link{plot_flow}} for a visNetwork plot, or
 #' \code{\link{nodes}} and \code{\link{edges}} for node and edge data in tabular
-#' form. 
+#' form.
 #' @export
 #' @importFrom shiny shinyApp fluidPage fluidRow column renderText
 #' @importFrom magrittr %>%
@@ -39,7 +39,7 @@ render_flow <- function(design_object) {
 
   # add node ids to the resulting table of block-questions
   ui_tbl <- merge(ui_tbl, node_tbl, all.x = TRUE, all.y = FALSE, by = "block_id")
-  data.table::setkey(ui_tbl, q_order)
+  data.table::setkey(ui_tbl, question_order)
 
   shiny::shinyApp(
     ui = shiny::fluidPage(
@@ -66,7 +66,7 @@ render_flow <- function(design_object) {
 
     output$tbl <- DT::renderDataTable(
       DT::datatable(
-        ui_tbl[node_id == input$click][, .(export_label, question_id)],
+        ui_tbl[node_id == input$click][, .(export_name, question_id)],
         filter = "none",
         selection = "single",
         class = c("compact", "row-border", "stripe"),
@@ -80,7 +80,7 @@ render_flow <- function(design_object) {
       )
 
     output$q_text <- shiny::renderText(
-      ui_tbl[node_id == input$click][input$tbl_rows_selected, questionText]
+      ui_tbl[node_id == input$click][input$tbl_rows_selected, question_text]
       )
   })
 }

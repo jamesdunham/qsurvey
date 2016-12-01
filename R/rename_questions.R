@@ -15,7 +15,7 @@
 ids_to_names <- function(tbl, design_object) {
   en <- export_names(design_object)
   data.table::setDT(tbl)
-  data.table::setnames(tbl, en$id, en$export_name)
+  data.table::setnames(tbl, en$question_id, en$export_name)
   return(tbl[])
 }
 
@@ -24,6 +24,6 @@ ids_to_names <- function(tbl, design_object) {
 names_to_ids <- function(tbl, design_object) {
   en <- export_names(design_object)
   data.table::setDT(tbl)
-  data.table::setnames(tbl, en$export_name, en$id)
+  data.table::setnames(tbl, en$export_name, en$question_id)
   return(tbl[])
 }
