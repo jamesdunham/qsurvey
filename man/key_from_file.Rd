@@ -26,10 +26,4 @@ The environment variable for the API key can be set during
 \link[=Startup]{startup} (recommended), interactively with
 \code{\link[base]{Sys.setenv}} or through \code{key_from_file}.
 }
-\examples{
-\dontrun{
-key <- key_from_file()
-identical(key, Sys.getenv("QUALTRICS_KEY"))
-}
-}
 

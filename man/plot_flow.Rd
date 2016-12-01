@@ -17,6 +17,12 @@ from Qualtrics by \code{\link{design}}.}
 \code{plot_flow} shows a survey's flow as a directed graph showing possible
 pathways through the elements of the survey.
 }
+\examples{
+\dontrun{
+svy_design <- design("SV_0VVlb9QwJ4bsBKZ")
+plot_flow(svy_design)
+}
+}
 \seealso{
 \code{\link{edges}}, \code{\link{nodes}}, \code{\link{render_flow}}
 }
