@@ -14,7 +14,8 @@ knitr::opts_chunk$set(
 # qsurvey
 
 [![Build Status](https://travis-ci.org/jamesdunham/qsurvey.svg?branch=master)](https://travis-ci.org/jamesdunham/qsurvey)
-[![CRAN Status Badge](http://www.r-pkg.org/badges/version/qsurvey)](https://cran.r-project.org/package=qsurvey)
+[![CRAN Status Badge](https://www.r-pkg.org/badges/version/qsurvey)](https://cran.r-project.org/package=qsurvey)
+[![codecov](https://codecov.io/github/jamesdunham/qsurvey/branch/master/graphs/badge.svg)](https://codecov.io/github/jamesdunham/qsurvey) 
 
 qsurvey is a toolkit for working with the Qualtrics survey platform and its data
 in R. It focuses on testing and review of surveys before fielding, and analysis
