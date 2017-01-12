@@ -11,7 +11,7 @@ test_that("verbosity works", {
 
 test_that("dots pass body params", {
   # see https://api.qualtrics.com/docs/json
-  expect_silent(r_limit_1 <- responses(svy_tbl$id[1], limit = 1))
+  expect_silent(r_limit_1 <- responses(svy_tbl$id[2], limit = 1))
   expect_true(identical(nrow(r_limit_1), 1L))
 })
 

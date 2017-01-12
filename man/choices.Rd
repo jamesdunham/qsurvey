@@ -14,7 +14,9 @@ from Qualtrics by \code{\link{design}}.}
 A table of response choices.
 }
 \description{
-Retrieve a table giving the response choices for each question in a survey.
+Retrieve a table giving the response choices for each close-ended question in
+a survey. Text-entry and other question types without predefined choices are
+omitted.
 }
 \seealso{
 Download a survey's \code{\link{questions}},

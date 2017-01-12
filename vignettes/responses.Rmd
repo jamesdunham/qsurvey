@@ -1,0 +1,105 @@
+---
+title: Responses
+output: github_document
+always_allow_html: yes
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+This vignette shows how to use qsurvey to download and work with responses
+collected with the Qualtrics survey platform. Before continuing you should have
+installed qsurvey; see the [installation
+instructions](http://jdunham.io/qsurvey/).
+
+
+## Retrieve survey responses
+
+We'll start by downloading the responses to a survey called "Demographics."
+
+```{r}
+(survey_id <- find_id("Demographics"))
+```
+
+`responses()` sends a request to the Qualtrics API for our response data and
+waits while the survey platform prepares the export. After downloading it,
+`responses()` returns the data.
+
+```{r}
+demographics = responses(survey_id)
+class(demographics)
+dim(demographics)
+```
+
+By default, `responses()` gives a table showing choice text or labels. This
+means that if the respondent-facing answer choices for a question are `"Low"`,
+`"Medium"`, and `"High"`, the response data will contain these strings.
+Alternatively, if argument `use_labels = FALSE`, the response data will show
+the choice ids `"1"`, `"2"`, and `"3"`, or if choice recodes have been
+configured, perhaps `"-1"`, `"0"`, and `"1"`.
+
+```{r}
+head(demographics$Q23)
+demographics_nolabels = responses(survey_id, use_labels = FALSE)
+head(demographics_nolabels$Q23)
+```
+
+As described in the documentation for `response()`, other [Qualtrics API
+parameters](https://api.qualtrics.com/docs/json) that affect the format of
+survey responses are available. For example, passing argument
+seenUnansweredRecode = "99" to `responses()` will show `"99"` as the response to
+unanswered questions instead of `NA`, the default. See the [Qualtrics
+documentation](https://api.qualtrics.com/docs/json) if you need to customize
+output from `responses()`.
+
+
+## Dropping columns
+
+Let's take a look at the columns in the response data. The first five are survey
+and respondent metadata. If they aren't useful to us, we can drop them with the
+`drop_meta()` function. We're left with actual survey responses and the eight
+columns named `DO-*` that give question display orders. 
+
+```{r}
+names(demographics)
+demographics <- drop_meta(demographics)
+names(demographics)
+```
+
+`drop_sensitive()` and `keep_questions()` are similar to `drop_meta()`, but
+target different column ranges.
+
+
+## Renaming variables
+
+By default, the response table's variable names are the descriptive export names
+given to each question in the Qualtrics Control Panel. Let's instead name them
+according to the unique identifiers of questions. We'll need the survey's design
+to access these; we pass it and the table of responses to `names_to_ids()`.
+
+```{r}
+demo_design <- design(survey_id)
+demographics <- names_to_ids(demographics, demo_design)
+names(demographics)
+```
+
+`ids_to_names()` does the reverse.
+
+```{r}
+# FIXME: need to preserve suffixes for eg Q5_1, Q5_2   
+# demographics <- ids_to_names(demographics, demo_design)
+# names(demographics)
+```
+
+
+## Conclusion
+
+After downloading survey response data with `responses()`, two sets of
+convenience functions are available: one for dropping/keeping columns, and
+another for renaming columns. If you have a question or suggestion, please open
+a [GitHub issue](https://github.com/jamesdunham/qsurvey/issues).
