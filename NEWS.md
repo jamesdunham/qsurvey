@@ -1,3 +1,10 @@
+# qsurvey 0.0.3
+
+- Properly export `print` S3 for `qualtrics_design` objects
+- Properly handle open-ended questions correctly in choices()
+- Serve CRAN badge over https on static site
+
+
 # qsurvey 0.0.2
 
 - Add covr to `.travis.yml`

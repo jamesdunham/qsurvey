@@ -1,7 +1,7 @@
 Package: qsurvey
 Title: A toolkit for working with the Qualtrics platform and its survey data in R
-Version: 0.0.2
-Date: 2016-12-01
+Version: 0.0.3
+Date: 2017-01-12
 Authors@R: person("James", "Dunham", email = "james@jdunham.io", role = c("aut", "cre"))
 Description: qsurvey is a toolkit for working with the Qualtrics platform and
     its survey data in R.  It focuses on testing and review of surveys before
