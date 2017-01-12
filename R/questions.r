@@ -38,7 +38,11 @@ nulls_to_na <- function(element) {
   # Missing elements will be NULL in json but must be NA in tabular output
 
   lapply(element, function(x) {
-    ifelse(is.null(x), NA, x)
+    if (is.null(x)) {
+      return(NA)
+    } else {
+      return(x)
+    }
   })
 }
 
