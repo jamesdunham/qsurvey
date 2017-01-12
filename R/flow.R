@@ -9,7 +9,7 @@ utils::globalVariables(c("edges", "br_subset", "edge_type", "edge_color",
 #'
 #' @inheritParams choices
 #' @aliases nodes
-#' @seealso \code{\link{plot_flow}} for a visNetwork graph of a survey flow.
+#' @seealso \code{\link{plot_flow}}, \code{\link{render_flow}}
 #' @export
 edges <- function(design_object) {
 

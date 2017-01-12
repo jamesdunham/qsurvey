@@ -10,8 +10,7 @@ utils::globalVariables(c("choice", "choice_id"))
 #' from Qualtrics by \code{\link{design}}.
 #' @return A table of response choices. 
 #'
-#' @seealso Download a survey's \code{\link{questions}},
-#'   \code{\link{responses}}, or \code{\link{design}}.
+#' @seealso \code{\link{blocks}}, \code{\link{questions}}
 #' @importFrom utils type.convert
 #' @export
 choices <- function(design_object) {
@@ -38,6 +37,7 @@ parse_choices <- function(choice_tree) {
   stopifnot(identical(names(choice_tree), unique(names(choice_tree))))
   x <- data.table::rbindlist(lapply(choice_tree, unlist, recursive = FALSE),
     fill = TRUE, idcol = "question_id")
+  x[, names(x) := lapply(.SD, as.character)]
   # x is now a wide table with columns like 9.description, 9.choiceText...
   x <- data.table::melt(x,
     id.vars = "question_id",
@@ -53,9 +53,13 @@ parse_choices <- function(choice_tree) {
 
 format_choices <- function(tbl) {
   data.table::setkeyv(tbl, c("question_id", "choice_id"))
-  data.table::setnames(tbl, c("choiceText", "description", "recode",
-      "variableName"), c("choice_text", "choice_description", "choice_recode",
-      "variableName"))
   data.table::setnames(tbl, names(tbl), uncamel(names(tbl)))
+  for (varname in c("recode", "description")) {
+    if (varname %in% names(tbl)) {
+      data.table::setnames(tbl, varname, paste0("choice_", varname))
+    }
+  }
+  data.table::setcolorder(tbl, union("choice_id", names(tbl)))
+  tbl[]
 }
 

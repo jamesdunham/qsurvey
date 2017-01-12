@@ -7,11 +7,47 @@ templates:
    bootswatch: readable
 
 navbar:
- right:
-   - icon: fa-github fa-lg
-     href: https://github.com/jamesdunham/qsurvey
+  title: qsurvey
+  left:
+    - text: Survey Designs
+      href: articles/design.html
+    - text: Survey Responses
+      href: articles/responses.html
+    - text: Reference
+      href: reference/index.html
+    - text: News
+      href: news/index.html
+    - icon: fa-github fa-lg
+      href: https://github.com/jamesdunham/qsurvey
 
-# reference:
-#   - title: 
-#     desc: >
-#     - contents:
+reference:
+  - title: Qualtrics API
+    desc: Functions for retrieving data from the Qualtrics survey platform.
+    contents:
+      - design
+      - find_id
+      - key_from_file
+      - qget
+      - qpost
+      - qsurvey
+      - request
+      - responses
+      - surveys
+  - title: Designs
+    desc: Functions for reviewing survey designs.
+    contents:
+      - blocks
+      - choices
+      - edges
+      - ends_with("_flow")
+      - export_names
+      - nodes
+      - questions
+      - response_counts
+      - plot_flow
+      - render_flow
+  - title: Responses
+    desc: Functions for manipulating survey response tables.
+    contents:
+      - matches(".*_to_.*")
+      - starts_with("drop_")

@@ -6,8 +6,7 @@ utils::globalVariables(c("export_label", "question", "question_order"))
 #'
 #' @inheritParams choices
 #' @return \code{questions} returns a table of question identifiers and text.
-#' @seealso Retrieve a survey's question \code{\link{choices}} or
-#'   \code{\link{responses}}.
+#' @seealso \code{\link{blocks}}, \code{\link{choices}}
 #' @export
 questions <- function(design_object) {
 

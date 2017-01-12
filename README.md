@@ -35,6 +35,8 @@ Pass a survey's id to `responses()` to retrieve responses. This is equivalent to
 r <- responses(id = "SV_0CGgkDZJaUvxnGl", verbose = FALSE)
 ```
 
+For functions that work with survey responses see `names_to_ids()` and `drop_meta()`.
+
 ### Survey design
 
 To retrieve a survey's design use `design()`. This returns a `qualtrics_design` object that many other qsurvey functions can operate on.
@@ -43,13 +45,14 @@ To retrieve a survey's design use `design()`. This returns a `qualtrics_design` 
 d <- design(id = "SV_0CGgkDZJaUvxnGl")
 
 print(d)
-#> name:        Student Feedback
-#> id:          SV_0CGgkDZJaUvxnGl
-#> created:     2016-11-24
-#> modified:    2016-11-24
-#> responses:   0 (closed)
-#> questions:   26
-#> blocks:      3
+#> # A qualtrics_design:
+#> name               Student Feedback     
+#> id                 SV_0CGgkDZJaUvxnGl   
+#> created            2016-11-24           
+#> modified           2016-11-24           
+#> responses          0 (closed)           
+#> questions          26                   
+#> blocks             3
 ```
 
 For example, use `questions()` to see the text and other attributes of each survey question.
@@ -66,6 +69,8 @@ svy_q[1:2, ]
 #> 2:                                  How interesting was this class?
 ```
 
+See also `choices()`, `blocks()`, and `response_counts()`.
+
 ### Visualization
 
 Visualize a survey flow with `plot_flow()`. Or for interactive review of a survey's flow and content in a Shiny app, use `render_flow()`.
@@ -76,8 +81,10 @@ plot_flow(design_object = d)
 
 <!--html_preserve-->
 
-<script type="application/json" data-for="htmlwidget-da4731dacf09ab25f8c5">{"x":{"nodes":{"id":[2,3,1],"parent_id":[0,0,0],"type":["Block","Block","Block"],"label":["Teacher Evaluation","Student Performance","Class Evaluation"],"block_id":["BL_0wUDDTxrMh9vOAd","BL_6FK8SIrVsXuBxFX","BL_agzU0yMolbPdFGd"],"color":["#d9d9d9","#d9d9d9","#d9d9d9"]},"edges":{"from":[0,1,2],"to":[1,2,3],"type":["deterministic","deterministic","deterministic"],"color":["#000000","#000000","#000000"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"interaction":{"dragNodes":false,"dragView":false,"zoomView":false},"edges":{"arrows":"to"},"layout":{"hierarchical":{"enabled":true,"direction":"LR","sortMethod":"directed"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-0612a360c5d40884e41d">{"x":{"nodes":{"id":[2,3,1],"parent_id":[0,0,0],"type":["Block","Block","Block"],"label":["Teacher Evaluation","Student Performance","Class Evaluation"],"block_id":["BL_0wUDDTxrMh9vOAd","BL_6FK8SIrVsXuBxFX","BL_agzU0yMolbPdFGd"],"color":["#d9d9d9","#d9d9d9","#d9d9d9"]},"edges":{"from":[0,1,2],"to":[1,2,3],"type":["deterministic","deterministic","deterministic"],"color":["#000000","#000000","#000000"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"interaction":{"dragNodes":false,"dragView":false,"zoomView":false},"edges":{"arrows":"to"},"layout":{"hierarchical":{"enabled":true,"direction":"LR","sortMethod":"directed"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
 <!--/html_preserve-->
+See also `edges()` and `nodes()`.
+
 Related
 -------
 

@@ -29,13 +29,17 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
+  <a href="articles/design.html">Survey Designs</a>
+</li>
+<li>
+  <a href="articles/responses.html">Survey Responses</a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="articles/index.html">Articles</a>
+  <a href="news/index.html">News</a>
 </li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/jamesdunham/qsurvey">
     <span class="fa fa-github fa-lg"></span>
@@ -43,6 +47,7 @@
   </a>
 </li>
       </ul>
+<ul class="nav navbar-nav navbar-right"></ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -82,6 +87,7 @@ devtools::<span class="kw">install_github</span>(<span class="st">"jamesdunham/q
 <a href="#survey-responses" class="anchor"> </a>Survey responses</h3>
 <p>Pass a survey’s id to <code><a href="reference/responses.html">responses()</a></code> to retrieve responses. This is equivalent to using the “Export Data” tool in the “Data and Analysis” view of the Control Panel and then reading the resulting file into R.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r &lt;-<span class="st"> </span><span class="kw"><a href="reference/responses.html">responses</a></span>(<span class="dt">id =</span> <span class="st">"SV_0CGgkDZJaUvxnGl"</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>For functions that work with survey responses see <code><a href="reference/ids_to_names.html">names_to_ids()</a></code> and <code><a href="reference/drop_sensitive.html">drop_meta()</a></code>.</p>
 </div>
 <div id="survey-design" class="section level3">
 <h3 class="hasAnchor">
@@ -90,13 +96,14 @@ devtools::<span class="kw">install_github</span>(<span class="st">"jamesdunham/q
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span><span class="kw"><a href="reference/design.html">design</a></span>(<span class="dt">id =</span> <span class="st">"SV_0CGgkDZJaUvxnGl"</span>)
 
 <span class="kw">print</span>(d)
-<span class="co">#&gt; name:        Student Feedback</span>
-<span class="co">#&gt; id:          SV_0CGgkDZJaUvxnGl</span>
-<span class="co">#&gt; created:     2016-11-24</span>
-<span class="co">#&gt; modified:    2016-11-24</span>
-<span class="co">#&gt; responses:   0 (closed)</span>
-<span class="co">#&gt; questions:   26</span>
-<span class="co">#&gt; blocks:      3</span></code></pre></div>
+<span class="co">#&gt; # A qualtrics_design:</span>
+<span class="co">#&gt; name               Student Feedback     </span>
+<span class="co">#&gt; id                 SV_0CGgkDZJaUvxnGl   </span>
+<span class="co">#&gt; created            2016-11-24           </span>
+<span class="co">#&gt; modified           2016-11-24           </span>
+<span class="co">#&gt; responses          0 (closed)           </span>
+<span class="co">#&gt; questions          26                   </span>
+<span class="co">#&gt; blocks             3</span></code></pre></div>
 <p>For example, use <code><a href="reference/questions.html">questions()</a></code> to see the text and other attributes of each survey question.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">svy_q &lt;-<span class="st"> </span><span class="kw"><a href="reference/questions.html">questions</a></span>(<span class="dt">design_object =</span> d)
 
@@ -107,14 +114,15 @@ svy_q[<span class="dv">1</span>:<span class="dv">2</span>, ]
 <span class="co">#&gt;                                                       question_text</span>
 <span class="co">#&gt; 1: Overall, how satisfied or dissatisfied were you with this class?</span>
 <span class="co">#&gt; 2:                                  How interesting was this class?</span></code></pre></div>
+<p>See also <code><a href="reference/choices.html">choices()</a></code>, <code><a href="reference/blocks.html">blocks()</a></code>, and <code><a href="reference/response_counts.html">response_counts()</a></code>.</p>
 </div>
 <div id="visualization" class="section level3">
 <h3 class="hasAnchor">
 <a href="#visualization" class="anchor"> </a>Visualization</h3>
 <p>Visualize a survey flow with <code><a href="reference/plot_flow.html">plot_flow()</a></code>. Or for interactive review of a survey’s flow and content in a Shiny app, use <code><a href="reference/render_flow.html">render_flow()</a></code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/plot_flow.html">plot_flow</a></span>(<span class="dt">design_object =</span> d)</code></pre></div>
-<div id="htmlwidget-b3694aeefa03dac5e0d2" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b3694aeefa03dac5e0d2">{"x":{"nodes":{"id":[2,3,1],"parent_id":[0,0,0],"type":["Block","Block","Block"],"label":["Teacher Evaluation","Student Performance","Class Evaluation"],"block_id":["BL_0wUDDTxrMh9vOAd","BL_6FK8SIrVsXuBxFX","BL_agzU0yMolbPdFGd"],"color":["#d9d9d9","#d9d9d9","#d9d9d9"]},"edges":{"from":[0,1,2],"to":[1,2,3],"type":["deterministic","deterministic","deterministic"],"color":["#000000","#000000","#000000"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"interaction":{"dragNodes":false,"dragView":false,"zoomView":false},"edges":{"arrows":"to"},"layout":{"hierarchical":{"enabled":true,"direction":"LR","sortMethod":"directed"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-a776c86a361c8c15e621" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a776c86a361c8c15e621">{"x":{"nodes":{"id":[2,3,1],"parent_id":[0,0,0],"type":["Block","Block","Block"],"label":["Teacher Evaluation","Student Performance","Class Evaluation"],"block_id":["BL_0wUDDTxrMh9vOAd","BL_6FK8SIrVsXuBxFX","BL_agzU0yMolbPdFGd"],"color":["#d9d9d9","#d9d9d9","#d9d9d9"]},"edges":{"from":[0,1,2],"to":[1,2,3],"type":["deterministic","deterministic","deterministic"],"color":["#000000","#000000","#000000"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"interaction":{"dragNodes":false,"dragView":false,"zoomView":false},"edges":{"arrows":"to"},"layout":{"hierarchical":{"enabled":true,"direction":"LR","sortMethod":"directed"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script><p>See also <code><a href="reference/edges.html">edges()</a></code> and <code><a href="reference/edges.html">nodes()</a></code>.</p>
 </div>
 </div>
 <div id="related" class="section level2">

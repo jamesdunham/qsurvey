@@ -6,10 +6,14 @@
 #' @inheritParams choices
 #' @return \code{plot_flow} returns a visNetwork object.
 #'
-#' @importFrom visNetwork visEdges visHierarchicalLayout visInteraction visNetwork 
-#' @seealso \code{\link{nodes}} and \code{\link{edges}} for node and edge data in tabular
-#'   form. \code{\link{render_flow}} for a Shiny app.
+#' @importFrom visNetwork visEdges visHierarchicalLayout visInteraction visNetwork
+#' @seealso \code{\link{edges}}, \code{\link{nodes}}, \code{\link{render_flow}}
 #' @export
+#' @examples
+#' \dontrun{
+#' svy_design <- design("SV_0VVlb9QwJ4bsBKZ")
+#' plot_flow(svy_design)
+#' }
 plot_flow <- function(design_object) {
 
   assert_is_design(design_object)

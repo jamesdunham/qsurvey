@@ -7,10 +7,9 @@
 #' @inheritParams request
 #'
 #' @return \code{design()} returns a \code{qualtrics_design} object, which is an
-#' S3 class built from a list. 
+#' S3 class built from a list.
 #'
-#' @seealso Download a survey's \code{\link{responses}},
-#'   \code{\link{questions}}, or question \code{\link{choices}}.
+#' @seealso \code{\link{responses}}
 #' @aliases qualtrics_design-class
 #' @export
 #' @examples
@@ -39,13 +38,14 @@ print.qualtrics_design <- function(x, ...) {
                "responseCounts", "questions", "blocks")) {
     assertthat::assert_that(assertthat::has_name(x, nm))
   }
-  message('name:\t\t', x$name)
-  message('id:\t\t\t', x$id)
-  message("created:\t\t", lubridate::date(x$creationDate))
-  message("modified:\t", lubridate::date(x$lastModifiedDate))
-  message("responses:\t", x$responseCounts$auditable,
-          ifelse(x[["isActive"]], " (active)", " (closed)"))
-  message("questions:\t", length(x$questions))
-  message("blocks:\t\t", length(x$blocks))
+  message(format(
+    c("# A qualtrics_design:",
+      "\nname", x$name,
+      "\nid", x$id,
+      "\ncreated", format(lubridate::date(x$creationDate)),
+      "\nmodified", format(lubridate::date(x$lastModifiedDate)),
+      "\nresponses", paste0(x$responseCounts$auditable, ifelse(x[["isActive"]], " (active)", " (closed)")),
+      "\nquestions", length(x$questions),
+      "\nblocks", length(x$blocks)),
+    ))
 }
-

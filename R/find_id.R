@@ -23,8 +23,13 @@ utils::globalVariables(c("lastModified"))
 #' @return A named character vector giving the id(s) of matching surveys, or an
 #' empty character vector if there are no matches.
 #'
+#' @seealso \code{\link{surveys}}
 #' @importFrom stats setNames
 #' @export
+#' @examples
+#' \dontrun{
+#' find_id("demographics")
+#' }
 find_id <- function(pattern,
   first = TRUE,
   ignore.case = TRUE,

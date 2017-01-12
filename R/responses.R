@@ -28,8 +28,7 @@
 #' @inheritParams request
 #'
 #' @return A table of survey responses.
-#' @seealso Retrieve a survey's \code{\link{questions}} or question
-#'   \code{\link{choices}}.
+#' @seealso \code{\link{design}}
 #' @importFrom utils unzip txtProgressBar setTxtProgressBar
 #' @importFrom jsonlite fromJSON
 #' @export

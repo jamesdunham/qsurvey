@@ -1,5 +1,4 @@
 ---
-title: Survey Designs
 output: github_document
 always_allow_html: yes
 ---
@@ -12,10 +11,14 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Survey Design
+
 This vignette demonstrates working with Qualtrics survey designs, which qsurvey
 formalizes as `qualtrics_design` objects that represent the configuration of a
-survey. Before continuing you should have installed qsurvey: see the
-[installation instructions](http://jdunham.io/qsurvey/).
+survey.
+
+Before continuing you should have installed qsurvey: this see the [insallation
+instructions](http://jdunham.io/qsurvey/).
 
 ```{r}
 library(qsurvey)
@@ -34,7 +37,7 @@ examination in detail. Passing a survey's id to `design()` retrieves its
 `qualtrics_design` object.
 
 ```{r}
-(feedback_id <- find_id("Feedback"))
+feedback_id <- survey_meta$id[1]
 feedback <- design(feedback_id)
 ```
 
@@ -132,22 +135,15 @@ you make changes. You can visualize a survey flow in R using `plot_flow()`.
 plot_flow(feedback)
 ```
 
-`plot_flow()` shows the survey flow as a directed graph, whose nodes can be flow
-elements like blocks, branches, and block randomizers. Edges between nodes can
-be deterministic, conditional, or random. (In this simple survey, all the edges
-are deterministic.) Conditional edges implement branch logic. Random edges
-represent outcomes from a block randomizer.
-
-A Shiny app (experimental) that includes a similar visual representation of
-survey flow is available through `render_flow()`. For the nodes and edges in
-tabular format, see `edges()` and `nodes()`.
-
+`plot_flow()` shows the survey flow as a directed graph whose nodes can be
+blocks, branches, randomizers, web services, and so on. Edges 
+There isn't much to see for this simple survey. 
 
 ## Conclusion
 
 Many of the functions in qsurvey operate on `qualtrics_design` objects. This
 vignette demonstrated how to retrieve one with `design()`, and then use
 `blocks()`, `questions()`, and `choices()` to examine the respondent-facing
-content of a survey and the configuration of renaming/recoding schemes and
-survey flow. If you have a question or suggestion, please open a [GitHub
+content of a survey and the setup of optional renaming and recoding schemes.  If
+you have a question or suggestion, please open a [GitHub
 issue](https://github.com/jamesdunham/qsurvey/issues).

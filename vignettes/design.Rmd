@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 This vignette demonstrates working with Qualtrics survey designs, which qsurvey
 formalizes as `qualtrics_design` objects that represent the configuration of a
 survey. Before continuing you should have installed qsurvey: see the
-[installation instructions](http://jdunham.io/qsurvey/).
+[installation instructions](https://jdunham.io/qsurvey/).
 
 ```{r}
 library(qsurvey)
