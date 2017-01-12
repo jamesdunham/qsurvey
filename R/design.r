@@ -31,7 +31,9 @@ design <- function(id, key = Sys.getenv("QUALTRICS_KEY"), subdomain =
   return(design_object)
 }
 
-print.qualtrics_design <- function(x) {
+#' @method print qualtrics_design
+#' @export
+print.qualtrics_design <- function(x, ...) {
 
   for (nm in c("name", "id", "creationDate", "lastModifiedDate",
                "responseCounts", "questions", "blocks")) {
