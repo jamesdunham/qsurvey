@@ -12,8 +12,9 @@ questions <- function(design_object) {
 
   assert_is_design(design_object)
 
-  tbl <- lapply(design_object$questions, function(x) {
-    nulls_to_na(x["questionText"])
+  tbl <- lapply(design_object$questions, function(x) {   
+    names(x$questionType$type) <- "questionType"
+    c(nulls_to_na(x["questionText"]), nulls_to_na(x$questionType$type))
   })
   tbl <- data.table::rbindlist(tbl, fill = TRUE, idcol = "question_id")
 
@@ -48,6 +49,6 @@ nulls_to_na <- function(element) {
 format_questions <- function(tbl) {
   data.table::setkey(tbl, "question_order")
   data.table::setnames(tbl, names(tbl), uncamel(names(tbl)))
-  set_first_cols(tbl,c("question_order", "question_id",
+  set_first_cols(tbl,c("question_order", "question_id", "question_type",
       "export_name", "question_text"))
 }
