@@ -35,8 +35,12 @@ parse_choices <- function(choice_tree) {
   
   # the names in choice_tree are question ids, which should be unique
   stopifnot(identical(names(choice_tree), unique(names(choice_tree))))
-  x <- data.table::rbindlist(lapply(choice_tree, unlist, recursive = FALSE),
-    fill = TRUE, idcol = "question_id")
+
+  # deal with case of MC with "other" option
+  z <- lapply(choice_tree, unlist, recursive = FALSE)
+  z <- lapply(z, function(y) lapply(y, function(z) if(!length(z)) z <- NA else z))
+  
+  x <- data.table::rbindlist(z, fill = TRUE, idcol = "question_id")
   x[, names(x) := lapply(.SD, as.character)]
   # x is now a wide table with columns like 9.description, 9.choiceText...
   x <- data.table::melt(x,
