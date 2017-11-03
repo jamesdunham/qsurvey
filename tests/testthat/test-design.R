@@ -5,10 +5,10 @@ test_that("survey_design is a qualtrics_design object with expected elements", {
     expect_silent(d <- design(id))
     expect_is(d, "qualtrics_design")
 
-    expect_named(d, c("id", "name", "ownerId", "organizationId",
+    expect_true(all(c("id", "name", "ownerId", "organizationId",
         "isActive", "creationDate", "lastModifiedDate", "expiration",
         "questions", "exportColumnMap", "blocks", "flow", "embeddedData",
-        "comments", "responseCounts", "json"), ignore.order = TRUE)
+        "comments", "responseCounts", "json") %in% names(d)))
 
     for (char_element in c("id", "name", "ownerId", "organizationId",
         "creationDate", "lastModifiedDate")) {
@@ -31,6 +31,7 @@ test_that("survey_design is a qualtrics_design object with expected elements", {
       # choices too, dpeending on question type
       # str(q_element, 1)
     })
+
     # str(d$questions, 1)
     # str(d$questions[[1]], 1)
     # str(d$questions[[26]], 1)
