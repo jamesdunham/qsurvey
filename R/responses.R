@@ -20,7 +20,8 @@
 #' \code{useLabels} (exposed as argument \code{use_labels}), and \code{format},
 #' (which must be \code{json}).
 #'
-#' @param id A Qualtrics survey identifier.
+#' @param design_object A \code{\link{qualtrics_design-class}} object retrieved
+#' from Qualtrics by \code{\link{design}}.
 #' @param use_labels Use question labels and choice descriptions (default),
 #'   instead of question and identifiers.
 #' @param verbose Print progress.
@@ -32,7 +33,7 @@
 #' @importFrom utils unzip txtProgressBar setTxtProgressBar
 #' @importFrom jsonlite fromJSON
 #' @export
-responses <- function(id,
+responses <- function(design_object,
                      use_labels = TRUE,
                      verbose = FALSE,
                      key = Sys.getenv("QUALTRICS_KEY"),
@@ -41,6 +42,14 @@ responses <- function(id,
 
   # Adapted from the Python example:
   # https://api.qualtrics.com/docs/response-exports
+
+  # Use the design object or ID depending what has been passed
+  if (!is.character(design_object)) {
+    assert_is_design(design_object)
+    id <- design_object$id
+  } else {
+    id <- design_object
+  }
 
   # requests() handles checking of key and subdomain arguments
   assertthat::assert_that(assertthat::is.string(id))

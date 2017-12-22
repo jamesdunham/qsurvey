@@ -34,6 +34,7 @@ test_that("survey_design is a qualtrics_design object with expected elements", {
       # choices too, dpeending on question type
       # str(q_element, 1)
     })
+
     # str(d$questions, 1)
     # str(d$questions[[1]], 1)
     # str(d$questions[[26]], 1)
