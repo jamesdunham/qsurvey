@@ -3,6 +3,7 @@
 \name{ids_to_names}
 \alias{ids_to_names}
 \alias{names_to_ids}
+\alias{names_to_ids}
 \title{Rename response table columns}
 \usage{
 ids_to_names(tbl, design_object)
@@ -27,4 +28,3 @@ question identifier names (e.g. \code{QID2}) using question names (e.g.,
 \code{\link{drop_meta}}, \code{\link{drop_sensitive}}, 
 \code{\link{keep_questions}}
 }
-

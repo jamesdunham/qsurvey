@@ -1,3 +1,9 @@
+# qsurvey 0.0.4
+
+- Update tests for minor changes to Qualtrics API
+- Specify `encoding = "UTF-8"` in `httr::content()` calls
+
+
 # qsurvey 0.0.3
 
 - Properly export `print` S3 for `qualtrics_design` objects

@@ -1,14 +1,17 @@
+context("qualtrics_design")
+
 test_that("survey_design is a qualtrics_design object with expected elements", {
-  svy_tbl <- surveys()
-  lapply(svy_tbl$id, function(id) {
+  test_survey_ids <- c("SV_cIKqX1B5wDO3wKV", "SV_0VVlb9QwJ4bsBKZ",
+    "SV_5goFlnLiTZWGI1D", "SV_0CGgkDZJaUvxnGl")
+  lapply(test_survey_ids, function(id) {
 
     expect_silent(d <- design(id))
     expect_is(d, "qualtrics_design")
 
-    expect_named(d, c("id", "name", "ownerId", "organizationId",
+    expect_true(all(c("id", "name", "ownerId", "organizationId",
         "isActive", "creationDate", "lastModifiedDate", "expiration",
         "questions", "exportColumnMap", "blocks", "flow", "embeddedData",
-        "comments", "responseCounts", "json"), ignore.order = TRUE)
+        "comments", "responseCounts", "json") %in% names(d)))
 
     for (char_element in c("id", "name", "ownerId", "organizationId",
         "creationDate", "lastModifiedDate")) {

@@ -11,8 +11,8 @@
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/readable/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -23,14 +23,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -88,28 +91,41 @@
     <p>Retrieve the responses to a survey.</p>
     
 
-    <pre><span class='fu'>responses</span>(<span class='no'>id</span>, <span class='kw'>use_labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+    <pre class="usage"><span class='fu'>responses</span>(<span class='no'>id</span>, <span class='kw'>use_labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>key</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"QUALTRICS_KEY"</span>),
   <span class='kw'>subdomain</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"QUALTRICS_SUBDOMAIN"</span>), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>id</dt>
-      <dd>A Qualtrics survey identifier.</dd>
-      <dt>use_labels</dt>
-      <dd>Use question labels and choice descriptions (default),
-instead of question and identifiers.</dd>
-      <dt>verbose</dt>
-      <dd>Print progress.</dd>
-      <dt>key</dt>
-      <dd>A Qualtrics API key (by default, the value of the environment
-variable <code>QUALTRICS_KEY</code>).</dd>
-      <dt>subdomain</dt>
-      <dd>A Qualtrics subdomain (by default, the value of the
-environment variable <code>QUALTRICS_SUBDOMAIN</code>).</dd>
-      <dt>...</dt>
-      <dd>Additional parameters for the <code>responseexports</code> API.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>id</th>
+      <td><p>A Qualtrics survey identifier.</p></td>
+    </tr>
+    <tr>
+      <th>use_labels</th>
+      <td><p>Use question labels and choice descriptions (default),
+instead of question and identifiers.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Print progress.</p></td>
+    </tr>
+    <tr>
+      <th>key</th>
+      <td><p>A Qualtrics API key (by default, the value of the environment
+variable <code>QUALTRICS_KEY</code>).</p></td>
+    </tr>
+    <tr>
+      <th>subdomain</th>
+      <td><p>A Qualtrics subdomain (by default, the value of the
+environment variable <code>QUALTRICS_SUBDOMAIN</code>).</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional parameters for the <code>responseexports</code> API.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -121,13 +137,13 @@ environment variable <code>QUALTRICS_SUBDOMAIN</code>).</dd>
 for download; once it is ready, the archive is downloaded to a location given
 by <code><a href='http://www.rdocumentation.org/packages/base/topics/tempfile'>tempfile</a></code> and unzipped; its JSON contents read and
 parsed; and the temporary files deleted.</p>
-    <p>By default, descriptive question labels and choice descriptions are requested
+<p>By default, descriptive question labels and choice descriptions are requested
 instead of question ids and choice codes. This is controlled by argument
 <code>use_labels</code>.</p>
-    <p>Other <a href = 'documented'>https://api.qualtrics.com/docs/json</a> Qualtrics API
+<p>Other <a href='https://api.qualtrics.com/docs/json'>documented</a> Qualtrics API
 parameters that affect the format of survey responses are available. For
-example, passing <code>seenUnansweredRecode = &quot;99&quot;</code> in the call to
-<code>responses</code> will show <code>&quot;99&quot;</code> as the response to unanswered
+example, passing <code>seenUnansweredRecode = "99"</code> in the call to
+<code>responses</code> will show <code>"99"</code> as the response to unanswered
 questions instead of <code>NA</code>, the default. The parameters that cannot be
 changed via <code>...</code> are <code>surveyId</code> (exposed as argument <code>id</code>),
 <code>useLabels</code> (exposed as argument <code>use_labels</code>), and <code>format</code>,

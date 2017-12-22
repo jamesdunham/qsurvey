@@ -12,6 +12,7 @@
 #' @seealso \code{\link{responses}}
 #' @aliases qualtrics_design-class
 #' @export
+#' @include http.R
 #' @examples
 #' \dontrun{
 #' design_object <- design("SV_0VVlb9QwJ4bsBKZ")
@@ -24,8 +25,9 @@ design <- function(id, key = Sys.getenv("QUALTRICS_KEY"), subdomain =
   subdomain <- set_if_missing(subdomain)
   response <- request(action = paste0("surveys/", id), key = key, subdomain =
     subdomain, verbose = verbose)
-  design_object <- httr::content(response, as = "parsed")$result
-  design_object$json <- httr::content(response, as = "text")
+  design_object <- httr::content(response, as = "parsed", encoding =
+    "UTF-8")$result
+  design_object$json <- httr::content(response, as = "text", encoding = "UTF-8")
   class(design_object) <- c("qualtrics_design", class(design_object))
   return(design_object)
 }

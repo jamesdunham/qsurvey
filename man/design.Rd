@@ -36,4 +36,3 @@ print(design_object)
 \seealso{
 \code{\link{responses}}
 }
-

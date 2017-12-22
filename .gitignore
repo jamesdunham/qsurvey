@@ -2,3 +2,5 @@
 .Rhistory
 .RData
 .api_key
+*.tar.gz
+*.Rcheck

@@ -11,8 +11,8 @@
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/readable/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -23,14 +23,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -90,7 +93,7 @@ useful in programming or when higher-level package functions are not
 available. <code>qget</code> and <code>qpost</code> are wrappers for <code>request</code>.</p>
     
 
-    <pre><span class='fu'>request</span>(<span class='kw'>verb</span> <span class='kw'>=</span> <span class='st'>"GET"</span>, <span class='kw'>action</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>key</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"QUALTRICS_KEY"</span>),
+    <pre class="usage"><span class='fu'>request</span>(<span class='kw'>verb</span> <span class='kw'>=</span> <span class='st'>"GET"</span>, <span class='kw'>action</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>key</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"QUALTRICS_KEY"</span>),
   <span class='kw'>subdomain</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"QUALTRICS_SUBDOMAIN"</span>), <span class='kw'>api_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
@@ -101,28 +104,45 @@ available. <code>qget</code> and <code>qpost</code> are wrappers for <code>reque
   <span class='kw'>subdomain</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"QUALTRICS_SUBDOMAIN"</span>), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>verb</dt>
-      <dd>Name of verb to use.</dd>
-      <dt>action</dt>
-      <dd>An API action (like <code>&quot;surveys&quot;</code>).</dd>
-      <dt>key</dt>
-      <dd>A Qualtrics API key (by default, the value of the environment
-variable <code>QUALTRICS_KEY</code>).</dd>
-      <dt>subdomain</dt>
-      <dd>A Qualtrics subdomain (by default, the value of the
-environment variable <code>QUALTRICS_SUBDOMAIN</code>).</dd>
-      <dt>api_url</dt>
-      <dd>A complete API URL. If used, argument <code>action</code> and
-<code>subdomain</code> are ignored.</dd>
-      <dt>verbose</dt>
-      <dd>Output API calls to <code><a href='http://www.rdocumentation.org/packages/base/topics/showConnections'>stderr</a></code>.</dd>
-      <dt>...</dt>
-      <dd>Further arguments to <code><a href='http://www.rdocumentation.org/packages/httr/topics/GET'>GET</a></code> or
-<code><a href='http://www.rdocumentation.org/packages/httr/topics/POST'>POST</a></code>, depending on <code>verb</code>.</dd>
-      <dt>as</dt>
-      <dd>Desired type of content. See <a href='http://www.rdocumentation.org/packages/httr/topics/content'>content</a>.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>verb</th>
+      <td><p>Name of verb to use.</p></td>
+    </tr>
+    <tr>
+      <th>action</th>
+      <td><p>An API action (like <code>"surveys"</code>).</p></td>
+    </tr>
+    <tr>
+      <th>key</th>
+      <td><p>A Qualtrics API key (by default, the value of the environment
+variable <code>QUALTRICS_KEY</code>).</p></td>
+    </tr>
+    <tr>
+      <th>subdomain</th>
+      <td><p>A Qualtrics subdomain (by default, the value of the
+environment variable <code>QUALTRICS_SUBDOMAIN</code>).</p></td>
+    </tr>
+    <tr>
+      <th>api_url</th>
+      <td><p>A complete API URL. If used, argument <code>action</code> and
+<code>subdomain</code> are ignored.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Output API calls to <code><a href='http://www.rdocumentation.org/packages/base/topics/showConnections'>stderr</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Further arguments to <code><a href='http://www.rdocumentation.org/packages/httr/topics/GET'>GET</a></code> or
+<code><a href='http://www.rdocumentation.org/packages/httr/topics/POST'>POST</a></code>, depending on <code>verb</code>.</p></td>
+    </tr>
+    <tr>
+      <th>as</th>
+      <td><p>Desired type of content. See <a href='http://www.rdocumentation.org/packages/httr/topics/content'>content</a>.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -133,7 +153,7 @@ environment variable <code>QUALTRICS_SUBDOMAIN</code>).</dd>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>For help with subdomains, see the
-<a href = 'Qualtrics documentation'>https://api.qualtrics.com/docs/root-url</a>. Each
+<a href='https://api.qualtrics.com/docs/root-url'>Qualtrics documentation</a>. Each
 Qualtrics account is assigned a subdomain, and using another will work but
 produce a warning.</p>
     

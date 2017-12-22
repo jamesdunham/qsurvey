@@ -1,3 +1,5 @@
+context("blocks")
+
 test_that("blocks() gets ids and descriptions", {
   test_design = list(
     blocks = list(

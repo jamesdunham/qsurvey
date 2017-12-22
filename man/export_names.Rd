@@ -26,4 +26,3 @@ unique export name for each choice, but only one question identifier.
 \seealso{
 \code{\link{questions}}
 }
-

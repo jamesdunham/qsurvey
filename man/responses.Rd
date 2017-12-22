@@ -52,4 +52,3 @@ changed via \code{...} are \code{surveyId} (exposed as argument \code{id}),
 \seealso{
 \code{\link{design}}
 }
-

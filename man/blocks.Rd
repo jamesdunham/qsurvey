@@ -26,4 +26,3 @@ pairs.
 \seealso{
 \code{\link{choices}}, \code{\link{questions}}
 }
-

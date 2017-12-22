@@ -34,7 +34,7 @@
 #' @export
 responses <- function(id,
                      use_labels = TRUE,
-                     verbose = FALSE, 
+                     verbose = FALSE,
                      key = Sys.getenv("QUALTRICS_KEY"),
                      subdomain = Sys.getenv("QUALTRICS_SUBDOMAIN"),
                      ...) {
@@ -69,7 +69,7 @@ responses <- function(id,
     key = key,
     subdomain = subdomain
   )
-  export_id <- httr::content(r, as = "parsed")$result$id
+  export_id <- httr::content(r, as = "parsed", encoding = "UTF-8")$result$id
   export_progress <- 0
   if (isTRUE(verbose))  {
     message("Qualtrics is preparing responses for download...")
@@ -94,7 +94,8 @@ responses <- function(id,
     r_export$result$file, verbose = verbose)
   # write it to disk so we can unzip it
   temp_name <- tempfile()
-  writeBin(httr::content(file_response, as = "raw"), temp_name)
+  writeBin(httr::content(file_response, as = "raw", encoding = "UTF-8"),
+    temp_name)
   f_unzip <- utils::unzip(temp_name, exdir = tempdir())
   json <- jsonlite::fromJSON(f_unzip)
   # json is a list whose sole element is the data.frame of responses

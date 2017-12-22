@@ -26,7 +26,8 @@ library(qsurvey)
 Survey metadata is available from the Qualtrics platform via `surveys()`.
 
 ```{r}
-(survey_meta <- surveys())
+survey_meta <- surveys()
+survey_meta[grepl("Feedback|Demographics", name), ]
 ```
 
 This Qualtrics account has access to a handful of surveys. We'll pick one for
@@ -34,7 +35,7 @@ examination in detail. Passing a survey's id to `design()` retrieves its
 `qualtrics_design` object.
 
 ```{r}
-(feedback_id <- find_id("Feedback"))
+(feedback_id <- find_id("Student Feedback"))
 feedback <- design(feedback_id)
 ```
 
@@ -129,7 +130,8 @@ elements of a survey. The "Survey Flow" view in the Qualtrics Control Panel lets
 you make changes. You can visualize a survey flow in R using `plot_flow()`.
  
 ```{r}
-plot_flow(feedback)
+# Not run
+# plot_flow(feedback)
 ```
 
 `plot_flow()` shows the survey flow as a directed graph, whose nodes can be flow

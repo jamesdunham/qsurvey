@@ -1,3 +1,5 @@
+context("drop_sensitive")
+
 test_that("drop_sensitive drops sensitive columns", {
   test_tbl = data.frame(
     "LocationLongitude" = character(),

@@ -21,4 +21,3 @@ omitted.
 \seealso{
 \code{\link{blocks}}, \code{\link{questions}}
 }
-

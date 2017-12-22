@@ -77,7 +77,7 @@ qget <- function(action = NULL,
 
   r <- request(verb = "GET", action = action, key = key, subdomain = subdomain,
     ...)
-  httr::content(r, as = as)
+  httr::content(r, as = as, encoding = "UTF-8")
 }
 
 #' @rdname request
@@ -92,7 +92,7 @@ qpost <- function(action = NULL,
 
   r <- request(verb = "POST", action = action, key = key, subdomain = subdomain,
     ...)
-  httr::content(r, as = as)
+  httr::content(r, as = as, encoding = "UTF-8")
 }
 
 warn_on_notice <- function(response) {
@@ -120,7 +120,7 @@ set_if_missing <- function(subdomain) {
   if (subdomain == "") {
     warning("Set the environment variable QUALTRICS_SUBDOMAIN for better performance. ",
       "See https://api.qualtrics.com/docs/root-url.")
-    subdomain = "az1"
+    subdomain <- "az1"
   }
   return(subdomain)
 }

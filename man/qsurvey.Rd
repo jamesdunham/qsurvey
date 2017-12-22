@@ -27,4 +27,3 @@ variable \code{QUALTRICS_KEY} to your key value. You can do this
 \link[=Startup]{during R startup} (recommended), interactively with
 \code{\link[base]{Sys.setenv}}, or through \code{\link{key_from_file}}.
 }
-

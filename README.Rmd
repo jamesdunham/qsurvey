@@ -21,6 +21,12 @@ qsurvey is a toolkit for working with the Qualtrics survey platform and its data
 in R. It focuses on testing and review of surveys before fielding, and analysis
 of responses afterward. 
 
+## Status
+
+Maintained, but not under development. Use the
+[qualtrics](https://github.com/cloudyr/qualtrics) package, which combines
+qsurvey, [qualtRics](https://github.com/JasperHG90/qualtRics), and
+[qualtricsR](https://github.com/saberry/qualtricsR).
 
 ## Installation
 

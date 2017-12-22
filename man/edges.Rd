@@ -3,6 +3,7 @@
 \name{edges}
 \alias{edges}
 \alias{nodes}
+\alias{nodes}
 \title{Represent survey flows as node or edge tables}
 \usage{
 edges(design_object)
@@ -20,4 +21,3 @@ its edge pairs, and \code{nodes} gives its nodes.
 \seealso{
 \code{\link{plot_flow}}, \code{\link{render_flow}}
 }
-

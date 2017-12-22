@@ -35,7 +35,7 @@ get_pages <- function(page_url, key) {
   res <- list()
   while (length(page_url)) {
     response <- request("GET", key = key, api_url = page_url)
-    json <- httr::content(response, as = "parsed")$result
+    json <- httr::content(response, as = "parsed", encoding = "UTF-8")$result
     if (length(json$nextPage)) {
       page_url <- json$nextPage
     } else {

@@ -1,7 +1,7 @@
 Package: qsurvey
 Title: A toolkit for working with the Qualtrics platform and its survey data in R
-Version: 0.0.3
-Date: 2017-01-12
+Version: 0.0.4
+Date: 2017-12-21
 Authors@R: person("James", "Dunham", email = "james@jdunham.io", role = c("aut", "cre"))
 Description: qsurvey is a toolkit for working with the Qualtrics platform and
     its survey data in R.  It focuses on testing and review of surveys before
@@ -17,6 +17,7 @@ BugReports: https://github.com/jamesdunham/qsurvey/issues
 Encoding: UTF-8
 LazyData: true
 Suggests:
+    knitr,
     testthat
 Imports:
     assertthat,
@@ -27,7 +28,26 @@ Imports:
     lubridate,
     magrittr,
     shiny,
-    stringr,
     visNetwork
-RoxygenNote: 5.0.1
-
+RoxygenNote: 6.0.1
+Collate: 
+    'assertions.R'
+    'blocks.R'
+    'choices.R'
+    'http.R'
+    'design.R'
+    'drop_sensitive.R'
+    'export_names.R'
+    'surveys.R'
+    'find_id.R'
+    'flow.R'
+    'key_from_file.R'
+    'plot.R'
+    'qsurvey.R'
+    'questions.R'
+    'rename_questions.R'
+    'render_flow.R'
+    'response_count.R'
+    'responses.R'
+    'uncamel.R'
+VignetteBuilder: knitr

@@ -30,4 +30,3 @@ render_flow(svy_design)
 \code{\link{nodes}} and \code{\link{edges}} for node and edge data in tabular
 form.
 }
-

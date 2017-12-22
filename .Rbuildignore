@@ -1,4 +1,7 @@
+^.git$
 ^.*\.Rproj$
 ^.*\.yml$
 ^docs$
 ^README.*$
+Makefile
+^_pkgdown\.yml$

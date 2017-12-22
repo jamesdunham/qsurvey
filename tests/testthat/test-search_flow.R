@@ -1,3 +1,5 @@
+context("survey flow")
+
 test_that("search_flow() handles block; block", {
   test_flow = list(
     list(type = "Block", id = "BL_1"),

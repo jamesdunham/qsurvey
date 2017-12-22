@@ -26,4 +26,3 @@ plot_flow(svy_design)
 \seealso{
 \code{\link{edges}}, \code{\link{nodes}}, \code{\link{render_flow}}
 }
-

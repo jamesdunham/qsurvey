@@ -24,6 +24,7 @@ utils::globalVariables(c("lastModified"))
 #' empty character vector if there are no matches.
 #'
 #' @seealso \code{\link{surveys}}
+#' @include surveys.R
 #' @importFrom stats setNames
 #' @export
 #' @examples
