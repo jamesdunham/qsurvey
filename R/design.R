@@ -3,6 +3,7 @@
 #' Retrieve a representation of the elements in a survey and their
 #' configuration.
 #'
+#' @param id A Qualtrics survey identifier.
 #' @inheritParams responses
 #' @inheritParams request
 #'

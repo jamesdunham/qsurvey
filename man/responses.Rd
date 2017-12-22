@@ -4,12 +4,13 @@
 \alias{responses}
 \title{Download survey responses}
 \usage{
-responses(id, use_labels = TRUE, verbose = FALSE,
+responses(design_object, use_labels = TRUE, verbose = FALSE,
   key = Sys.getenv("QUALTRICS_KEY"),
   subdomain = Sys.getenv("QUALTRICS_SUBDOMAIN"), ...)
 }
 \arguments{
-\item{id}{A Qualtrics survey identifier.}
+\item{design_object}{A \code{\link{qualtrics_design-class}} object retrieved
+from Qualtrics by \code{\link{design}}.}
 
 \item{use_labels}{Use question labels and choice descriptions (default),
 instead of question and identifiers.}

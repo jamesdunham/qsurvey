@@ -91,7 +91,7 @@
     <p>Retrieve the responses to a survey.</p>
     
 
-    <pre class="usage"><span class='fu'>responses</span>(<span class='no'>id</span>, <span class='kw'>use_labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+    <pre class="usage"><span class='fu'>responses</span>(<span class='no'>design_object</span>, <span class='kw'>use_labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>key</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"QUALTRICS_KEY"</span>),
   <span class='kw'>subdomain</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"QUALTRICS_SUBDOMAIN"</span>), <span class='no'>...</span>)</pre>
     
@@ -99,8 +99,9 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>id</th>
-      <td><p>A Qualtrics survey identifier.</p></td>
+      <th>design_object</th>
+      <td><p>A <code><a href='design.html'>qualtrics_design-class</a></code> object retrieved
+from Qualtrics by <code><a href='design.html'>design</a></code>.</p></td>
     </tr>
     <tr>
       <th>use_labels</th>

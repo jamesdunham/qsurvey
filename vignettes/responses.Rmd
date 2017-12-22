@@ -2,6 +2,10 @@
 title: Responses
 output: github_document
 always_allow_html: yes
+vignette: >
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteIndexEntry{Responses}
+  %\usepackage[UTF-8]{inputenc}
 ---
 
 ```{r, echo = FALSE}
